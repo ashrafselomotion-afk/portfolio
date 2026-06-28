@@ -92,15 +92,11 @@ header.nav{
 .hero-name span{display:inline-block;opacity:0;transform:translateY(40px) rotate(3deg);animation:rise 1.1s var(--ease) forwards}
 .hero-name .l2{background:linear-gradient(112deg,#d8688f 0%,#b07cc9 48%,#5f8fcf 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0}
 
-.hero-disc{position:absolute;bottom:11vh;left:0;right:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(13px,2.6vw,34px);padding:0 7vw}
-.hd-word{font-family:'Syne';font-weight:700;font-size:clamp(15px,2.15vw,27px);letter-spacing:.015em;white-space:nowrap;
-  background:linear-gradient(110deg,#d8688f 0%,#b07cc9 32%,#5f8fcf 64%,#d8688f 100%);background-size:240% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  opacity:0;transform:translateY(14px);animation:hdIn 1s var(--ease) .5s forwards, hdFlow 9s linear infinite}
-.hd-dot{flex:none;width:6px;height:6px;border-radius:50%;background:var(--rope);
-  opacity:0;transform:translateY(14px);animation:hdIn 1s var(--ease) .62s forwards}
-@keyframes hdIn{to{opacity:1;transform:translateY(0)}}
-@keyframes hdFlow{to{background-position:240% 0}}
+.hero-bottom{position:absolute;bottom:8vh;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.disc-rotate{height:1.2em;overflow:hidden;font-family:'Syne';font-weight:700;font-size:clamp(18px,3vw,30px);letter-spacing:-.01em}
+.disc-rotate .track{transition:transform .6s var(--ease)}
+.disc-rotate .item{height:1.2em;display:flex;align-items:center;justify-content:center;gap:12px}
+.disc-rotate .item b{color:var(--rope-deep)}
 .scrollcue{display:flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut-d)}
 .scrollcue .bar{position:relative;width:46px;height:1px;background:rgba(0,0,0,.25);overflow:hidden}
 .scrollcue .bar::after{content:"";position:absolute;inset:0;background:var(--ink);transform:translateX(-100%);animation:sweep 2.2s var(--ease) infinite}
@@ -276,14 +272,15 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="l2" style="animation-delay:.6s">SELO</span>
         </h1>
       </div>
-      <div class="hero-disc">
-        <span class="hd-word">Motion Graphics</span>
-        <i class="hd-dot"></i>
-        <span class="hd-word">AI Creation</span>
-        <i class="hd-dot"></i>
-        <span class="hd-word">Video Editing</span>
-        <i class="hd-dot"></i>
-        <span class="hd-word">Social Design</span>
+      <div class="hero-bottom">
+        <div class="disc-rotate"><div class="track" id="discTrack">
+          <div class="item"><b>Motion</b> Graphics</div>
+          <div class="item"><b>AI</b> Creation</div>
+          <div class="item"><b>Video</b> Editing</div>
+          <div class="item"><b>Social</b> Design</div>
+          <div class="item"><b>3D</b> Motion</div>
+        </div></div>
+        <div class="scrollcue"><span>Scroll to unfold</span><span class="bar"></span></div>
       </div>
       <div class="scrubmeter"><span id="scrubPct">00</span><span class="ring" id="scrubRing"><i></i></span></div>
     </div>
@@ -540,6 +537,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 
   /* ============ SCROLL → FRAME + UI ============ */
   const hero = document.getElementById('hero');
+  const discTrack = document.getElementById('discTrack');
   const scrubPct = document.getElementById('scrubPct');
   const scrubRing = document.getElementById('scrubRing');
   let ticking=false, lastP=0;
@@ -556,7 +554,9 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
     const p = heroProgress();
     lastP = p;
     draw(Math.round(p*(TOTAL-1)));
-    // (discipline words now auto-stream via CSS animation — no scroll coupling)
+    // rotating discipline word (5 items)
+    const idx = Math.min(4, Math.floor(p*4.999));
+    discTrack.style.transform = 'translateY(-'+(idx*1.2)+'em)';
     // meter
     const pp = Math.round(p*100);
     if(scrubPct) scrubPct.textContent = String(pp).padStart(2,'0');
