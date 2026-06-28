@@ -8,7 +8,7 @@
 
 backend:
   name: github
-  repo: YOUR-GITHUB-USERNAME/YOUR-REPO   # <-- CHANGE THIS
+  repo: ashrafselomotion-afk/portfolio
   branch: main
   # Auth proxy — Sveltia can use its own GitHub OAuth, or your own.
   # If you deploy on Netlify you can instead use: name: git-gateway
