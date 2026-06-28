@@ -35,32 +35,23 @@ The four discipline cards read from `content/work.json`. Each card has:
 
 ---
 
-## Going live (one-time setup, ~20 min)
+## It's already live
 
-You'll need three free accounts: **GitHub** (stores the site), **Cloudflare** (hosts it), **Vimeo** (your videos). I can't sign up as you, but here's the exact path:
+- **Site:** https://ashrafselomotion-afk.github.io/portfolio/
+- **Admin:** https://ashrafselomotion-afk.github.io/portfolio/admin/
+- **Repo:** https://github.com/ashrafselomotion-afk/portfolio (GitHub Pages, `main` branch)
 
-**1. Put the site on GitHub**
-- Create a new **private** repo (e.g. `portfolio`).
-- Upload this whole `ashraf-portfolio` folder to it (GitHub's web "upload files" works, or `git push`).
+Any change pushed to `main` auto-redeploys in ~1 minute.
 
-**2. Host it on Cloudflare Pages**
-- Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git** → pick the repo.
-- Framework preset: **None**. Build command: *(empty)*. Output dir: `/`.
-- Deploy → you get a live `*.pages.dev` URL (and you can attach your own domain later).
+### The admin (Pages CMS)
+The `/admin` page sends you to **[Pages CMS](https://pagescms.org)** — a free, hosted editor that signs you in with **your GitHub account**, so only you can edit. It reads the schema in `.pages.yml` and saves to `content/work.json`.
 
-**3. Point the admin at your repo**
-- Edit `admin/config.yml` → set `repo: your-github-username/portfolio`.
+**First-time connect (once):** open `/admin` → **Sign in with GitHub** → install the Pages CMS GitHub app on your account → pick the **portfolio** repo. After that, `/admin` drops you straight into the editor.
 
-**4. Turn on the private login**
-- The `/admin` uses your **GitHub** account for auth, so only you can get in.
-- Easiest route: in Sveltia's docs, enable GitHub auth via their hosted OAuth or a small Cloudflare Worker (5 min, copy-paste). *Ping me at this step and I'll give you the exact snippet for your setup.*
+**Add a reel:** Editor → **Work & Reels** → pick a card → set *Video source* = **Vimeo** → paste the link → **Save**. Live in ~1 min.
 
-**5. Use it**
-- Go to `yoursite.com/admin`, log in with GitHub.
-- Open **Work & Reels**, pick a card, set source = **Vimeo**, paste your reel link, **Save**.
-- Cloudflare rebuilds in ~20s and it's live. That's it.
-
-> Nobody else can log in: auth is your GitHub account on your private repo. The `/admin` page itself is just a login screen with no content until authenticated, and it's marked `noindex`.
+> Prefer no third party? You can also edit content directly (login-gated by GitHub):
+> https://github.com/ashrafselomotion-afk/portfolio/edit/main/content/work.json
 
 ---
 
