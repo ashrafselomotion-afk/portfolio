@@ -203,15 +203,31 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 .span6{grid-column:span 6}.span4{grid-column:span 4}.span3{grid-column:span 3}.span12{grid-column:span 12}
 @media(max-width:900px){.span6,.span4,.span3{grid-column:span 12}}
 
-/* ---------- EXPERIENCE ---------- */
-.xp{border-top:1px solid var(--line)}
-.xp-row{display:grid;grid-template-columns:.5fr 1.4fr 1.1fr;gap:30px;padding:30px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:.4s var(--ease)}
-.xp-row:hover{background:rgba(255,255,255,.02);padding-left:14px;padding-right:14px;border-radius:10px}
-.xp-row .yr{font-family:'Space Mono';font-size:13px;color:var(--rope);letter-spacing:.06em}
-.xp-row .co{font-family:'Syne';font-weight:700;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.01em}
-.xp-row .co small{display:block;font-family:'Inter';font-weight:500;font-size:13px;color:var(--mut);letter-spacing:0;margin-top:5px}
-.xp-row .ds{color:#bdbac6;font-size:14px;line-height:1.6}
-@media(max-width:760px){.xp-row{grid-template-columns:1fr;gap:8px}.xp-row .ds{margin-top:6px}}
+/* ---------- EXPERIENCE — HORIZONTAL TIMELINE ---------- */
+#xp{position:relative;height:340vh}
+.xp-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.xp-head{position:absolute;top:clamp(26px,6vh,64px);left:clamp(20px,5vw,64px);right:clamp(20px,5vw,64px);z-index:4;pointer-events:none}
+.xp-title{font-family:'Syne';font-weight:800;font-size:clamp(30px,5vw,62px);line-height:.95;letter-spacing:-.03em;margin-top:12px}
+.xp-hint{position:absolute;top:4px;right:0;font-family:'Space Mono';font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--rope)}
+.xp-track{position:absolute;top:0;left:0;height:100%;display:flex;align-items:stretch;width:max-content;padding:0 clamp(40px,8vw,130px);gap:clamp(30px,3.2vw,60px);will-change:transform}
+.xp-line{position:absolute;top:57%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16) 5%,rgba(255,255,255,.16) 95%,transparent)}
+.xp-card{position:relative;flex:0 0 clamp(270px,30vw,380px);height:100%}
+.xp-node{position:absolute;top:57%;left:0;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 5px rgba(244,185,200,.12),0 0 22px 4px rgba(244,185,200,.45);z-index:3}
+.xp-yr{position:absolute;top:57%;left:22px;transform:translateY(-50%);font-family:'Space Mono';font-size:13px;letter-spacing:.07em;color:var(--rope);background:var(--ink);padding:3px 9px;border-radius:4px;z-index:2;white-space:nowrap}
+.xp-cardbody{position:absolute;left:0;width:100%}
+.xp-card.up .xp-cardbody{bottom:46%}
+.xp-card.down .xp-cardbody{top:60%}
+.xp-card.up::before{content:"";position:absolute;left:0;top:54%;height:3%;width:1px;background:rgba(255,255,255,.18)}
+.xp-card.down::before{content:"";position:absolute;left:0;top:57%;height:3%;width:1px;background:rgba(255,255,255,.18)}
+.xp-co{font-family:'Syne';font-weight:700;font-size:clamp(20px,2.3vw,29px);letter-spacing:-.01em;line-height:1.05}
+.xp-role{font-family:'Inter';font-weight:500;font-size:13px;color:var(--mut);margin:7px 0 12px}
+.xp-cardbody p{color:#bdbac6;font-size:14px;line-height:1.6;max-width:34ch}
+.xp-final{display:flex;align-items:center;flex:0 0 clamp(280px,28vw,420px)}
+.xp-final-in{font-family:'Syne';font-weight:800;font-size:clamp(26px,3.2vw,46px);line-height:1.04;letter-spacing:-.02em;background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.xp-final-in span{-webkit-text-fill-color:var(--rope);color:var(--rope)}
+.xp-progress{position:absolute;left:clamp(20px,5vw,64px);right:clamp(20px,5vw,64px);bottom:6vh;height:2px;background:rgba(255,255,255,.1);z-index:4}
+.xp-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--blue))}
+@media(max-width:760px){.xp-title{font-size:32px}.xp-cardbody p{font-size:13px}}
 
 /* ---------- CLIENTS MARQUEE ---------- */
 #clients{overflow:hidden}
@@ -437,19 +453,46 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 </section>
 
 <!-- ===== EXPERIENCE ===== -->
-<section class="block" id="xp">
-  <div class="wrap">
-    <span class="kicker reveal">04 — Experience</span>
-    <h2 class="reveal d1" style="font-family:'Syne';font-weight:800;font-size:clamp(36px,7vw,92px);line-height:.92;letter-spacing:-.03em;margin-bottom:50px">8 years<br>in the timeline</h2>
-    <div class="xp">
-      <div class="xp-row reveal"><div class="yr">2024 — Now</div><div class="co">MultiBank Group<small>Senior Multimedia Designer · Dubai</small></div><div class="ds">Leading motion graphics, CGI &amp; AI-driven video, statics and carousels. Driving creative direction, 3D for event booths, web &amp; mobile, and multi-language campaign assets.</div></div>
-      <div class="xp-row reveal"><div class="yr">2023 — 2024</div><div class="co">Think Human<small>Senior Motion Graphics Designer</small></div><div class="ds">Commercial social ads for MOM Store, BEEAH and more — motion &amp; video optimized for audience impact and brand positioning across client accounts.</div></div>
-      <div class="xp-row reveal"><div class="yr">2022 — 2023</div><div class="co">Millionaire Aisle<small>Senior Multimedia Designer</small></div><div class="ds">Motion &amp; static content for social campaigns — creatives built for engagement, reach and consistent brand communication.</div></div>
-      <div class="xp-row reveal"><div class="yr">2021 — 2022</div><div class="co">Echo Media<small>Senior Motion Graphics Designer</small></div><div class="ds">Commercial ads &amp; reels for medical, real estate and food clients across Dubai, Erbil and Damascus. Storyboards and script optimization.</div></div>
-      <div class="xp-row reveal"><div class="yr">2019 — 2021</div><div class="co">Spacetoon TV<small>Senior Multimedia Designer</small></div><div class="ds">Directed TV commercials, YouTube intros and campaign content for kids' entertainment brands — high-quality motion shaping visual identity.</div></div>
-      <div class="xp-row reveal"><div class="yr">2018 — 2019</div><div class="co">Syrian Development Org.<small>Junior Motion Graphics Designer</small></div><div class="ds">Visual content and data-driven narratives for social media and organizational reporting videos.</div></div>
-      <div class="xp-row reveal"><div class="yr">2018 — Now</div><div class="co">Freelance<small>Senior Multimedia Designer · MENA</small></div><div class="ds">IG ads, reels and promos for private brands and government entities. Cinematic &amp; AI-generated content, live event editing on site.</div></div>
+<section id="xp">
+  <div class="xp-sticky">
+    <div class="xp-head">
+      <span class="kicker">04 — Experience</span>
+      <h2 class="xp-title">8 years in the timeline</h2>
+      <span class="xp-hint">Scroll →</span>
     </div>
+    <div class="xp-track" id="xpTrack">
+      <div class="xp-line"></div>
+      <article class="xp-card up">
+        <div class="xp-cardbody"><div class="xp-co">MultiBank Group</div><div class="xp-role">Senior Multimedia Designer · Dubai</div><p>Leading motion graphics, CGI &amp; AI-driven video, statics and carousels. Driving creative direction, 3D for event booths, web &amp; mobile, and multi-language campaign assets.</p></div>
+        <span class="xp-node"></span><div class="xp-yr">2024 — Now</div>
+      </article>
+      <article class="xp-card down">
+        <div class="xp-cardbody"><div class="xp-co">Think Human</div><div class="xp-role">Senior Motion Graphics Designer</div><p>Commercial social ads for MOM Store, BEEAH and more — motion &amp; video optimized for audience impact and brand positioning across client accounts.</p></div>
+        <span class="xp-node"></span><div class="xp-yr">2023 — 2024</div>
+      </article>
+      <article class="xp-card up">
+        <div class="xp-cardbody"><div class="xp-co">Millionaire Aisle</div><div class="xp-role">Senior Multimedia Designer</div><p>Motion &amp; static content for social campaigns — creatives built for engagement, reach and consistent brand communication.</p></div>
+        <span class="xp-node"></span><div class="xp-yr">2022 — 2023</div>
+      </article>
+      <article class="xp-card down">
+        <div class="xp-cardbody"><div class="xp-co">Echo Media</div><div class="xp-role">Senior Motion Graphics Designer</div><p>Commercial ads &amp; reels for medical, real estate and food clients across Dubai, Erbil and Damascus. Storyboards and script optimization.</p></div>
+        <span class="xp-node"></span><div class="xp-yr">2021 — 2022</div>
+      </article>
+      <article class="xp-card up">
+        <div class="xp-cardbody"><div class="xp-co">Spacetoon TV</div><div class="xp-role">Senior Multimedia Designer</div><p>Directed TV commercials, YouTube intros and campaign content for kids' entertainment brands — high-quality motion shaping visual identity.</p></div>
+        <span class="xp-node"></span><div class="xp-yr">2019 — 2021</div>
+      </article>
+      <article class="xp-card down">
+        <div class="xp-cardbody"><div class="xp-co">Syrian Development Org.</div><div class="xp-role">Junior Motion Graphics Designer</div><p>Visual content and data-driven narratives for social media and organizational reporting videos.</p></div>
+        <span class="xp-node"></span><div class="xp-yr">2018 — 2019</div>
+      </article>
+      <article class="xp-card up">
+        <div class="xp-cardbody"><div class="xp-co">Freelance</div><div class="xp-role">Senior Multimedia Designer · MENA</div><p>IG ads, reels and promos for private brands and government entities. Cinematic &amp; AI-generated content, live event editing on site.</p></div>
+        <span class="xp-node"></span><div class="xp-yr">2018 — Now</div>
+      </article>
+      <div class="xp-card xp-final"><div class="xp-final-in">The best work<br>is still ahead <span>→</span></div></div>
+    </div>
+    <div class="xp-progress"><i id="xpBar"></i></div>
   </div>
 </section>
 
@@ -648,6 +691,27 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     else nav.style.transform='translateY(0)';
     last=y;
   }, {passive:true});
+})();
+
+/* ============ EXPERIENCE — HORIZONTAL TIMELINE SCROLL ============ */
+(function(){
+  const xp = document.getElementById('xp');
+  const track = document.getElementById('xpTrack');
+  const bar = document.getElementById('xpBar');
+  if(!xp || !track) return;
+  let ticking=false;
+  function render(){
+    ticking=false;
+    const total = xp.offsetHeight - window.innerHeight;
+    if(total<=0) return;
+    const p = Math.min(1, Math.max(0, -xp.getBoundingClientRect().top/total));
+    const max = Math.max(0, track.scrollWidth - window.innerWidth);
+    track.style.transform = 'translate3d(' + (-p*max).toFixed(1) + 'px,0,0)';
+    if(bar) bar.style.width = (p*100).toFixed(1) + '%';
+  }
+  window.addEventListener('scroll', ()=>{ if(!ticking){ requestAnimationFrame(render); ticking=true; } }, {passive:true});
+  window.addEventListener('resize', render);
+  render();
 })();
 
 /* ============ CONTENT-DRIVEN WORK CARDS (CMS) ============ */
