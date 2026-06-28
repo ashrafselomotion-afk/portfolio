@@ -92,13 +92,17 @@ header.nav{
 .hero-name span{display:inline-block;opacity:0;transform:translateY(40px) rotate(3deg);animation:rise 1.1s var(--ease) forwards}
 .hero-name .l2{background:linear-gradient(112deg,#d8688f 0%,#b07cc9 48%,#5f8fcf 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0}
 
-.hero-bottom{position:absolute;bottom:7vh;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:14px;will-change:transform}
-.disc-label{font-family:'Space Mono';font-size:clamp(10px,1.3vw,12px);letter-spacing:.42em;text-transform:uppercase;color:var(--rope-deep)}
-.disc-reel-wrap{height:1.02em;overflow:hidden;padding:0 12px;font-size:clamp(22px,6vw,84px)}
-.disc-reel{transition:transform .7s var(--ease)}
-.dword{display:block;text-align:center;height:1.02em;line-height:1.02;white-space:nowrap;
-  font-family:'Syne';font-weight:800;font-size:clamp(22px,6vw,84px);letter-spacing:-.03em;
+.disc-stream-wrap{position:absolute;left:0;right:0;bottom:0;height:46vh;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 34%,#000 78%,transparent 100%);
+          mask-image:linear-gradient(180deg,transparent 0,#000 34%,#000 78%,transparent 100%)}
+.disc-stream{display:flex;flex-direction:column;animation:streamUp 16s linear infinite;will-change:transform}
+.disc-stream:hover{animation-play-state:paused}
+.dword{display:block;line-height:1.5;white-space:nowrap;padding:0 6vw;
+  font-family:'Syne';font-weight:800;font-size:clamp(28px,5.6vw,76px);letter-spacing:-.03em;
   background:linear-gradient(112deg,#d8688f 0%,#b07cc9 50%,#5f8fcf 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dword.r{text-align:right}
+.dword.l{text-align:left}
+@keyframes streamUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
 .scrollcue{display:flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut-d)}
 .scrollcue .bar{position:relative;width:46px;height:1px;background:rgba(0,0,0,.25);overflow:hidden}
 .scrollcue .bar::after{content:"";position:absolute;inset:0;background:var(--ink);transform:translateX(-100%);animation:sweep 2.2s var(--ease) infinite}
@@ -274,16 +278,19 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="l2" style="animation-delay:.6s">SELO</span>
         </h1>
       </div>
-      <div class="hero-bottom" id="heroBottom">
-        <div class="disc-label">What I do</div>
-        <div class="disc-reel-wrap"><div class="disc-reel" id="discReel">
-          <span class="dword">Motion Graphics</span>
-          <span class="dword">AI Creation</span>
-          <span class="dword">Video Editing</span>
-          <span class="dword">Social Design</span>
-          <span class="dword">3D Motion</span>
-        </div></div>
-        <div class="scrollcue"><span>Scroll to unfold</span><span class="bar"></span></div>
+      <div class="disc-stream-wrap" aria-hidden="true">
+        <div class="disc-stream">
+          <span class="dword r">Motion Graphics</span>
+          <span class="dword l">AI Creation</span>
+          <span class="dword r">Video Editing</span>
+          <span class="dword l">Social Design</span>
+          <span class="dword r">3D Motion</span>
+          <span class="dword r">Motion Graphics</span>
+          <span class="dword l">AI Creation</span>
+          <span class="dword r">Video Editing</span>
+          <span class="dword l">Social Design</span>
+          <span class="dword r">3D Motion</span>
+        </div>
       </div>
       <div class="scrubmeter"><span id="scrubPct">00</span><span class="ring" id="scrubRing"><i></i></span></div>
     </div>
@@ -540,8 +547,6 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 
   /* ============ SCROLL → FRAME + UI ============ */
   const hero = document.getElementById('hero');
-  const discReel = document.getElementById('discReel');
-  const heroBottom = document.getElementById('heroBottom');
   const scrubPct = document.getElementById('scrubPct');
   const scrubRing = document.getElementById('scrubRing');
   let ticking=false, lastP=0;
@@ -558,10 +563,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
     const p = heroProgress();
     lastP = p;
     draw(Math.round(p*(TOTAL-1)));
-    // big discipline word reel: cycles + the whole block drifts up with scroll
-    const idx = Math.min(4, Math.floor(p*4.999));
-    discReel.style.transform = 'translateY(-'+(idx*1.02)+'em)';
-    heroBottom.style.transform = 'translateY(-'+(p*7).toFixed(2)+'vh)';
+    // (discipline words now auto-stream via CSS animation — no scroll coupling)
     // meter
     const pp = Math.round(p*100);
     if(scrubPct) scrubPct.textContent = String(pp).padStart(2,'0');
