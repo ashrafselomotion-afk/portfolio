@@ -1,30 +1,30 @@
 {
   "motion": {
-    "tag": "Reel · 3D Motion",
+    "tag": "Almarai Anchor · Motion",
     "headline": "",
     "blurb": "",
     "media_type": "file",
-    "media_value": "assets/showreel.mp4"
+    "media_value": "assets/work/motion.mp4"
   },
   "ai": {
-    "tag": "Generative · Cinematic",
+    "tag": "Hermès · AI Film",
     "headline": "",
     "blurb": "",
-    "media_type": "none",
-    "media_value": ""
+    "media_type": "file",
+    "media_value": "assets/work/ai.mp4"
   },
   "video": {
-    "tag": "Edit · Post",
+    "tag": "COP28 · Recap",
     "headline": "",
     "blurb": "",
-    "media_type": "none",
-    "media_value": ""
+    "media_type": "file",
+    "media_value": "assets/work/video.mp4"
   },
   "social": {
-    "tag": "Social · Static",
+    "tag": "GITEX · Social Reel",
     "headline": "",
     "blurb": "",
-    "media_type": "none",
-    "media_value": ""
+    "media_type": "file",
+    "media_value": "assets/work/social.mp4"
   }
 }
