@@ -679,7 +679,8 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
       } else if(type==='file'){
         const v=document.createElement('video');
         v.src=val; v.muted=true; v.loop=true; v.autoplay=true; v.playsInline=true;
-        v.setAttribute('playsinline',''); v.setAttribute('poster','assets/poster.jpg');
+        v.setAttribute('playsinline','');
+        v.setAttribute('poster', val.replace(/\.(mp4|webm|mov)$/i,'-poster.jpg'));
         v.play&&v.play().catch(()=>{});
         node=v;
       }
