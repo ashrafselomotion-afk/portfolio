@@ -1,30 +1,26 @@
 {
   "motion": {
-    "tag": "Almarai Anchor · Motion",
-    "headline": "",
-    "blurb": "",
-    "media_type": "file",
-    "media_value": "assets/work/motion.mp4"
+    "t1": { "label": "Reel 01", "type": "none", "src": "" },
+    "t2": { "label": "Reel 02", "type": "none", "src": "" },
+    "t3": { "label": "Reel 03", "type": "none", "src": "" },
+    "t4": { "label": "Reel 04", "type": "none", "src": "" }
   },
   "ai": {
-    "tag": "Hermès · AI Film",
-    "headline": "",
-    "blurb": "",
-    "media_type": "file",
-    "media_value": "assets/work/ai.mp4"
+    "t1": { "label": "Reel 01", "type": "none", "src": "" },
+    "t2": { "label": "Reel 02", "type": "none", "src": "" },
+    "t3": { "label": "Reel 03", "type": "none", "src": "" },
+    "t4": { "label": "Reel 04", "type": "none", "src": "" }
   },
   "video": {
-    "tag": "COP28 · Recap",
-    "headline": "",
-    "blurb": "",
-    "media_type": "file",
-    "media_value": "assets/work/video.mp4"
+    "t1": { "label": "Reel 01", "type": "none", "src": "" },
+    "t2": { "label": "Reel 02", "type": "none", "src": "" },
+    "t3": { "label": "Reel 03", "type": "none", "src": "" },
+    "t4": { "label": "Reel 04", "type": "none", "src": "" }
   },
   "social": {
-    "tag": "GITEX · Social Reel",
-    "headline": "",
-    "blurb": "",
-    "media_type": "file",
-    "media_value": "assets/work/social.mp4"
+    "t1": { "label": "Reel 01", "type": "none", "src": "" },
+    "t2": { "label": "Reel 02", "type": "none", "src": "" },
+    "t3": { "label": "Reel 03", "type": "none", "src": "" },
+    "t4": { "label": "Reel 04", "type": "none", "src": "" }
   }
 }

@@ -374,7 +374,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="chip">Kinetic Type</span><span class="chip">Brand Idents</span><span class="chip">Carousels</span>
         </div>
       </div>
-      <div class="disc-grid reveal d1">
+      <div class="disc-grid reveal d1" data-section="motion">
         <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
         <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
         <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
@@ -393,7 +393,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="chip">Veo / Flow</span><span class="chip">Higgsfield</span><span class="chip">Kling</span>
         </div>
       </div>
-      <div class="disc-grid reveal d1">
+      <div class="disc-grid reveal d1" data-section="ai">
         <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
         <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
         <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
@@ -412,7 +412,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="chip">Color Grade</span><span class="chip">Reels</span><span class="chip">Storyboards</span>
         </div>
       </div>
-      <div class="disc-grid reveal d1">
+      <div class="disc-grid reveal d1" data-section="video">
         <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
         <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
         <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
@@ -431,7 +431,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="chip">Campaigns</span><span class="chip">Statics</span><span class="chip">Carousels</span>
         </div>
       </div>
-      <div class="disc-grid reveal d1">
+      <div class="disc-grid reveal d1" data-section="social">
         <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
         <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
         <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
@@ -752,23 +752,68 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   setLine(); render();
 })();
 
-/* ============ WORK TILES — LAZY PLAY ON SCROLL ============ */
-/* 16 video tiles: load + play only while in view, pause off-screen (perf). */
+/* ============ WORK TILES — CMS DRIVEN + LAZY PLAY ============ */
+/* Each tile reads content/work.json (edited via /admin). Empty tiles keep the
+   styled placeholder; a Vimeo/YouTube link or uploaded file fills the tile.
+   Videos play only while in view (pause off-screen) for performance. */
 (function(){
-  const vids = document.querySelectorAll('.wtile video');
-  if(!vids.length) return;
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      const v = e.target;
-      if(e.isIntersecting){
-        if(v.preload === 'none'){ v.preload = 'auto'; v.load(); }
-        const p = v.play(); if(p && p.catch) p.catch(()=>{});
-      } else {
-        v.pause();
+  function vimeoId(v){ const m=String(v).match(/(?:vimeo\.com\/(?:video\/)?)?(\d{6,})/); return m?m[1]:null; }
+  function youtubeId(v){ const m=String(v).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m?m[1]:(/^[\w-]{11}$/.test(v)?v:null); }
+
+  function fillTile(tile, item){
+    if(!item) return;
+    const tag = tile.querySelector('.wtag');
+    if(tag && item.label) tag.textContent = item.label;
+    const type = (item.type||'none').toLowerCase();
+    const src = (item.src||'').trim();
+    if(type==='none' || !src) return;            // keep placeholder
+
+    let node=null, embed=false;
+    if(type==='vimeo'){
+      const id=vimeoId(src); if(!id) return;
+      const f=document.createElement('iframe');
+      f.src='https://player.vimeo.com/video/'+id+'?background=1&autoplay=1&muted=1&loop=1&autopause=0';
+      f.allow='autoplay; fullscreen'; f.loading='lazy';
+      const w=document.createElement('div'); w.className='embed'; w.appendChild(f); node=w; embed=true;
+    } else if(type==='youtube'){
+      const id=youtubeId(src); if(!id) return;
+      const f=document.createElement('iframe');
+      f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&loop=1&playlist='+id+'&controls=0&modestbranding=1&playsinline=1';
+      f.allow='autoplay; encrypted-media; fullscreen'; f.loading='lazy';
+      const w=document.createElement('div'); w.className='embed'; w.appendChild(f); node=w; embed=true;
+    } else if(type==='file'){
+      const v=document.createElement('video');
+      v.src=src; v.muted=true; v.loop=true; v.playsInline=true; v.preload='none';
+      v.setAttribute('playsinline','');
+      node=v;
+    }
+    if(!node) return;
+    tile.querySelectorAll('.ph-glow,.ph-play').forEach(e=>e.remove());
+    tile.classList.remove('ph-tile');
+    tile.insertBefore(node, tile.firstChild);
+  }
+
+  function lazyPlay(){
+    const vids=document.querySelectorAll('.wtile video');
+    if(!vids.length) return;
+    const io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target;
+      if(e.isIntersecting){ if(v.preload==='none'){v.preload='auto';v.load();} const p=v.play(); if(p&&p.catch)p.catch(()=>{}); }
+      else v.pause(); }), {threshold:0.2});
+    vids.forEach(v=>io.observe(v));
+  }
+
+  fetch('content/work.json',{cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(data=>{
+      if(data){
+        document.querySelectorAll('.disc-grid[data-section]').forEach(grid=>{
+          const sec=data[grid.getAttribute('data-section')]; if(!sec) return;
+          grid.querySelectorAll('.wtile').forEach((tile,idx)=> fillTile(tile, sec['t'+(idx+1)]));
+        });
       }
-    });
-  }, {threshold:0.2});
-  vids.forEach(v=>io.observe(v));
+      lazyPlay();
+    })
+    .catch(lazyPlay);
 })();
 </script>
 </body>
