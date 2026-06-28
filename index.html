@@ -471,6 +471,10 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 </section>
 
 <script>
+/* always open at the top (the hero video) — never restore the last scroll position */
+if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
+window.scrollTo(0,0);
+window.addEventListener('load', function(){ window.scrollTo(0,0); });
 /* ============ PRELOADER + FRAME SEQUENCE ============ */
 (function(){
   const TOTAL = 120;
@@ -525,6 +529,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
   let started=false;
   function start(){
     if(started) return; started=true;
+    window.scrollTo(0,0);
     fit(); draw(0);
     setTimeout(()=>{ loader.classList.add('done'); }, 350);
     document.body.classList.add('ready');
