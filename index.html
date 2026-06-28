@@ -194,6 +194,11 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 .wtile:hover{transform:translateY(-5px);box-shadow:0 18px 44px -18px rgba(0,0,0,.85)}
 .wtile:hover::after{opacity:1}
 .wtile:hover .wtag{opacity:1;transform:none}
+.wtile.ph-tile{display:grid;place-items:center}
+.wtile.ph-tile .wtag{opacity:1;transform:none}
+.wtile .ph-glow{position:absolute;inset:0;opacity:.85;mix-blend-mode:screen}
+.wtile .ph-play{position:relative;z-index:2;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:grid;place-items:center}
+.wtile .ph-play::after{content:"";border-left:12px solid rgba(255,255,255,.9);border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
 @media(max-width:860px){.disc:nth-child(even) .disc-grid{order:0}}
 
 /* ---------- TOOLS ---------- */
@@ -370,10 +375,10 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
         </div>
       </div>
       <div class="disc-grid reveal d1">
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/m1.jpg" src="assets/work/m1.mp4"></video><span class="wtag">Almarai Anchor</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/m2.jpg" src="assets/work/m2.mp4"></video><span class="wtag">Creative</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/m3.jpg" src="assets/work/m3.mp4"></video><span class="wtag">Creative Eyes</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/m4.jpg" src="assets/work/m4.mp4"></video><span class="wtag">WIC · SIF Logos</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 04</span></div>
       </div>
     </article>
 
@@ -389,10 +394,10 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
         </div>
       </div>
       <div class="disc-grid reveal d1">
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/a1.jpg" src="assets/work/a1.mp4"></video><span class="wtag">Hermès · AI</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/a2.jpg" src="assets/work/a2.mp4"></video><span class="wtag">Dior Sauvage</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/a3.jpg" src="assets/work/a3.mp4"></video><span class="wtag">Will Smith</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/a4.jpg" src="assets/work/a4.mp4"></video><span class="wtag">Baflay</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 04</span></div>
       </div>
     </article>
 
@@ -408,10 +413,10 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
         </div>
       </div>
       <div class="disc-grid reveal d1">
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/v1.jpg" src="assets/work/v1.mp4"></video><span class="wtag">COP28</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/v2.jpg" src="assets/work/v2.mp4"></video><span class="wtag">NACD Recap</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/v3.jpg" src="assets/work/v3.mp4"></video><span class="wtag">Impact Zone</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/v4.jpg" src="assets/work/v4.mp4"></video><span class="wtag">House of Wisdom</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 04</span></div>
       </div>
     </article>
 
@@ -427,10 +432,10 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
         </div>
       </div>
       <div class="disc-grid reveal d1">
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/s1.jpg" src="assets/work/s1.mp4"></video><span class="wtag">IIS · GITEX</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/s2.jpg" src="assets/work/s2.mp4"></video><span class="wtag">LALA Poker</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/s3.jpg" src="assets/work/s3.mp4"></video><span class="wtag">DS · EID</span></div>
-        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/s4.jpg" src="assets/work/s4.mp4"></video><span class="wtag">SEF Startup</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
+        <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 04</span></div>
       </div>
     </article>
   </div>
