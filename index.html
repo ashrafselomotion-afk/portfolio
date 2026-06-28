@@ -211,7 +211,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 .xp-hint{position:absolute;top:4px;right:0;font-family:'Space Mono';font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--rope)}
 .xp-track{position:absolute;top:0;left:0;height:100%;display:flex;align-items:stretch;width:max-content;padding:0 clamp(40px,8vw,130px);gap:clamp(30px,3.2vw,60px);will-change:transform}
 .xp-line{position:absolute;top:57%;left:0;right:0;height:2px;border-radius:2px;
-  background:rgba(255,255,255,.55);box-shadow:0 0 10px rgba(255,255,255,.18),0 0 20px rgba(244,185,200,.22)}
+  background:rgba(255,255,255,.5);box-shadow:0 0 10px rgba(255,255,255,.16),0 0 20px rgba(244,185,200,.2)}
 .xp-card{position:relative;flex:0 0 clamp(270px,30vw,380px);height:100%}
 .xp-node{position:absolute;top:57%;left:0;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 5px rgba(244,185,200,.12),0 0 22px 4px rgba(244,185,200,.45);z-index:3}
 .xp-yr{position:absolute;top:57%;left:22px;transform:translateY(-50%);font-family:'Space Mono';font-size:13px;letter-spacing:.07em;color:var(--rope);background:var(--ink);padding:3px 9px;border-radius:4px;z-index:2;white-space:nowrap}
@@ -699,7 +699,21 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   const xp = document.getElementById('xp');
   const track = document.getElementById('xpTrack');
   const bar = document.getElementById('xpBar');
+  const line = track ? track.querySelector('.xp-line') : null;
   if(!xp || !track) return;
+  function setLine(){
+    if(!line) return;
+    const nodes = track.querySelectorAll('.xp-card:not(.xp-final) .xp-node');
+    if(!nodes.length) return;
+    const tr = track.getBoundingClientRect();
+    const a = nodes[0].getBoundingClientRect();
+    const b = nodes[nodes.length-1].getBoundingClientRect();   // Freelance (last role) dot
+    const x1 = a.left + a.width/2 - tr.left;
+    const x2 = b.left + b.width/2 - tr.left;
+    line.style.left = x1 + 'px';
+    line.style.right = 'auto';
+    line.style.width = Math.max(0, x2 - x1) + 'px';
+  }
   let ticking=false;
   function render(){
     ticking=false;
@@ -711,8 +725,10 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     if(bar) bar.style.width = (p*100).toFixed(1) + '%';
   }
   window.addEventListener('scroll', ()=>{ if(!ticking){ requestAnimationFrame(render); ticking=true; } }, {passive:true});
-  window.addEventListener('resize', render);
-  render();
+  window.addEventListener('resize', ()=>{ setLine(); render(); });
+  window.addEventListener('load', setLine);
+  document.fonts && document.fonts.ready && document.fonts.ready.then(setLine);
+  setLine(); render();
 })();
 
 /* ============ CONTENT-DRIVEN WORK CARDS (CMS) ============ */
