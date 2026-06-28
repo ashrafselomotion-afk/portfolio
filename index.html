@@ -184,6 +184,17 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 .gl-3{background:radial-gradient(75% 60% at 25% 80%,#ff8a5c,transparent 60%),radial-gradient(70% 70% at 85% 15%,var(--blue),transparent 60%)}
 .gl-4{background:radial-gradient(75% 60% at 80% 80%,var(--blue),transparent 60%),radial-gradient(70% 70% at 15% 20%,var(--cream),transparent 60%)}
 @media(max-width:860px){.disc{grid-template-columns:1fr;gap:30px}.disc:nth-child(even) .disc-media{order:0}.disc:nth-child(even) .disc-text{order:0}.disc-media{aspect-ratio:16/11}}
+/* ---------- WORK GRID — 2x2 video tiles ---------- */
+.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.disc:nth-child(even) .disc-grid{order:2}
+.wtile{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0e0e13;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.wtile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.wtile .wtag{position:absolute;left:10px;bottom:10px;z-index:3;font-family:'Space Mono';font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#fff;padding:5px 9px;border-radius:100px;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);opacity:0;transform:translateY(6px);transition:.35s var(--ease)}
+.wtile::after{content:"";position:absolute;inset:0;border-radius:14px;padding:1.5px;background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s var(--ease);pointer-events:none;z-index:2}
+.wtile:hover{transform:translateY(-5px);box-shadow:0 18px 44px -18px rgba(0,0,0,.85)}
+.wtile:hover::after{opacity:1}
+.wtile:hover .wtag{opacity:1;transform:none}
+@media(max-width:860px){.disc:nth-child(even) .disc-grid{order:0}}
 
 /* ---------- TOOLS ---------- */
 #tools{background:
@@ -358,9 +369,11 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="chip">Kinetic Type</span><span class="chip">Brand Idents</span><span class="chip">Carousels</span>
         </div>
       </div>
-      <div class="disc-media reveal d1" data-slot="motion">
-        <div class="ph"><span class="tag">Reel · 3D Motion</span></div>
-        <div class="play"><span class="tri"></span>Showreel</div>
+      <div class="disc-grid reveal d1">
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/m1.jpg" src="assets/work/m1.mp4"></video><span class="wtag">Almarai Anchor</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/m2.jpg" src="assets/work/m2.mp4"></video><span class="wtag">Creative</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/m3.jpg" src="assets/work/m3.mp4"></video><span class="wtag">Creative Eyes</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/m4.jpg" src="assets/work/m4.mp4"></video><span class="wtag">WIC · SIF Logos</span></div>
       </div>
     </article>
 
@@ -375,10 +388,11 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="chip">Veo / Flow</span><span class="chip">Higgsfield</span><span class="chip">Kling</span>
         </div>
       </div>
-      <div class="disc-media reveal d1" data-slot="ai">
-        <div class="glow gl-2"></div>
-        <div class="ph"><span class="tag">Generative · Cinematic</span><span class="big">AI<br>FILM</span></div>
-        <div class="play"><span class="tri"></span>Add reel here</div>
+      <div class="disc-grid reveal d1">
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/a1.jpg" src="assets/work/a1.mp4"></video><span class="wtag">Hermès · AI</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/a2.jpg" src="assets/work/a2.mp4"></video><span class="wtag">Dior Sauvage</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/a3.jpg" src="assets/work/a3.mp4"></video><span class="wtag">Will Smith</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/a4.jpg" src="assets/work/a4.mp4"></video><span class="wtag">Baflay</span></div>
       </div>
     </article>
 
@@ -393,10 +407,11 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="chip">Color Grade</span><span class="chip">Reels</span><span class="chip">Storyboards</span>
         </div>
       </div>
-      <div class="disc-media reveal d1" data-slot="video">
-        <div class="glow gl-3"></div>
-        <div class="ph"><span class="tag">Edit · Post</span><span class="big">CUT<br>&amp; GRADE</span></div>
-        <div class="play"><span class="tri"></span>Add reel here</div>
+      <div class="disc-grid reveal d1">
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/v1.jpg" src="assets/work/v1.mp4"></video><span class="wtag">COP28</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/v2.jpg" src="assets/work/v2.mp4"></video><span class="wtag">NACD Recap</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/v3.jpg" src="assets/work/v3.mp4"></video><span class="wtag">Impact Zone</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/v4.jpg" src="assets/work/v4.mp4"></video><span class="wtag">House of Wisdom</span></div>
       </div>
     </article>
 
@@ -411,10 +426,11 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
           <span class="chip">Campaigns</span><span class="chip">Statics</span><span class="chip">Carousels</span>
         </div>
       </div>
-      <div class="disc-media reveal d1" data-slot="social">
-        <div class="glow gl-4"></div>
-        <div class="ph"><span class="tag">Social · Static</span><span class="big">POSTS<br>THAT POP</span></div>
-        <div class="play"><span class="tri"></span>Add work here</div>
+      <div class="disc-grid reveal d1">
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/s1.jpg" src="assets/work/s1.mp4"></video><span class="wtag">IIS · GITEX</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/s2.jpg" src="assets/work/s2.mp4"></video><span class="wtag">LALA Poker</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/s3.jpg" src="assets/work/s3.mp4"></video><span class="wtag">DS · EID</span></div>
+        <div class="wtile"><video class="wv" muted loop playsinline preload="none" poster="assets/work/s4.jpg" src="assets/work/s4.mp4"></video><span class="wtag">SEF Startup</span></div>
       </div>
     </article>
   </div>
@@ -731,70 +747,23 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   setLine(); render();
 })();
 
-/* ============ CONTENT-DRIVEN WORK CARDS (CMS) ============ */
-/* Reads content/work.json (edited via /admin). Each card injects a Vimeo/
-   YouTube embed or a local video file. Falls back to these defaults so the
-   page still works when opened directly from disk (file://). */
+/* ============ WORK TILES — LAZY PLAY ON SCROLL ============ */
+/* 16 video tiles: load + play only while in view, pause off-screen (perf). */
 (function(){
-  const DEFAULTS = {
-    motion:{tag:"Reel · 3D Motion", media_type:"file", media_value:"assets/showreel.mp4"},
-    ai:{tag:"Generative · Cinematic", media_type:"none", media_value:""},
-    video:{tag:"Edit · Post", media_type:"none", media_value:""},
-    social:{tag:"Social · Static", media_type:"none", media_value:""}
-  };
-
-  function vimeoId(v){ const m=String(v).match(/(?:vimeo\.com\/(?:video\/)?)?(\d{6,})/); return m?m[1]:null; }
-  function youtubeId(v){ const m=String(v).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m?m[1]:(/^[\w-]{11}$/.test(v)?v:null); }
-
-  function apply(data){
-    document.querySelectorAll('.disc-media[data-slot]').forEach(media=>{
-      const slot=media.getAttribute('data-slot');
-      const d=Object.assign({}, DEFAULTS[slot], data&&data[slot]?data[slot]:{});
-      // update tag text if provided
-      const tagEl=media.querySelector('.ph .tag'); if(tagEl && d.tag) tagEl.textContent=d.tag;
-      const card=media.closest('.disc'); const pEl=card&&card.querySelector('.disc-text p'); if(pEl && d.blurb) pEl.textContent=d.blurb;
-
-      const type=(d.media_type||'none').toLowerCase();
-      const val=(d.media_value||'').trim();
-      if(type==='none' || !val) return; // keep styled placeholder
-
-      let node=null, embed=false;
-      if(type==='vimeo'){
-        const id=vimeoId(val); if(!id) return;
-        const f=document.createElement('iframe');
-        f.src=`https://player.vimeo.com/video/${id}?background=1&autoplay=1&muted=1&loop=1&autopause=0`;
-        f.allow='autoplay; fullscreen'; f.loading='lazy';
-        const wrap=document.createElement('div'); wrap.className='embed'; wrap.appendChild(f);
-        node=wrap; embed=true;
-      } else if(type==='youtube'){
-        const id=youtubeId(val); if(!id) return;
-        const f=document.createElement('iframe');
-        f.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1`;
-        f.allow='autoplay; encrypted-media; fullscreen'; f.loading='lazy';
-        const wrap=document.createElement('div'); wrap.className='embed'; wrap.appendChild(f);
-        node=wrap; embed=true;
-      } else if(type==='file'){
-        const v=document.createElement('video');
-        v.src=val; v.muted=true; v.loop=true; v.autoplay=true; v.playsInline=true;
-        v.setAttribute('playsinline','');
-        v.setAttribute('poster', val.replace(/\.(mp4|webm|mov)$/i,'-poster.jpg'));
-        v.play&&v.play().catch(()=>{});
-        node=v;
+  const vids = document.querySelectorAll('.wtile video');
+  if(!vids.length) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      const v = e.target;
+      if(e.isIntersecting){
+        if(v.preload === 'none'){ v.preload = 'auto'; v.load(); }
+        const p = v.play(); if(p && p.catch) p.catch(()=>{});
+      } else {
+        v.pause();
       }
-      if(!node) return;
-      media.insertBefore(node, media.firstChild);
-      media.classList.add('has-media');
-      if(embed) media.classList.add('has-embed');
-      // flip the corner label to an active state
-      const play=media.querySelector('.play');
-      if(play){ const last=play.childNodes[play.childNodes.length-1]; if(last&&last.nodeType===3) last.textContent='Showreel'; }
     });
-  }
-
-  fetch('content/work.json',{cache:'no-store'})
-    .then(r=>r.ok?r.json():null)
-    .then(j=>apply(j))
-    .catch(()=>apply(null)); // file:// or offline → defaults (Motion still plays)
+  }, {threshold:0.2});
+  vids.forEach(v=>io.observe(v));
 })();
 </script>
 </body>
