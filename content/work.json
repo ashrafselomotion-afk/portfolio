@@ -1,0 +1,30 @@
+{
+  "motion": {
+    "tag": "Reel · 3D Motion",
+    "headline": "",
+    "blurb": "",
+    "media_type": "file",
+    "media_value": "assets/showreel.mp4"
+  },
+  "ai": {
+    "tag": "Generative · Cinematic",
+    "headline": "",
+    "blurb": "",
+    "media_type": "none",
+    "media_value": ""
+  },
+  "video": {
+    "tag": "Edit · Post",
+    "headline": "",
+    "blurb": "",
+    "media_type": "none",
+    "media_value": ""
+  },
+  "social": {
+    "tag": "Social · Static",
+    "headline": "",
+    "blurb": "",
+    "media_type": "none",
+    "media_value": ""
+  }
+}

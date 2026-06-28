@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ashraf Selo — Senior Motion Graphics Designer · AI Creative · Video Editor</title>
+<meta name="description" content="Ashraf Selo — Senior Motion Graphics Designer, AI Creative Specialist and Video Editor based in Dubai. 8+ years of cinematic storytelling, motion, AI filmmaking and social design." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0a0a0d;
+  --ink-soft:#111116;
+  --paper:#f6f3ec;
+  --paper-2:#ece7dc;
+  --pink:#f4b9c8;
+  --blue:#a8c9e8;
+  --cream:#efe7d6;
+  --rope:#c9a87d;
+  --rope-deep:#a9854f;
+  --mut:#8b8a93;
+  --mut-d:#5c5b63;
+  --line:rgba(255,255,255,.10);
+  --maxw:1280px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:400;
+  line-height:1.55;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img,video,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:var(--ink)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+.mono{font-family:'Space Mono',monospace;letter-spacing:.04em}
+.display{font-family:'Syne',sans-serif;font-weight:800;line-height:.95;letter-spacing:-.02em}
+
+/* ---------- PRELOADER ---------- */
+#loader{
+  position:fixed;inset:0;z-index:1000;background:var(--paper);color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+  transition:opacity .9s var(--ease), visibility .9s var(--ease);
+}
+#loader.done{opacity:0;visibility:hidden}
+#loader .lname{font-family:'Syne';font-weight:800;font-size:clamp(34px,7vw,64px);letter-spacing:-.03em;line-height:1}
+#loader .lsub{font-family:'Space Mono';font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--rope-deep)}
+.lbar{width:min(320px,70vw);height:2px;background:rgba(0,0,0,.12);overflow:hidden;border-radius:2px}
+.lbar i{display:block;height:100%;width:0%;background:var(--ink);transition:width .25s linear}
+#lpct{font-family:'Space Mono';font-size:12px;color:var(--mut-d);letter-spacing:.2em}
+
+/* ---------- NAV ---------- */
+header.nav{
+  position:fixed;top:0;left:0;right:0;z-index:90;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(20px,5vw,64px);
+  mix-blend-mode:difference;color:#fff;
+  transition:transform .5s var(--ease);
+}
+.nav .brand{font-family:'Syne';font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.nav .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 4px rgba(244,185,200,.25)}
+.nav nav{display:flex;gap:30px;font-size:13px;font-weight:500;letter-spacing:.02em}
+.nav nav a{position:relative;opacity:.85;transition:opacity .3s}
+.nav nav a:hover{opacity:1}
+.nav nav a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:currentColor;transition:width .35s var(--ease)}
+.nav nav a:hover::after{width:100%}
+.nav .loc{font-family:'Space Mono';font-size:11px;letter-spacing:.18em;opacity:.8}
+@media(max-width:760px){.nav nav{display:none}.nav .loc{display:none}}
+
+/* ---------- HERO / SCROLL SCRUB ---------- */
+#hero{position:relative;height:560vh;background:var(--paper)}
+.hero-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--paper)}
+#frames{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-vignette{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 80% at 50% 40%,transparent 40%,rgba(246,243,236,.55) 100%)}
+.hero-ui{position:absolute;inset:0;color:var(--ink);pointer-events:none}
+
+.hero-top{position:absolute;top:13vh;left:0;right:0;text-align:center;padding:0 16px}
+.hero-top .eyebrow{font-family:'Space Mono';font-size:clamp(10px,1.4vw,13px);letter-spacing:.4em;text-transform:uppercase;color:var(--rope-deep);margin-bottom:18px;opacity:0;transform:translateY(14px);animation:rise 1s var(--ease) .4s forwards}
+.hero-name{font-family:'Syne';font-weight:800;font-size:clamp(52px,12vw,160px);line-height:.86;letter-spacing:-.03em;color:var(--ink)}
+.hero-name span{display:inline-block;opacity:0;transform:translateY(40px) rotate(3deg);animation:rise 1.1s var(--ease) forwards}
+.hero-name .l2{background:linear-gradient(112deg,#d8688f 0%,#b07cc9 48%,#5f8fcf 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0}
+
+.hero-bottom{position:absolute;bottom:8vh;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.disc-rotate{height:1.2em;overflow:hidden;font-family:'Syne';font-weight:700;font-size:clamp(18px,3vw,30px);letter-spacing:-.01em}
+.disc-rotate .track{transition:transform .6s var(--ease)}
+.disc-rotate .item{height:1.2em;display:flex;align-items:center;justify-content:center;gap:12px}
+.disc-rotate .item b{color:var(--rope-deep)}
+.scrollcue{display:flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut-d)}
+.scrollcue .bar{position:relative;width:46px;height:1px;background:rgba(0,0,0,.25);overflow:hidden}
+.scrollcue .bar::after{content:"";position:absolute;inset:0;background:var(--ink);transform:translateX(-100%);animation:sweep 2.2s var(--ease) infinite}
+
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes sweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+/* progress ring in corner during hero */
+.scrubmeter{position:absolute;right:clamp(20px,5vw,64px);bottom:8vh;font-family:'Space Mono';font-size:11px;letter-spacing:.2em;color:var(--mut-d);display:flex;align-items:center;gap:10px}
+.scrubmeter .ring{width:34px;height:34px;border-radius:50%;background:conic-gradient(var(--ink) var(--p,0%),rgba(0,0,0,.12) 0)}
+.scrubmeter .ring i{display:block;width:100%;height:100%;border-radius:50%;background:var(--paper);transform:scale(.74)}
+@media(max-width:760px){.scrubmeter{display:none}}
+
+/* ---------- TRANSITION PAPER->INK ---------- */
+.fade-to-ink{height:60vh;background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 18%,#3a3630 55%,var(--ink) 100%);position:relative;z-index:2;margin-top:-2px}
+
+/* ---------- SECTION FRAMEWORK ---------- */
+section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
+.kicker{font-family:'Space Mono';font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--rope);display:inline-flex;align-items:center;gap:12px;margin-bottom:26px}
+.kicker::before{content:"";width:30px;height:1px;background:var(--rope)}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+/* ---------- MANIFESTO ---------- */
+#about .lead{font-family:'Syne';font-weight:700;font-size:clamp(26px,4.4vw,58px);line-height:1.08;letter-spacing:-.02em;max-width:18ch}
+#about .lead em{font-style:normal;background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0}
+#about .lead .hl{color:var(--pink)}
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:end;margin-top:60px}
+.about-grid p{color:#cfccd6;font-size:clamp(15px,1.7vw,18px);line-height:1.7;max-width:46ch}
+.stats{display:flex;gap:40px;flex-wrap:wrap}
+.stat .n{font-family:'Syne';font-weight:800;font-size:clamp(38px,5vw,68px);line-height:1;background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .t{font-family:'Space Mono';font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-top:8px}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ---------- DISCIPLINES ---------- */
+#work{padding-top:40px}
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:30px}
+.work-head h2{font-family:'Syne';font-weight:800;font-size:clamp(40px,8vw,108px);line-height:.92;letter-spacing:-.03em}
+.work-head h2 .o{background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0}
+
+.disc{display:grid;grid-template-columns:0.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:center;padding:clamp(48px,8vh,110px) 0;border-top:1px solid var(--line)}
+.disc:nth-child(even) .disc-media{order:2}
+.disc:nth-child(even) .disc-text{order:1}
+.disc-text .num{font-family:'Space Mono';font-size:13px;letter-spacing:.2em;color:var(--rope)}
+.disc-text h3{font-family:'Syne';font-weight:800;font-size:clamp(32px,5.2vw,72px);line-height:.98;letter-spacing:-.02em;margin:14px 0 20px}
+.disc-text h3 .accent{display:block;font-size:.42em;font-weight:600;letter-spacing:.02em;color:var(--mut);-webkit-text-stroke:0}
+.disc-text p{color:#c7c4cf;font-size:clamp(15px,1.6vw,17px);max-width:44ch;margin-bottom:24px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-family:'Space Mono';font-size:11px;letter-spacing:.05em;padding:8px 13px;border:1px solid var(--line);border-radius:100px;color:#d9d6df;transition:.35s var(--ease)}
+.chip:hover{border-color:var(--pink);color:var(--pink);transform:translateY(-2px)}
+
+.disc-media{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  background:#0f0f14;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+.disc-media .ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:22px}
+.disc-media .glow{position:absolute;inset:0;opacity:.9;mix-blend-mode:screen}
+.disc-media video,.disc-media img.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.disc-media .embed{position:absolute;inset:0;overflow:hidden;background:#000}
+.disc-media .embed iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;border:0}
+.disc-media.has-embed{aspect-ratio:16/9}
+.disc-media.has-media .glow{display:none}
+.disc-media.has-media .ph .big{display:none}
+.disc-media .ph .tag{align-self:flex-start;font-family:'Space Mono';font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px;border-radius:100px;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);border:1px solid var(--line);z-index:2}
+.disc-media .ph .big{font-family:'Syne';font-weight:800;font-size:clamp(40px,7vw,84px);line-height:.9;letter-spacing:-.03em;z-index:2;mix-blend-mode:overlay;opacity:.92}
+.disc-media .play{position:absolute;left:22px;bottom:22px;z-index:2;display:flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#fff}
+.disc-media .play .tri{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.5);display:grid;place-items:center}
+.disc-media .play .tri::after{content:"";border-left:8px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px}
+.gl-1{background:radial-gradient(80% 60% at 20% 20%,var(--pink),transparent 60%),radial-gradient(70% 70% at 90% 80%,var(--blue),transparent 60%)}
+.gl-2{background:radial-gradient(75% 65% at 80% 15%,#7c5cff,transparent 60%),radial-gradient(70% 70% at 10% 90%,var(--pink),transparent 55%)}
+.gl-3{background:radial-gradient(75% 60% at 25% 80%,#ff8a5c,transparent 60%),radial-gradient(70% 70% at 85% 15%,var(--blue),transparent 60%)}
+.gl-4{background:radial-gradient(75% 60% at 80% 80%,var(--blue),transparent 60%),radial-gradient(70% 70% at 15% 20%,var(--cream),transparent 60%)}
+@media(max-width:860px){.disc{grid-template-columns:1fr;gap:30px}.disc:nth-child(even) .disc-media{order:0}.disc:nth-child(even) .disc-text{order:0}.disc-media{aspect-ratio:16/11}}
+
+/* ---------- TOOLS ---------- */
+#tools{background:
+  radial-gradient(60% 50% at 100% 0%,rgba(168,201,232,.08),transparent 60%),
+  radial-gradient(50% 50% at 0% 100%,rgba(244,185,200,.08),transparent 60%)}
+.tools-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:46px}
+.tcard{border:1px solid var(--line);border-radius:16px;padding:26px;background:rgba(255,255,255,.015);position:relative;overflow:hidden;transition:.45s var(--ease)}
+.tcard:hover{border-color:rgba(255,255,255,.28);transform:translateY(-4px);background:rgba(255,255,255,.04)}
+.tcard .ico{font-family:'Syne';font-weight:800;font-size:20px;color:var(--ink);width:42px;height:42px;border-radius:10px;display:grid;place-items:center;margin-bottom:18px}
+.tcard .ico.brand{background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.tcard .ico svg{display:block}
+.tcard h4{font-family:'Syne';font-weight:700;font-size:20px;letter-spacing:-.01em;margin-bottom:6px}
+.tcard .sub{font-family:'Space Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:16px}
+.tcard ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.tcard li{font-size:13px;color:#d2cfd9;padding:6px 11px;border:1px solid var(--line);border-radius:8px;transition:.3s}
+.tcard:hover li{border-color:rgba(255,255,255,.16)}
+.span6{grid-column:span 6}.span4{grid-column:span 4}.span3{grid-column:span 3}.span12{grid-column:span 12}
+@media(max-width:900px){.span6,.span4,.span3{grid-column:span 12}}
+
+/* ---------- EXPERIENCE ---------- */
+.xp{border-top:1px solid var(--line)}
+.xp-row{display:grid;grid-template-columns:.5fr 1.4fr 1.1fr;gap:30px;padding:30px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:.4s var(--ease)}
+.xp-row:hover{background:rgba(255,255,255,.02);padding-left:14px;padding-right:14px;border-radius:10px}
+.xp-row .yr{font-family:'Space Mono';font-size:13px;color:var(--rope);letter-spacing:.06em}
+.xp-row .co{font-family:'Syne';font-weight:700;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.01em}
+.xp-row .co small{display:block;font-family:'Inter';font-weight:500;font-size:13px;color:var(--mut);letter-spacing:0;margin-top:5px}
+.xp-row .ds{color:#bdbac6;font-size:14px;line-height:1.6}
+@media(max-width:760px){.xp-row{grid-template-columns:1fr;gap:8px}.xp-row .ds{margin-top:6px}}
+
+/* ---------- CLIENTS MARQUEE ---------- */
+#clients{overflow:hidden}
+.marq{display:flex;gap:0;white-space:nowrap;width:max-content;animation:marq 38s linear infinite}
+.marq.rev{animation-direction:reverse;animation-duration:46s}
+.marq:hover{animation-play-state:paused}
+.marq .m{font-family:'Syne';font-weight:800;font-size:clamp(30px,5vw,68px);letter-spacing:-.02em;color:rgba(247,244,238,.46);-webkit-text-stroke:0;padding:0 .35em;transition:color .4s var(--ease)}
+.marq .m:hover{color:var(--pink)}
+.marq .dotm{font-size:clamp(30px,5vw,60px);color:var(--rope);padding:0 .1em;align-self:center}
+.marq-wrap{display:flex;flex-direction:column;gap:20px;margin-top:48px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- CONTACT ---------- */
+#contact{background:var(--paper);color:var(--ink);position:relative;overflow:hidden}
+#contact .kicker{color:var(--rope-deep)}
+#contact .kicker::before{background:var(--rope-deep)}
+.contact-big{font-family:'Syne';font-weight:800;font-size:clamp(44px,11vw,150px);line-height:.9;letter-spacing:-.03em;margin:18px 0 10px}
+.contact-big a{display:inline-block;transition:.4s var(--ease)}
+.contact-big a:hover{color:var(--rope-deep);transform:translateX(14px)}
+.contact-sub{font-family:'Syne';font-weight:600;font-size:clamp(18px,2.4vw,30px);color:#4a463e;max-width:24ch;margin-bottom:50px}
+.contact-info{display:flex;flex-wrap:wrap;gap:14px 46px;border-top:1px solid rgba(0,0,0,.14);padding-top:34px;margin-top:30px}
+.cinfo .l{font-family:'Space Mono';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--rope-deep);margin-bottom:7px}
+.cinfo .v{font-family:'Syne';font-weight:700;font-size:clamp(16px,2vw,22px)}
+.cinfo .v a:hover{color:var(--rope-deep)}
+.footnote{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:70px;font-family:'Space Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7a766c}
+
+/* floating side rope label */
+.side{position:fixed;left:18px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-family:'Space Mono';font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--mut);z-index:80;mix-blend-mode:difference}
+@media(max-width:1100px){.side{display:none}}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PRELOADER ===== -->
+<div id="loader">
+  <div class="lname">ASHRAF SELO</div>
+  <div class="lsub">Motion · AI · Film</div>
+  <div class="lbar"><i id="lbar"></i></div>
+  <div id="lpct">000%</div>
+</div>
+
+<div class="side">Dubai, UAE — Est. 2018</div>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <a class="brand" href="#top"><span class="dot"></span>Ashraf&nbsp;Selo</a>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#tools">Tools</a>
+    <a href="#xp">Experience</a>
+    <a href="#clients">Clients</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="loc">+971 55 344 1707</div>
+</header>
+
+<!-- ===== HERO SCROLL-SCRUB ===== -->
+<section id="hero" aria-label="Intro">
+  <a id="top"></a>
+  <div class="hero-sticky">
+    <canvas id="frames" width="1440" height="810" aria-hidden="true"></canvas>
+    <div class="hero-vignette"></div>
+    <div class="hero-ui">
+      <div class="hero-top">
+        <div class="eyebrow">Senior Motion Graphics Designer · AI Creative · Video Editor</div>
+        <h1 class="hero-name">
+          <span style="animation-delay:.45s">ASHRAF</span><br>
+          <span class="l2" style="animation-delay:.6s">SELO</span>
+        </h1>
+      </div>
+      <div class="hero-bottom">
+        <div class="disc-rotate"><div class="track" id="discTrack">
+          <div class="item"><b>Motion</b> Graphics</div>
+          <div class="item"><b>AI</b> Creation</div>
+          <div class="item"><b>Video</b> Editing</div>
+          <div class="item"><b>Social</b> Design</div>
+          <div class="item"><b>3D</b> Motion</div>
+        </div></div>
+        <div class="scrollcue"><span>Scroll to unfold</span><span class="bar"></span></div>
+      </div>
+      <div class="scrubmeter"><span id="scrubPct">00</span><span class="ring" id="scrubRing"><i></i></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="fade-to-ink"></div>
+
+<!-- ===== ABOUT / MANIFESTO ===== -->
+<section class="block" id="about">
+  <div class="wrap">
+    <span class="kicker reveal">01 — Profile</span>
+    <h2 class="lead reveal d1">Ideas that <span class="hl">move</span>. Stories that <em>stick</em>.</h2>
+    <div class="about-grid">
+      <p class="reveal d2">Creative Senior Motion Graphics Designer, AI Creator, Video Editor and Graphic Designer with over 8 years delivering visual content across digital platforms — advertising, social media, campaigns, cinematic storytelling and AI-powered content creation. Based in Dubai, working freelance &amp; full-time across the MENA region.</p>
+      <div class="stats reveal d3">
+        <div class="stat"><div class="n">8+</div><div class="t">Years<br>Experience</div></div>
+        <div class="stat"><div class="n">40+</div><div class="t">Brands &amp;<br>Entities</div></div>
+        <div class="stat"><div class="n">∞</div><div class="t">Frames<br>Rendered</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORK / DISCIPLINES ===== -->
+<section class="block" id="work">
+  <div class="wrap">
+    <span class="kicker reveal">02 — What I Do</span>
+    <div class="work-head">
+      <h2 class="reveal d1">Four crafts.<br><span class="o">One vision.</span></h2>
+      <p class="reveal d2" style="max-width:34ch;color:#bdbac6;font-size:15px">From a single keyframe to a full AI-generated film — the disciplines I blend to build brands in motion.</p>
+    </div>
+
+    <!-- 1 MOTION -->
+    <article class="disc">
+      <div class="disc-text reveal">
+        <div class="num">/ 01</div>
+        <h3>Motion Graphics<span class="accent">&amp; Animation</span></h3>
+        <p>Brand systems in motion — logo stings, CGI, kinetic typography and 3D motion design built to stop the scroll and stay on-brand across every channel and language.</p>
+        <div class="chips">
+          <span class="chip">After Effects</span><span class="chip">Cinematic CGI</span>
+          <span class="chip">Kinetic Type</span><span class="chip">Brand Idents</span><span class="chip">Carousels</span>
+        </div>
+      </div>
+      <div class="disc-media reveal d1" data-slot="motion">
+        <div class="ph"><span class="tag">Reel · 3D Motion</span></div>
+        <div class="play"><span class="tri"></span>Showreel</div>
+      </div>
+    </article>
+
+    <!-- 2 AI -->
+    <article class="disc">
+      <div class="disc-text reveal">
+        <div class="num">/ 02</div>
+        <h3>AI Creation<span class="accent">Filmmaking &amp; Ads</span></h3>
+        <p>AI filmmaking, AI ad creation and prompt engineering — directing generative tools to produce cinematic, photoreal and stylised content that would be impossible (or impossibly expensive) to shoot.</p>
+        <div class="chips">
+          <span class="chip">Prompt Engineering</span><span class="chip">AI Film</span>
+          <span class="chip">Veo / Flow</span><span class="chip">Higgsfield</span><span class="chip">Kling</span>
+        </div>
+      </div>
+      <div class="disc-media reveal d1" data-slot="ai">
+        <div class="glow gl-2"></div>
+        <div class="ph"><span class="tag">Generative · Cinematic</span><span class="big">AI<br>FILM</span></div>
+        <div class="play"><span class="tri"></span>Add reel here</div>
+      </div>
+    </article>
+
+    <!-- 3 VIDEO -->
+    <article class="disc">
+      <div class="disc-text reveal">
+        <div class="num">/ 03</div>
+        <h3>Video Editing<span class="accent">&amp; Post Production</span></h3>
+        <p>Story-first editing — reels, commercials and event recaps cut on site, color graded and sound designed for maximum audience impact and retention.</p>
+        <div class="chips">
+          <span class="chip">Premiere Pro</span><span class="chip">Edit On Site</span>
+          <span class="chip">Color Grade</span><span class="chip">Reels</span><span class="chip">Storyboards</span>
+        </div>
+      </div>
+      <div class="disc-media reveal d1" data-slot="video">
+        <div class="glow gl-3"></div>
+        <div class="ph"><span class="tag">Edit · Post</span><span class="big">CUT<br>&amp; GRADE</span></div>
+        <div class="play"><span class="tri"></span>Add reel here</div>
+      </div>
+    </article>
+
+    <!-- 4 SOCIAL -->
+    <article class="disc">
+      <div class="disc-text reveal">
+        <div class="num">/ 04</div>
+        <h3>Social Media<span class="accent">Design &amp; Campaigns</span></h3>
+        <p>Scroll-stopping statics, carousels and campaign systems engineered for reach, engagement and brand consistency — tailored per platform and per market.</p>
+        <div class="chips">
+          <span class="chip">Photoshop</span><span class="chip">Illustrator</span>
+          <span class="chip">Campaigns</span><span class="chip">Statics</span><span class="chip">Carousels</span>
+        </div>
+      </div>
+      <div class="disc-media reveal d1" data-slot="social">
+        <div class="glow gl-4"></div>
+        <div class="ph"><span class="tag">Social · Static</span><span class="big">POSTS<br>THAT POP</span></div>
+        <div class="play"><span class="tri"></span>Add work here</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== TOOLS ===== -->
+<section class="block" id="tools">
+  <div class="wrap">
+    <span class="kicker reveal">03 — Toolkit</span>
+    <div class="work-head">
+      <h2 class="reveal d1" style="font-family:'Syne';font-weight:800;font-size:clamp(36px,7vw,92px);line-height:.92;letter-spacing:-.03em">The stack<br>behind the craft</h2>
+    </div>
+    <div class="tools-grid">
+      <div class="tcard span6 reveal">
+        <div class="ico brand"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FA0F00" xmlns="http://www.w3.org/2000/svg"><path d="M13.966 22.624l-1.69-4.281H8.122l3.892-9.144 5.662 13.425zM8.884 1.376H0v21.248zm15.116 0h-8.884L24 22.624Z"/></svg></div>
+        <h4>Adobe Creative Suite</h4>
+        <div class="sub">Daily Drivers</div>
+        <ul><li>After Effects</li><li>Premiere Pro</li><li>Photoshop</li><li>Illustrator</li></ul>
+      </div>
+      <div class="tcard span6 reveal d1">
+        <div class="ico brand"><svg width="28" height="28" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M25.163 34.858c.233-4.16 2.27-7.825 5.344-10.424 3.014-2.552 7.07-4.111 11.497-4.111 4.422 0 8.479 1.56 11.495 4.111 3.071 2.599 5.108 6.264 5.344 10.42.233 4.274-1.485 8.245-4.5 11.189-3.073 2.994-7.444 4.873-12.34 4.873-4.894 0-9.274-1.879-12.346-4.873-3.016-2.944-4.73-6.915-4.494-11.185" fill="#fff"/><path d="M33.363 35.232c.12-2.135 1.165-4.016 2.742-5.349 1.547-1.31 3.628-2.11 5.9-2.11 2.268 0 4.35.8 5.898 2.11 1.575 1.333 2.62 3.214 2.742 5.346.12 2.194-.762 4.231-2.309 5.742-1.577 1.536-3.82 2.5-6.332 2.5s-4.759-.964-6.335-2.5c-1.547-1.51-2.427-3.548-2.306-5.74" fill="#265787"/><path d="M19.603 39.545c.014.835.28 2.458.68 3.726.84 2.683 2.265 5.166 4.247 7.353 2.034 2.249 4.54 4.055 7.432 5.337 3.041 1.347 6.336 2.033 9.76 2.028 3.416-.005 6.711-.705 9.752-2.061 2.893-1.295 5.396-3.11 7.427-5.359 1.981-2.197 3.403-4.684 4.245-7.367.424-1.356.691-2.732.799-4.112q.156-2.041-.133-4.084a19 19 0 0 0-2.708-7.411c-1.292-2.085-2.958-3.91-4.94-5.447l.005-.003L36.176 6.794c-.018-.014-.032-.028-.052-.04-1.311-1.008-3.517-1.004-4.96.005-1.458 1.02-1.625 2.708-.327 3.772l-.006.006 8.339 6.78-25.416.028h-.034c-2.1.002-4.12 1.38-4.52 3.122-.41 1.775 1.016 3.247 3.2 3.255l-.003.008 12.883-.025L2.292 41.35l-.088.065C.035 43.075-.666 45.837.7 47.585c1.387 1.776 4.334 1.78 6.525.01l12.546-10.268s-.183 1.386-.168 2.218zm32.238 4.642c-2.585 2.633-6.204 4.127-10.12 4.134-3.921.007-7.54-1.473-10.126-4.102a12 12 0 0 1-2.763-4.325 11.2 11.2 0 0 1-.634-4.834 11.4 11.4 0 0 1 1.385-4.55 12.5 12.5 0 0 1 3.075-3.657c2.512-2.047 5.712-3.156 9.057-3.16 3.35-.005 6.547 1.093 9.062 3.134a12.5 12.5 0 0 1 3.071 3.645 11.4 11.4 0 0 1 1.39 4.548 11.3 11.3 0 0 1-.636 4.83 12.1 12.1 0 0 1-2.76 4.337" fill="#ea7600"/></svg></div>
+        <h4>Blender</h4>
+        <div class="sub">3D &amp; CGI</div>
+        <ul><li>3D Motion</li><li>Look-Dev</li><li>Render</li></ul>
+      </div>
+      <div class="tcard span12 reveal">
+        <div class="ico" style="background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff">✦</div>
+        <h4>AI Tools — Generative Pipeline</h4>
+        <div class="sub">Video · Image · Audio · Voice</div>
+        <ul>
+          <li>Flow</li><li>Higgsfield</li><li>OpenArt</li><li>Kling</li>
+          <li>Seedance</li><li>Midjourney</li><li>Runway</li><li>ElevenLabs</li><li>Suno</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section class="block" id="xp">
+  <div class="wrap">
+    <span class="kicker reveal">04 — Experience</span>
+    <h2 class="reveal d1" style="font-family:'Syne';font-weight:800;font-size:clamp(36px,7vw,92px);line-height:.92;letter-spacing:-.03em;margin-bottom:50px">8 years<br>in the timeline</h2>
+    <div class="xp">
+      <div class="xp-row reveal"><div class="yr">2024 — Now</div><div class="co">MultiBank Group<small>Senior Multimedia Designer · Dubai</small></div><div class="ds">Leading motion graphics, CGI &amp; AI-driven video, statics and carousels. Driving creative direction, 3D for event booths, web &amp; mobile, and multi-language campaign assets.</div></div>
+      <div class="xp-row reveal"><div class="yr">2023 — 2024</div><div class="co">Think Human<small>Senior Motion Graphics Designer</small></div><div class="ds">Commercial social ads for MOM Store, BEEAH and more — motion &amp; video optimized for audience impact and brand positioning across client accounts.</div></div>
+      <div class="xp-row reveal"><div class="yr">2022 — 2023</div><div class="co">Millionaire Aisle<small>Senior Multimedia Designer</small></div><div class="ds">Motion &amp; static content for social campaigns — creatives built for engagement, reach and consistent brand communication.</div></div>
+      <div class="xp-row reveal"><div class="yr">2021 — 2022</div><div class="co">Echo Media<small>Senior Motion Graphics Designer</small></div><div class="ds">Commercial ads &amp; reels for medical, real estate and food clients across Dubai, Erbil and Damascus. Storyboards and script optimization.</div></div>
+      <div class="xp-row reveal"><div class="yr">2019 — 2021</div><div class="co">Spacetoon TV<small>Senior Multimedia Designer</small></div><div class="ds">Directed TV commercials, YouTube intros and campaign content for kids' entertainment brands — high-quality motion shaping visual identity.</div></div>
+      <div class="xp-row reveal"><div class="yr">2018 — 2019</div><div class="co">Syrian Development Org.<small>Junior Motion Graphics Designer</small></div><div class="ds">Visual content and data-driven narratives for social media and organizational reporting videos.</div></div>
+      <div class="xp-row reveal"><div class="yr">2018 — Now</div><div class="co">Freelance<small>Senior Multimedia Designer · MENA</small></div><div class="ds">IG ads, reels and promos for private brands and government entities. Cinematic &amp; AI-generated content, live event editing on site.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLIENTS ===== -->
+<section class="block" id="clients">
+  <div class="wrap">
+    <span class="kicker reveal">05 — Selected Clients</span>
+    <h2 class="reveal d1" style="font-family:'Syne';font-weight:800;font-size:clamp(30px,6vw,76px);line-height:.95;letter-spacing:-.03em">Trusted by brands,<br>governments &amp; festivals</h2>
+  </div>
+  <div class="marq-wrap">
+    <div class="marq" id="marq1"></div>
+    <div class="marq rev" id="marq2"></div>
+    <div class="marq" id="marq3"></div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <span class="kicker">06 — Contact</span>
+    <div class="contact-sub">Appreciate you being here. Let's connect and create — the best work is still ahead.</div>
+    <div class="contact-big"><a href="mailto:Ashrafselo.motion@gmail.com">Let's talk →</a></div>
+    <div class="contact-info">
+      <div class="cinfo"><div class="l">Email</div><div class="v"><a href="mailto:Ashrafselo.motion@gmail.com">Ashrafselo.motion@gmail.com</a></div></div>
+      <div class="cinfo"><div class="l">Phone</div><div class="v"><a href="tel:+971553441707">+971 55 344 1707</a></div></div>
+      <div class="cinfo"><div class="l">Based In</div><div class="v">Dubai, UAE</div></div>
+      <div class="cinfo"><div class="l">Languages</div><div class="v">Arabic · English</div></div>
+    </div>
+    <div class="footnote">
+      <span>© 2026 Ashraf Selo</span>
+      <span>Motion · AI · Video · Social</span>
+      <span>Designed to move ✦</span>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ============ PRELOADER + FRAME SEQUENCE ============ */
+(function(){
+  const TOTAL = 120;
+  const pad = n => String(n).padStart(3,'0');
+  const imgs = new Array(TOTAL);
+  let loaded = 0;
+  const bar = document.getElementById('lbar');
+  const pct = document.getElementById('lpct');
+  const loader = document.getElementById('loader');
+  const canvas = document.getElementById('frames');
+  const ctx = canvas.getContext('2d');
+
+  // device pixel sizing
+  function fit(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    canvas.width = w*dpr; canvas.height = h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    draw(currentFrame);
+  }
+  function drawCover(img){
+    if(!img || !img.complete) return;
+    const cw = canvas.clientWidth, ch = canvas.clientHeight;
+    const ir = img.width/img.height, cr = cw/ch;
+    let w,h,x,y;
+    if(ir > cr){ h = ch; w = ch*ir; x = (cw-w)/2; y = 0; }
+    else { w = cw; h = cw/ir; x = 0; y = (ch-h)/2; }
+    ctx.clearRect(0,0,cw,ch);
+    ctx.drawImage(img,x,y,w,h);
+  }
+  let currentFrame = 0;
+  function draw(i){
+    i = Math.max(0,Math.min(TOTAL-1, i|0));
+    currentFrame = i;
+    drawCover(imgs[i]);
+  }
+
+  function onload(){
+    loaded++;
+    const p = loaded/TOTAL;
+    bar.style.width = (p*100)+'%';
+    pct.textContent = pad(Math.round(p*100))+'%';
+    if(loaded===TOTAL) start();
+  }
+  for(let i=0;i<TOTAL;i++){
+    const im = new Image();
+    im.onload = onload; im.onerror = onload;
+    im.src = 'assets/frames/f_'+pad(i+1)+'.jpg';
+    imgs[i]=im;
+  }
+
+  let started=false;
+  function start(){
+    if(started) return; started=true;
+    fit(); draw(0);
+    setTimeout(()=>{ loader.classList.add('done'); }, 350);
+    document.body.classList.add('ready');
+    bindScroll();
+  }
+  // safety: don't hang forever if an image stalls
+  setTimeout(()=>{ if(!started) start(); }, 9000);
+
+  window.addEventListener('resize', fit);
+
+  /* ============ SCROLL → FRAME + UI ============ */
+  const hero = document.getElementById('hero');
+  const discTrack = document.getElementById('discTrack');
+  const scrubPct = document.getElementById('scrubPct');
+  const scrubRing = document.getElementById('scrubRing');
+  let ticking=false, lastP=0;
+
+  function heroProgress(){
+    const rect = hero.getBoundingClientRect();
+    const total = hero.offsetHeight - window.innerHeight;
+    const p = Math.min(1, Math.max(0, -rect.top/total));
+    return p;
+  }
+  function render(){
+    ticking=false;
+    const p = heroProgress();
+    lastP = p;
+    draw(Math.round(p*(TOTAL-1)));
+    // rotating discipline word (5 items)
+    const idx = Math.min(4, Math.floor(p*4.999));
+    discTrack.style.transform = 'translateY(-'+(idx*1.2)+'em)';
+    // meter
+    const pp = Math.round(p*100);
+    if(scrubPct) scrubPct.textContent = String(pp).padStart(2,'0');
+    if(scrubRing) scrubRing.style.setProperty('--p', pp+'%');
+  }
+  function bindScroll(){
+    window.addEventListener('scroll', ()=>{
+      if(!ticking){ requestAnimationFrame(render); ticking=true; }
+    }, {passive:true});
+    render();
+  }
+})();
+
+/* ============ REVEAL ON SCROLL ============ */
+(function(){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.16, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ============ CLIENTS MARQUEE ============ */
+(function(){
+  const rowA = ["PepsiCo — Mo Salah","Almarai — Anchor","BEEAH Group","Edge Group","Dubai Airshow","Genesis F1 2025","Duty Free (DDF)","EWEC"];
+  const rowB = ["SHUROOQ","Invest in Sharjah","IGCF","Sharjah Entrepreneurship Festival","SIBF","House of Wisdom","Arab Youth Center","SPC Free Zone"];
+  const rowC = ["Messe Frankfurt","MRO Middle East","AIME Exhibitions","Xposure Festival","Les Misérables — Abu Dhabi","The Big Heart Foundation","Hope Makers","IUCN — Abu Dhabi"];
+  function build(el, arr){
+    const make = () => arr.map(t=>`<span class="m">${t}</span><span class="dotm">✦</span>`).join('');
+    el.innerHTML = make() + make(); // duplicate for seamless loop
+  }
+  build(document.getElementById('marq1'), rowA);
+  build(document.getElementById('marq2'), rowB);
+  build(document.getElementById('marq3'), rowC);
+})();
+
+/* ============ NAV HIDE ON SCROLL DOWN ============ */
+(function(){
+  const nav = document.querySelector('header.nav');
+  let last=0;
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    if(y>last && y>600) nav.style.transform='translateY(-110%)';
+    else nav.style.transform='translateY(0)';
+    last=y;
+  }, {passive:true});
+})();
+
+/* ============ CONTENT-DRIVEN WORK CARDS (CMS) ============ */
+/* Reads content/work.json (edited via /admin). Each card injects a Vimeo/
+   YouTube embed or a local video file. Falls back to these defaults so the
+   page still works when opened directly from disk (file://). */
+(function(){
+  const DEFAULTS = {
+    motion:{tag:"Reel · 3D Motion", media_type:"file", media_value:"assets/showreel.mp4"},
+    ai:{tag:"Generative · Cinematic", media_type:"none", media_value:""},
+    video:{tag:"Edit · Post", media_type:"none", media_value:""},
+    social:{tag:"Social · Static", media_type:"none", media_value:""}
+  };
+
+  function vimeoId(v){ const m=String(v).match(/(?:vimeo\.com\/(?:video\/)?)?(\d{6,})/); return m?m[1]:null; }
+  function youtubeId(v){ const m=String(v).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m?m[1]:(/^[\w-]{11}$/.test(v)?v:null); }
+
+  function apply(data){
+    document.querySelectorAll('.disc-media[data-slot]').forEach(media=>{
+      const slot=media.getAttribute('data-slot');
+      const d=Object.assign({}, DEFAULTS[slot], data&&data[slot]?data[slot]:{});
+      // update tag text if provided
+      const tagEl=media.querySelector('.ph .tag'); if(tagEl && d.tag) tagEl.textContent=d.tag;
+
+      const type=(d.media_type||'none').toLowerCase();
+      const val=(d.media_value||'').trim();
+      if(type==='none' || !val) return; // keep styled placeholder
+
+      let node=null, embed=false;
+      if(type==='vimeo'){
+        const id=vimeoId(val); if(!id) return;
+        const f=document.createElement('iframe');
+        f.src=`https://player.vimeo.com/video/${id}?background=1&autoplay=1&muted=1&loop=1&autopause=0`;
+        f.allow='autoplay; fullscreen'; f.loading='lazy';
+        const wrap=document.createElement('div'); wrap.className='embed'; wrap.appendChild(f);
+        node=wrap; embed=true;
+      } else if(type==='youtube'){
+        const id=youtubeId(val); if(!id) return;
+        const f=document.createElement('iframe');
+        f.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1`;
+        f.allow='autoplay; encrypted-media; fullscreen'; f.loading='lazy';
+        const wrap=document.createElement('div'); wrap.className='embed'; wrap.appendChild(f);
+        node=wrap; embed=true;
+      } else if(type==='file'){
+        const v=document.createElement('video');
+        v.src=val; v.muted=true; v.loop=true; v.autoplay=true; v.playsInline=true;
+        v.setAttribute('playsinline',''); v.setAttribute('poster','assets/poster.jpg');
+        v.play&&v.play().catch(()=>{});
+        node=v;
+      }
+      if(!node) return;
+      media.insertBefore(node, media.firstChild);
+      media.classList.add('has-media');
+      if(embed) media.classList.add('has-embed');
+      // flip the corner label to an active state
+      const play=media.querySelector('.play');
+      if(play){ const last=play.childNodes[play.childNodes.length-1]; if(last&&last.nodeType===3) last.textContent='Showreel'; }
+    });
+  }
+
+  fetch('content/work.json',{cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(j=>apply(j))
+    .catch(()=>apply(null)); // file:// or offline → defaults (Motion still plays)
+})();
+</script>
+</body>
+</html>

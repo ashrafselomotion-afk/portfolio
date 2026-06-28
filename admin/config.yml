@@ -1,0 +1,64 @@
+# ====================================================================
+# Sveltia / Decap CMS configuration for the Ashraf Selo portfolio admin
+# --------------------------------------------------------------------
+# BEFORE THIS WORKS you must set `repo:` below to your GitHub repo, e.g.
+#   repo: ashrafselo/portfolio
+# and connect GitHub auth (see README → "Going live" step 4).
+# ====================================================================
+
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPO   # <-- CHANGE THIS
+  branch: main
+  # Auth proxy — Sveltia can use its own GitHub OAuth, or your own.
+  # If you deploy on Netlify you can instead use: name: git-gateway
+
+# Where uploaded images/posters are stored in the repo
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# A nicer editor experience
+site_url: https://YOUR-SITE-DOMAIN          # <-- optional, your live URL
+display_url: https://YOUR-SITE-DOMAIN
+logo_url: /assets/poster.jpg
+
+collections:
+  # ---- The 4 discipline cards + their videos -----------------------
+  - name: "work"
+    label: "Work & Reels"
+    description: "Manage the four discipline cards and their videos."
+    files:
+      - name: "cards"
+        label: "Discipline Cards"
+        file: "content/work.json"
+        description: "Paste a Vimeo link (recommended) into any card."
+        fields:
+          - label: "Motion Graphics"
+            name: "motion"
+            widget: "object"
+            fields: &cardfields
+              - {label: "Badge text", name: "tag", widget: "string", required: false}
+              - {label: "Headline override", name: "headline", widget: "string", required: false, hint: "Leave blank to keep the default."}
+              - {label: "Description override", name: "blurb", widget: "text", required: false, hint: "Leave blank to keep the default."}
+              - label: "Video source"
+                name: "media_type"
+                widget: "select"
+                default: "none"
+                options:
+                  - {label: "None (show placeholder)", value: "none"}
+                  - {label: "Vimeo link", value: "vimeo"}
+                  - {label: "YouTube link", value: "youtube"}
+                  - {label: "Uploaded / local file", value: "file"}
+              - {label: "Link or file path", name: "media_value", widget: "string", required: false, hint: "Vimeo: paste the share URL. File: assets/uploads/your-clip.mp4"}
+          - label: "AI Creation"
+            name: "ai"
+            widget: "object"
+            fields: *cardfields
+          - label: "Video Editing"
+            name: "video"
+            widget: "object"
+            fields: *cardfields
+          - label: "Social Media Design"
+            name: "social"
+            widget: "object"
+            fields: *cardfields
