@@ -43,6 +43,21 @@ img,video,canvas{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--pink);color:var(--ink)}
 
+/* ---------- CINEMATIC ANIMATED BACKGROUND (behind dark sections) ---------- */
+.cine-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.cine-bg i{position:absolute;display:block;border-radius:50%;will-change:transform}
+.cine-bg .b1{width:75vw;height:75vw;left:-18vw;top:-12vh;
+  background:radial-gradient(circle at center,rgba(244,185,200,.20),rgba(244,185,200,0) 64%);animation:drift1 34s ease-in-out infinite}
+.cine-bg .b2{width:70vw;height:70vw;right:-15vw;top:28vh;
+  background:radial-gradient(circle at center,rgba(168,201,232,.18),rgba(168,201,232,0) 64%);animation:drift2 44s ease-in-out infinite}
+.cine-bg .b3{width:60vw;height:60vw;left:22vw;bottom:-18vh;
+  background:radial-gradient(circle at center,rgba(201,168,125,.15),rgba(201,168,125,0) 64%);animation:drift3 40s ease-in-out infinite}
+.cine-bg .b4{width:48vw;height:48vw;right:8vw;bottom:6vh;
+  background:radial-gradient(circle at center,rgba(124,92,255,.12),rgba(124,92,255,0) 64%);animation:drift1 50s ease-in-out infinite reverse}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8vw,7vh) scale(1.18)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-7vw,-6vh) scale(1.12)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,-9vh) scale(1.22)}}
+
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 .mono{font-family:'Space Mono',monospace;letter-spacing:.04em}
 .display{font-family:'Syne',sans-serif;font-weight:800;line-height:.95;letter-spacing:-.02em}
@@ -242,6 +257,8 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
   <div class="lbar"><i id="lbar"></i></div>
   <div id="lpct">000%</div>
 </div>
+
+<div class="cine-bg" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i></div>
 
 <div class="side">Dubai, UAE — Est. 2018</div>
 
