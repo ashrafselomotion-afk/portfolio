@@ -624,6 +624,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
       const d=Object.assign({}, DEFAULTS[slot], data&&data[slot]?data[slot]:{});
       // update tag text if provided
       const tagEl=media.querySelector('.ph .tag'); if(tagEl && d.tag) tagEl.textContent=d.tag;
+      const card=media.closest('.disc'); const pEl=card&&card.querySelector('.disc-text p'); if(pEl && d.blurb) pEl.textContent=d.blurb;
 
       const type=(d.media_type||'none').toLowerCase();
       const val=(d.media_value||'').trim();

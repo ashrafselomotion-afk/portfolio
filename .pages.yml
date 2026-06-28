@@ -1,0 +1,64 @@
+media:
+  input: assets/uploads
+  output: /assets/uploads
+  extensions: [mp4, webm, mov, jpg, jpeg, png, webp, gif]
+
+content:
+  - name: work
+    label: Work & Reels
+    type: file
+    path: content/work.json
+    format: json
+    fields:
+      - name: motion
+        label: 01 — Motion Graphics
+        type: object
+        fields:
+          - { name: tag, label: Badge text, type: string }
+          - { name: blurb, label: Description (optional override), type: text }
+          - name: media_type
+            label: Video source
+            type: select
+            default: none
+            options:
+              values: [none, vimeo, youtube, file]
+          - { name: media_value, label: Vimeo / YouTube link or file path, type: string }
+      - name: ai
+        label: 02 — AI Creation
+        type: object
+        fields:
+          - { name: tag, label: Badge text, type: string }
+          - { name: blurb, label: Description (optional override), type: text }
+          - name: media_type
+            label: Video source
+            type: select
+            default: none
+            options:
+              values: [none, vimeo, youtube, file]
+          - { name: media_value, label: Vimeo / YouTube link or file path, type: string }
+      - name: video
+        label: 03 — Video Editing
+        type: object
+        fields:
+          - { name: tag, label: Badge text, type: string }
+          - { name: blurb, label: Description (optional override), type: text }
+          - name: media_type
+            label: Video source
+            type: select
+            default: none
+            options:
+              values: [none, vimeo, youtube, file]
+          - { name: media_value, label: Vimeo / YouTube link or file path, type: string }
+      - name: social
+        label: 04 — Social Media Design
+        type: object
+        fields:
+          - { name: tag, label: Badge text, type: string }
+          - { name: blurb, label: Description (optional override), type: text }
+          - name: media_type
+            label: Video source
+            type: select
+            default: none
+            options:
+              values: [none, vimeo, youtube, file]
+          - { name: media_value, label: Vimeo / YouTube link or file path, type: string }
