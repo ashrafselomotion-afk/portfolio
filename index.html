@@ -111,10 +111,11 @@ header.nav{
 @media(max-width:760px){.scrubmeter{display:none}}
 
 /* ---------- TRANSITION PAPER->INK ---------- */
-.fade-to-ink{height:60vh;background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 18%,#3a3630 55%,var(--ink) 100%);position:relative;z-index:2;margin-top:-2px}
+.fade-to-ink{height:26vh;background:linear-gradient(180deg,var(--paper) 0%,#d9d3c7 26%,#272521 74%,var(--ink) 100%);position:relative;z-index:2;margin-top:-2px}
 
 /* ---------- SECTION FRAMEWORK ---------- */
 section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
+#about{padding-top:clamp(36px,6vh,80px)}
 .kicker{font-family:'Space Mono';font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--rope);display:inline-flex;align-items:center;gap:12px;margin-bottom:26px}
 .kicker::before{content:"";width:30px;height:1px;background:var(--rope)}
 .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
