@@ -105,9 +105,6 @@ header.nav{
 
 .hero-top{position:absolute;top:11vh;left:0;right:0;text-align:center;padding:0 16px;will-change:opacity}
 .hero-top .eyebrow{font-family:'Space Mono';font-size:clamp(10px,1.4vw,13px);letter-spacing:.4em;text-transform:uppercase;color:var(--rope-deep);margin-bottom:18px;opacity:0;transform:translateY(14px);animation:rise 1s var(--ease) .4s forwards}
-.hero-tagline{position:absolute;top:15vh;left:0;right:0;z-index:3;text-align:center;padding:0 6vw;opacity:0;will-change:opacity;
-  font-family:'Space Mono';font-weight:700;font-size:clamp(11px,1.5vw,16px);letter-spacing:.3em;text-transform:uppercase;color:#15151b}
-.hero-tagline b{color:var(--rope-deep);font-weight:700}
 .hero-name{font-family:'Syne';font-weight:800;font-size:clamp(50px,11vw,150px);line-height:.86;letter-spacing:-.03em;color:var(--ink)}
 .hero-name span{display:inline-block;opacity:0;transform:translateY(40px) rotate(3deg);animation:rise 1.1s var(--ease) forwards}
 .hero-name .l2{background:linear-gradient(112deg,#d8688f 0%,#b07cc9 48%,#5f8fcf 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0}
@@ -329,12 +326,12 @@ html.gsap-on .reveal{transition:none}
     <div class="hero-vignette"></div>
     <div class="hero-ui">
       <div class="hero-top">
+        <div class="eyebrow">Senior Motion Graphics Designer · AI Creative · Video Editor</div>
         <h1 class="hero-name">
           <span style="animation-delay:.45s">ASHRAF</span><br>
           <span class="l2" style="animation-delay:.6s">SELO</span>
         </h1>
       </div>
-      <div class="hero-tagline" id="heroTagline">Senior Motion Graphics Designer&ensp;·&ensp;AI Creative&ensp;·&ensp;Video Editor</div>
       <div class="hero-bottom">
         <div class="disc-rotate"><div class="track" id="discTrack">
           <div class="item"><b>Motion</b> Graphics</div>
@@ -357,7 +354,7 @@ html.gsap-on .reveal{transition:none}
     <span class="kicker reveal">01 — Profile</span>
     <h2 class="lead reveal d1">Ideas that <span class="hl">move</span>. Stories that <em>stick</em>.</h2>
     <div class="about-grid">
-      <p class="reveal d2">Over 8 years delivering visual content across digital platforms — advertising, social media, campaigns, cinematic storytelling and AI-powered content creation. Based in Dubai, working freelance &amp; full-time across the MENA region.</p>
+      <p class="reveal d2">Creative Senior Motion Graphics Designer, AI Creator, Video Editor and Graphic Designer with over 8 years delivering visual content across digital platforms — advertising, social media, campaigns, cinematic storytelling and AI-powered content creation. Based in Dubai, working freelance &amp; full-time across the MENA region.</p>
       <div class="stats reveal d3">
         <div class="stat"><div class="n">8+</div><div class="t">Years<br>Experience</div></div>
         <div class="stat"><div class="n">40+</div><div class="t">Brands &amp;<br>Entities</div></div>
@@ -620,7 +617,6 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   /* ============ SCROLL → FRAME + UI ============ */
   const hero = document.getElementById('hero');
   const heroTop = document.querySelector('.hero-top');
-  const heroTagline = document.getElementById('heroTagline');
   const discTrack = document.getElementById('discTrack');
   const scrubPct = document.getElementById('scrubPct');
   const scrubRing = document.getElementById('scrubRing');
@@ -640,7 +636,6 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     draw(Math.round(p*(TOTAL-1)));
     // fade the name out as you scroll so the character is revealed cleanly
     if(heroTop) heroTop.style.opacity = String(Math.min(1, Math.max(0, 1 - (p-0.22)/0.36)));
-    if(heroTagline) heroTagline.style.opacity = String(Math.min(1, Math.max(0, (p-0.30)/0.22)));
     // rotating discipline word (5 items)
     const idx = Math.min(4, Math.floor(p*4.999));
     discTrack.style.transform = 'translateY(-'+(idx*1.2)+'em)';
@@ -881,6 +876,17 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
       scrollTrigger:{ trigger: grid, start: 'top 82%', once:true }
     });
   });
+
+  // Profile (01) — layered parallax: headline + kicker drift up, the big numbers float at staggered rates
+  const aboutEl = document.getElementById('about');
+  if(aboutEl && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)){
+    const mk = ()=>({ trigger: aboutEl, start:'top bottom', end:'bottom top', scrub:0.7 });
+    gsap.to('#about .kicker',       { yPercent:-30, ease:'none', scrollTrigger: mk() });
+    gsap.to('#about .lead',         { yPercent:-18, ease:'none', scrollTrigger: mk() });
+    gsap.to('#about .about-grid p', { yPercent:9,   ease:'none', scrollTrigger: mk() });
+    const offs=[28,-8,20];
+    gsap.utils.toArray('#about .stat').forEach((s,i)=> gsap.to(s, { yPercent: offs[i]!=null?offs[i]:12, ease:'none', scrollTrigger: mk() }));
+  }
 
   // recompute trigger positions once images/fonts settle
   window.addEventListener('load', ()=>ScrollTrigger.refresh());
