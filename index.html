@@ -782,20 +782,24 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     const src = (item.src||'').trim();
     if(type==='none' || !src) return;            // keep placeholder
 
+    function mkEmbed(srcUrl, allow){
+      const f=document.createElement('iframe');
+      f.src=srcUrl; f.allow=allow; f.loading='lazy';
+      const w=document.createElement('div'); w.className='embed'; w.appendChild(f); return w;
+    }
     let node=null, embed=false;
-    if(type==='vimeo'){
+    const drive = src.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?[^"']*id=)([\w-]{20,})/);
+
+    if(drive){                                   // Google Drive link → Drive player
+      node = mkEmbed('https://drive.google.com/file/d/'+drive[1]+'/preview', 'autoplay'); embed=true;
+    } else if(type==='vimeo' || /vimeo\.com/.test(src)){
       const id=vimeoId(src); if(!id) return;
-      const f=document.createElement('iframe');
-      f.src='https://player.vimeo.com/video/'+id+'?background=1&autoplay=1&muted=1&loop=1&autopause=0';
-      f.allow='autoplay; fullscreen'; f.loading='lazy';
-      const w=document.createElement('div'); w.className='embed'; w.appendChild(f); node=w; embed=true;
-    } else if(type==='youtube'){
+      node = mkEmbed('https://player.vimeo.com/video/'+id+'?background=1&autoplay=1&muted=1&loop=1&autopause=0', 'autoplay; fullscreen'); embed=true;
+    } else if(type==='youtube' || /youtu\.?be/.test(src)){
       const id=youtubeId(src); if(!id) return;
-      const f=document.createElement('iframe');
-      f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&loop=1&playlist='+id+'&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0';
-      f.allow='autoplay; encrypted-media; fullscreen'; f.loading='lazy';
-      const w=document.createElement('div'); w.className='embed'; w.appendChild(f); node=w; embed=true;
+      node = mkEmbed('https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&loop=1&playlist='+id+'&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0', 'autoplay; encrypted-media; fullscreen'); embed=true;
     } else if(type==='file'){
+      if(/^https?:\/\//i.test(src) && !/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(src)) return;  // unknown URL → keep placeholder
       const v=document.createElement('video');
       v.src=src; v.muted=true; v.loop=true; v.playsInline=true; v.preload='none';
       v.setAttribute('playsinline','');
