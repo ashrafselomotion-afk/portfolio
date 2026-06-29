@@ -1,75 +1,26 @@
 {
   "motion": {
-    "t1": {
-      "type": "file"
-    },
-    "t2": {
-      "type": "youtube"
-    },
-    "t3": {
-      "label": "Reel 03",
-      "type": "none"
-    },
-    "t4": {
-      "label": "Reel 04",
-      "type": "none"
-    }
+    "t1": { "label": "Bizcentric", "type": "file", "src": "assets/work/mg1.mp4" },
+    "t2": { "label": "Anchor", "type": "file", "src": "assets/work/mg2.mp4" },
+    "t3": { "label": "SEF Speakers", "type": "file", "src": "assets/work/mg3.mp4" },
+    "t4": { "label": "House of Wisdom", "type": "file", "src": "assets/work/mg4.mp4" }
   },
   "ai": {
-    "t1": {
-      "label": "Baflay",
-      "type": "file",
-      "src": "https://drive.google.com/file/d/10kPUYPqSkFW83jLUXkCCCNZEdx_4D-mg/view?usp=drive_link"
-    },
-    "t2": {
-      "label": "Hermès Birkin Black Crocodile",
-      "type": "youtube",
-      "src": "<iframe width=\"620\" height=\"1102\" src=\"https://www.youtube.com/embed/NKNqU3hE79M\" title=\"\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
-    },
-    "t3": {
-      "label": "Reel 03",
-      "type": "none"
-    },
-    "t4": {
-      "label": "NEW EAST",
-      "type": "file",
-      "src": "https://drive.google.com/file/d/1ID7UcwHbW9IjBScrjYtz0c6EFO9j5A6U/view?usp=drive_link"
-    }
+    "t1": { "label": "NEW EAST", "type": "file", "src": "assets/work/ai1.mp4" },
+    "t2": { "label": "Hermès Birkin", "type": "file", "src": "assets/work/ai2.mp4" },
+    "t3": { "label": "Baflay", "type": "file", "src": "assets/work/ai3.mp4" },
+    "t4": { "label": "AI Film", "type": "file", "src": "assets/work/ai4.mp4" }
   },
   "video": {
-    "t1": {
-      "label": "Reel 01",
-      "type": "none"
-    },
-    "t2": {
-      "label": "Reel 02",
-      "type": "none"
-    },
-    "t3": {
-      "label": "Reel 03",
-      "type": "none"
-    },
-    "t4": {
-      "label": "Reel 04",
-      "type": "none"
-    }
+    "t1": { "label": "Creative", "type": "file", "src": "assets/work/ve1.mp4" },
+    "t2": { "label": "Impact Zone", "type": "file", "src": "assets/work/ve2.mp4" },
+    "t3": { "label": "NACD Recap", "type": "file", "src": "assets/work/ve3.mp4" },
+    "t4": { "label": "Reel 04", "type": "none", "src": "" }
   },
   "social": {
-    "t1": {
-      "label": "Reel 01",
-      "type": "none"
-    },
-    "t2": {
-      "label": "Reel 02",
-      "type": "none"
-    },
-    "t3": {
-      "label": "Reel 03",
-      "type": "none"
-    },
-    "t4": {
-      "label": "Reel 04",
-      "type": "none"
-    }
+    "t1": { "label": "Reel 01", "type": "none", "src": "" },
+    "t2": { "label": "Reel 02", "type": "none", "src": "" },
+    "t3": { "label": "Reel 03", "type": "none", "src": "" },
+    "t4": { "label": "Reel 04", "type": "none", "src": "" }
   }
 }
