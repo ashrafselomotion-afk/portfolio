@@ -16,7 +16,10 @@
     { "label": "Hermès Birkin", "type": "file", "src": "assets/work/ai2.mp4", "ar": "9/16" },
     { "label": "Baflay", "type": "file", "src": "assets/work/ai3.mp4", "ar": "9/16" },
     { "label": "AI Film", "type": "file", "src": "assets/work/ai4.mp4", "ar": "9/16" },
-    { "label": "Isuzu", "type": "file", "src": "assets/work/ai5.mp4", "ar": "16/9" }
+    { "label": "Isuzu", "type": "file", "src": "assets/work/ai5.mp4", "ar": "16/9" },
+    { "label": "Napoli Pasta", "type": "file", "src": "assets/work/ai6.mp4", "ar": "9/16" },
+    { "label": "AI Film · Sesen I", "type": "file", "src": "assets/work/ai7.mp4", "ar": "16/9" },
+    { "label": "AI Film · Sesen II", "type": "file", "src": "assets/work/ai8.mp4", "ar": "16/9" }
   ],
   "video": [
     { "label": "Creative", "type": "file", "src": "assets/work/ve1.mp4", "ar": "9/16" },
