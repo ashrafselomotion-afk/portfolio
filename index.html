@@ -265,8 +265,9 @@ html.gsap-on .reveal{transition:none}
 #contact .kicker{color:var(--rope-deep)}
 #contact .kicker::before{background:var(--rope-deep)}
 .contact-big{font-family:'Syne';font-weight:800;font-size:clamp(44px,11vw,150px);line-height:.9;letter-spacing:-.03em;margin:18px 0 10px}
-.contact-big a{display:inline-block;transition:.4s var(--ease)}
-.contact-big a:hover{color:var(--rope-deep);transform:translateX(14px)}
+.contact-big a{display:inline-block;transition:color .4s var(--ease)}
+.contact-big a:hover{color:var(--rope-deep)}
+.lt-ch{display:inline-block;transform-origin:50% 100%;will-change:transform}
 .contact-sub{font-family:'Syne';font-weight:600;font-size:clamp(18px,2.4vw,30px);color:#4a463e;max-width:24ch;margin-bottom:50px}
 .contact-info{display:flex;flex-wrap:wrap;gap:14px 46px;border-top:1px solid rgba(0,0,0,.14);padding-top:34px;margin-top:30px}
 .cinfo .l{font-family:'Space Mono';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--rope-deep);margin-bottom:7px}
@@ -928,6 +929,44 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   function stop(){ running=false; if(raf) cancelAnimationFrame(raf); raf=null; }
   document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : (!reduce && start()); });
   if(reduce){ renderer.render(scene, camera); } else { start(); }
+})();
+
+/* ============ GSAP — "LET'S TALK" PLAYFUL BOUNCE ============ */
+(function(){
+  if(!window.gsap) return;
+  const link = document.querySelector('.contact-big a'); if(!link) return;
+  const txt = link.textContent;
+  link.textContent = '';
+  const chars = [];
+  for(const ch of txt){
+    const s = document.createElement('span');
+    s.className = 'lt-ch';
+    if(ch === ' '){ s.innerHTML = '&nbsp;'; }
+    else { s.textContent = ch; chars.push(s); }
+    link.appendChild(s);
+  }
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+
+  // letters spring up when the contact section scrolls into view
+  if(window.ScrollTrigger){
+    gsap.from(chars, { y:90, opacity:0, duration:1.1, ease:'elastic.out(1,0.55)', stagger:0.05,
+      scrollTrigger:{ trigger: link, start:'top 90%', once:true } });
+  }
+
+  // bouncy elastic wave on hover
+  let busy = false;
+  link.addEventListener('mouseenter', ()=>{
+    if(busy) return; busy = true;
+    gsap.to(chars, {
+      keyframes:[
+        { y:-34, scaleY:1.22, scaleX:0.82, duration:0.2, ease:'power2.out' },
+        { y:0,   scaleY:1,    scaleX:1,    duration:1.0, ease:'elastic.out(1,0.38)' }
+      ],
+      stagger:0.035, overwrite:'auto',
+      onComplete:()=>{ busy = false; }
+    });
+  });
 })();
 </script>
 </body>
