@@ -45,6 +45,8 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- CINEMATIC ANIMATED BACKGROUND (behind dark sections) ---------- */
 .cine-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.three-bg{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.three-bg canvas{display:block}
 .cine-bg i{position:absolute;display:block;border-radius:50%;will-change:transform}
 .cine-bg .b1{width:75vw;height:75vw;left:-18vw;top:-12vh;
   background:radial-gradient(circle at center,rgba(244,185,200,.20),rgba(244,185,200,0) 64%);animation:drift1 34s ease-in-out infinite}
@@ -554,6 +556,7 @@ html.gsap-on .reveal{transition:none}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* always open at the top (the hero video) — never restore the last scroll position */
 if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
@@ -866,6 +869,65 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   // recompute trigger positions once images/fonts settle
   window.addEventListener('load', ()=>ScrollTrigger.refresh());
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>ScrollTrigger.refresh());
+})();
+
+/* ============ THREE.JS — 3D PARTICLE FIELD (cinematic depth) ============ */
+(function(){
+  if(!window.THREE) return;
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const host = document.createElement('div'); host.className='three-bg'; host.setAttribute('aria-hidden','true');
+  document.body.appendChild(host);
+
+  let W = innerWidth, H = innerHeight;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(62, W/H, 1, 2000);
+  camera.position.z = 460;
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({alpha:true, antialias:true}); }
+  catch(e){ host.remove(); return; }                 // no WebGL → keep CSS aurora only
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1, 2));
+  renderer.setSize(W, H);
+  host.appendChild(renderer.domElement);
+
+  const N = W < 760 ? 700 : 1500;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(N*3), col = new Float32Array(N*3);
+  const palette = [[0.957,0.725,0.784],[0.659,0.788,0.910],[0.788,0.659,0.49]]; // pink, blue, rope
+  for(let i=0;i<N;i++){
+    pos[i*3]   = (Math.random()-0.5)*1000;
+    pos[i*3+1] = (Math.random()-0.5)*680;
+    pos[i*3+2] = (Math.random()-0.5)*680;
+    const c = palette[i%palette.length];
+    col[i*3]=c[0]; col[i*3+1]=c[1]; col[i*3+2]=c[2];
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col,3));
+  const mat = new THREE.PointsMaterial({ size:2.6, vertexColors:true, transparent:true, opacity:0.65,
+    depthWrite:false, blending:THREE.AdditiveBlending, sizeAttenuation:true });
+  const points = new THREE.Points(geo, mat);
+  scene.add(points);
+
+  let tx=0, ty=0, mx=0, my=0;
+  window.addEventListener('mousemove', e=>{ tx = e.clientX/W - 0.5; ty = e.clientY/H - 0.5; }, {passive:true});
+  function onResize(){ W=innerWidth||document.documentElement.clientWidth; H=innerHeight||document.documentElement.clientHeight; camera.aspect=W/H; camera.updateProjectionMatrix(); renderer.setSize(W,H); }
+  window.addEventListener('resize', onResize);
+  window.addEventListener('load', onResize);
+
+  let raf=null, running=false;
+  function frame(){
+    raf = requestAnimationFrame(frame);
+    points.rotation.y += 0.0006;
+    points.rotation.x += 0.00022;
+    points.rotation.z = (window.scrollY||0) * 0.00004;
+    mx += (tx-mx)*0.04; my += (ty-my)*0.04;
+    camera.position.x = mx*70; camera.position.y = -my*46;
+    camera.lookAt(scene.position);
+    renderer.render(scene, camera);
+  }
+  function start(){ if(!running){ running=true; frame(); } }
+  function stop(){ running=false; if(raf) cancelAnimationFrame(raf); raf=null; }
+  document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : (!reduce && start()); });
+  if(reduce){ renderer.render(scene, camera); } else { start(); }
 })();
 </script>
 </body>
