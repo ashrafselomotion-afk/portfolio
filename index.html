@@ -47,6 +47,12 @@ a{color:inherit;text-decoration:none}
 .cine-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .three-bg{position:fixed;inset:0;z-index:-1;pointer-events:none}
 .three-bg canvas{display:block}
+.gsap-curve{position:absolute;top:clamp(64px,11vh,150px);right:clamp(18px,5vw,80px);width:clamp(200px,22vw,300px);height:auto;z-index:1;pointer-events:none;overflow:visible}
+.gc-path{stroke:#efe7d6;stroke-width:5;stroke-linecap:round;fill:none}
+.gc-handle{stroke:rgba(247,244,238,.42);stroke-width:1.6;stroke-dasharray:5 7}
+.gc-sq{fill:#efe7d6}
+.gc-dot{stroke:#0a0a0d;stroke-width:2.5}
+@media(max-width:880px){.gsap-curve{display:none}}
 .cine-bg i{position:absolute;display:block;border-radius:50%;will-change:transform}
 .cine-bg .b1{width:75vw;height:75vw;left:-18vw;top:-12vh;
   background:radial-gradient(circle at center,rgba(244,185,200,.20),rgba(244,185,200,0) 64%);animation:drift1 34s ease-in-out infinite}
@@ -343,6 +349,15 @@ html.gsap-on .reveal{transition:none}
 
 <!-- ===== ABOUT / MANIFESTO ===== -->
 <section class="block" id="about">
+  <svg class="gsap-curve" viewBox="0 0 320 240" fill="none" aria-hidden="true">
+    <line id="gcH1" class="gc-handle" x1="50" y1="90" x2="95" y2="180"></line>
+    <line id="gcH2" class="gc-handle" x1="270" y1="50" x2="225" y2="180"></line>
+    <path id="gcPath" class="gc-path" d="M50,90 C 95,180 225,180 270,50"></path>
+    <rect class="gc-sq" x="36" y="76" width="28" height="28" rx="4" transform="rotate(-18 50 90)"></rect>
+    <rect class="gc-sq" x="256" y="36" width="28" height="28" rx="4" transform="rotate(20 270 50)"></rect>
+    <circle id="gcC1" class="gc-dot" cx="95" cy="180" r="9" fill="#f4b9c8"></circle>
+    <circle id="gcC2" class="gc-dot" cx="225" cy="180" r="9" fill="#a8c9e8"></circle>
+  </svg>
   <div class="wrap">
     <span class="kicker reveal">01 — Profile</span>
     <h2 class="lead reveal d1">Ideas that <span class="hl">move</span>. Stories that <em>stick</em>.</h2>
@@ -869,6 +884,30 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   // recompute trigger positions once images/fonts settle
   window.addEventListener('load', ()=>ScrollTrigger.refresh());
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>ScrollTrigger.refresh());
+})();
+
+/* ============ GSAP — BÉZIER CURVE MOTIF (flexing control points) ============ */
+(function(){
+  if(!window.gsap) return;
+  const svg = document.querySelector('.gsap-curve'); if(!svg) return;
+  const path = svg.querySelector('#gcPath');
+  const c1 = svg.querySelector('#gcC1'), c2 = svg.querySelector('#gcC2');
+  const h1 = svg.querySelector('#gcH1'), h2 = svg.querySelector('#gcH2');
+  const A = {x:50, y:90}, B = {x:270, y:50};
+  const s = {c1x:95, c1y:180, c2x:225, c2y:180};
+  function draw(){
+    path.setAttribute('d', 'M'+A.x+','+A.y+' C '+s.c1x+','+s.c1y+' '+s.c2x+','+s.c2y+' '+B.x+','+B.y);
+    c1.setAttribute('cx', s.c1x); c1.setAttribute('cy', s.c1y);
+    c2.setAttribute('cx', s.c2x); c2.setAttribute('cy', s.c2y);
+    h1.setAttribute('x2', s.c1x); h1.setAttribute('y2', s.c1y);
+    h2.setAttribute('x2', s.c2x); h2.setAttribute('y2', s.c2y);
+  }
+  draw();
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+  gsap.timeline({repeat:-1, yoyo:true, defaults:{ease:'sine.inOut'}, onUpdate:draw})
+    .to(s, {c1x:135, c1y:215, c2x:205, c2y:120, duration:2.6}, 0)
+    .to(s, {c1y:150, c2y:205, duration:3.4}, 0);
 })();
 
 /* ============ THREE.JS — 3D PARTICLE FIELD (cinematic depth) ============ */
