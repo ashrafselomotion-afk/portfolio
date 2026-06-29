@@ -1,14 +1,10 @@
 {
   "motion": {
     "t1": {
-      "label": "Baflay",
-      "type": "file",
-      "src": "https://drive.google.com/file/d/10kPUYPqSkFW83jLUXkCCCNZEdx_4D-mg/view?usp=drive_link"
+      "type": "file"
     },
     "t2": {
-      "label": "Hermès Birkin Black Crocodile",
-      "type": "youtube",
-      "src": "<iframe width=\"621\" height=\"1104\" src=\"https://www.youtube.com/embed/NKNqU3hE79M\" title=\"\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      "type": "youtube"
     },
     "t3": {
       "label": "Reel 03",
@@ -21,12 +17,14 @@
   },
   "ai": {
     "t1": {
-      "label": "Reel 01",
-      "type": "none"
+      "label": "Baflay",
+      "type": "file",
+      "src": "https://drive.google.com/file/d/10kPUYPqSkFW83jLUXkCCCNZEdx_4D-mg/view?usp=drive_link"
     },
     "t2": {
-      "label": "Reel 02",
-      "type": "none"
+      "label": "Hermès Birkin Black Crocodile",
+      "type": "youtube",
+      "src": "<iframe width=\"621\" height=\"1104\" src=\"https://www.youtube.com/embed/NKNqU3hE79M\" title=\"\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
     },
     "t3": {
       "label": "Reel 03",
