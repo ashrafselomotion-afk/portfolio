@@ -71,11 +71,14 @@ a{color:inherit;text-decoration:none}
   transition:opacity .9s var(--ease), visibility .9s var(--ease);
 }
 #loader.done{opacity:0;visibility:hidden}
-#loader .lname{font-family:'Syne';font-weight:800;font-size:clamp(34px,7vw,64px);letter-spacing:-.03em;line-height:1}
-#loader .lsub{font-family:'Space Mono';font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--rope-deep)}
-.lbar{width:min(320px,70vw);height:2px;background:rgba(0,0,0,.12);overflow:hidden;border-radius:2px}
-.lbar i{display:block;height:100%;width:0%;background:var(--ink);transition:width .25s linear}
-#lpct{font-family:'Space Mono';font-size:12px;color:var(--mut-d);letter-spacing:.2em}
+.load-dots{display:flex;gap:16px;margin-bottom:16px}
+.load-dots i{display:block;width:20px;height:20px;border-radius:50%;will-change:transform;animation:ldbounce .9s ease-in-out infinite}
+.load-dots i:nth-child(1){background:var(--pink)}
+.load-dots i:nth-child(2){background:var(--blue);animation-delay:.15s}
+.load-dots i:nth-child(3){background:var(--rope);animation-delay:.3s}
+@keyframes ldbounce{0%,100%{transform:translateY(0)}45%{transform:translateY(-26px)}}
+.load-pct{font-family:'Syne';font-weight:800;font-size:clamp(52px,11vw,120px);line-height:1;letter-spacing:-.03em;color:var(--ink)}
+.load-msg{font-family:'Space Mono';font-size:clamp(11px,1.5vw,13px);letter-spacing:.22em;text-transform:uppercase;color:var(--rope-deep);min-height:1.4em;margin-top:8px;text-align:center;padding:0 24px}
 
 /* ---------- NAV ---------- */
 header.nav{
@@ -295,10 +298,9 @@ html.gsap-on .reveal{transition:none}
 
 <!-- ===== PRELOADER ===== -->
 <div id="loader">
-  <div class="lname">ASHRAF SELO</div>
-  <div class="lsub">Motion · AI · Film</div>
-  <div class="lbar"><i id="lbar"></i></div>
-  <div id="lpct">000%</div>
+  <div class="load-dots"><i></i><i></i><i></i></div>
+  <div id="lpct" class="load-pct">0%</div>
+  <div class="load-msg" id="loadMsg">Waking up the pixels…</div>
 </div>
 
 <div class="cine-bg" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i></div>
@@ -535,11 +537,50 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   const pad = n => String(n).padStart(3,'0');
   const imgs = new Array(TOTAL);
   let loaded = 0;
-  const bar = document.getElementById('lbar');
   const pct = document.getElementById('lpct');
   const loader = document.getElementById('loader');
   const canvas = document.getElementById('frames');
   const ctx = canvas.getContext('2d');
+
+  // ---- funny GSAP loader: bouncing dots (squash & stretch) + rotating quips ----
+  (function loaderFX(){
+    if(!window.gsap) return;                         // CSS keyframe bounce is the fallback
+    const dots = gsap.utils.toArray('#loader .load-dots i');
+    dots.forEach(d => d.style.animation = 'none');    // hand the bounce over to GSAP
+    gsap.set(dots, {transformOrigin:'50% 100%'});
+    gsap.to(dots, {
+      keyframes:[
+        { y:-30, scaleX:0.86, scaleY:1.18, duration:0.34, ease:'power2.out' },   // stretch up
+        { y:0,   scaleX:1.18, scaleY:0.82, duration:0.30, ease:'power2.in' },     // squash on land
+        { scaleX:1, scaleY:1, duration:0.16, ease:'power1.out' }
+      ],
+      stagger:{ each:0.13, repeat:-1 }
+    });
+    const QUIPS = [
+      'Waking up the pixels…',
+      'Bribing the render farm…',
+      'Untangling the rope…',
+      'Convincing the AI to behave…',
+      'Adding one more keyframe…',
+      'Caffeinating the designer…',
+      'Rendering at 1 fps (kidding)…',
+      'Making it pop…',
+      'Almost famous…'
+    ];
+    const msg = document.getElementById('loadMsg');
+    if(!msg) return;
+    let qi = 0;
+    (function cycle(){
+      gsap.delayedCall(1.25, ()=>{
+        qi = (qi+1) % QUIPS.length;
+        gsap.to(msg, { opacity:0, y:-8, duration:0.24, ease:'power1.in', onComplete:()=>{
+          msg.textContent = QUIPS[qi];
+          gsap.fromTo(msg, {opacity:0, y:8}, {opacity:1, y:0, duration:0.34, ease:'power2.out'});
+          cycle();
+        }});
+      });
+    })();
+  })();
 
   // device pixel sizing
   function fit(){
@@ -569,8 +610,7 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   function onload(){
     loaded++;
     const p = loaded/TOTAL;
-    bar.style.width = (p*100)+'%';
-    pct.textContent = pad(Math.round(p*100))+'%';
+    pct.textContent = Math.round(p*100)+'%';
     if(loaded===TOTAL) start();
   }
   for(let i=0;i<TOTAL;i++){
@@ -585,7 +625,15 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     if(started) return; started=true;
     window.scrollTo(0,0);
     fit(); draw(0);
-    setTimeout(()=>{ loader.classList.add('done'); }, 350);
+    if(window.gsap){
+      gsap.killTweensOf('#loader .load-dots i');
+      const tl = gsap.timeline({ delay:0.2, onComplete:()=>loader.classList.add('done') });
+      tl.to('#loader .load-dots i', { y:-70, opacity:0, scale:1.5, duration:0.5, ease:'back.in(2.2)', stagger:0.07 })
+        .to('#loader .load-pct, #loader .load-msg', { opacity:0, y:-16, duration:0.32, ease:'power2.in' }, '-=0.28');
+      setTimeout(()=>loader.classList.add('done'), 1600);   // safety: always hide
+    } else {
+      setTimeout(()=>{ loader.classList.add('done'); }, 350);
+    }
     document.body.classList.add('ready');
     bindScroll();
   }
