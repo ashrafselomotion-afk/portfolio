@@ -7,7 +7,9 @@
     { "label": "SBA · National Day", "type": "file", "src": "assets/work/mg5.mp4", "ar": "9/16" },
     { "label": "Duty Free · EID", "type": "file", "src": "assets/work/mg6.mp4", "ar": "9/16" },
     { "label": "MB.io", "type": "file", "src": "assets/work/mg7.mp4", "ar": "1/1" },
-    { "label": "Khabib · MultiBank", "type": "file", "src": "assets/work/mg8.mp4", "ar": "1/1" }
+    { "label": "Khabib · MultiBank", "type": "file", "src": "assets/work/mg8.mp4", "ar": "1/1" },
+    { "label": "Invest in Sharjah · AIM", "type": "file", "src": "assets/work/mg9.mp4", "ar": "9/16" },
+    { "label": "Xposure · Rick Smolan", "type": "file", "src": "assets/work/mg10.mp4", "ar": "9/16" }
   ],
   "ai": [
     { "label": "NEW EAST", "type": "file", "src": "assets/work/ai1.mp4", "ar": "16/9" },
@@ -22,7 +24,13 @@
     { "label": "NACD Recap", "type": "file", "src": "assets/work/ve3.mp4", "ar": "16/9" },
     { "label": "IIS Recap", "type": "file", "src": "assets/work/ve4.mp4", "ar": "9/16" },
     { "label": "Colors", "type": "file", "src": "assets/work/ve5.mp4", "ar": "9/16" },
-    { "label": "EDGE · SDF", "type": "file", "src": "assets/work/ve6.mp4", "ar": "16/9" }
+    { "label": "EDGE · SDF", "type": "file", "src": "assets/work/ve6.mp4", "ar": "16/9" },
+    { "label": "IIS Golf Day", "type": "file", "src": "assets/work/ve7.mp4", "ar": "9/16" },
+    { "label": "Shurooq Highlights", "type": "file", "src": "assets/work/ve8.mp4", "ar": "9/16" },
+    { "label": "Formula 1", "type": "file", "src": "assets/work/ve9.mp4", "ar": "16/9" },
+    { "label": "Children's Day", "type": "file", "src": "assets/work/ve10.mp4", "ar": "9/16" },
+    { "label": "IIS Tunaiji Reels", "type": "file", "src": "assets/work/ve11.mp4", "ar": "16/9" },
+    { "label": "Saeed · Visa", "type": "file", "src": "assets/work/ve12.mp4", "ar": "9/16" }
   ],
   "social": [
     { "label": "Reel 01", "type": "none", "src": "", "ar": "9/16" },
