@@ -133,6 +133,7 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
 .kicker{font-family:'Space Mono';font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--rope);display:inline-flex;align-items:center;gap:12px;margin-bottom:26px}
 .kicker::before{content:"";width:30px;height:1px;background:var(--rope)}
 .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+html.gsap-on .reveal{transition:none}
 .reveal.in{opacity:1;transform:none}
 .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
 
@@ -551,6 +552,8 @@ section.block{position:relative;padding:clamp(80px,12vh,160px) 0}
   </div>
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 /* always open at the top (the hero video) — never restore the last scroll position */
 if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
@@ -659,16 +662,18 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   }
 })();
 
-/* ============ REVEAL ON SCROLL ============ */
+/* ============ REVEAL ON SCROLL (fallback when GSAP absent) ============ */
 (function(){
+  if(window.gsap && window.ScrollTrigger) return;   // GSAP handles reveals below
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   }, {threshold:.16, rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
-/* ============ COUNT-UP STAT NUMBERS ============ */
+/* ============ COUNT-UP STAT NUMBERS (fallback when GSAP absent) ============ */
 (function(){
+  if(window.gsap && window.ScrollTrigger) return;   // GSAP handles count-up below
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const nums = document.querySelectorAll('#about .stat .n');
   function run(el){
@@ -817,6 +822,50 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
       lazyPlay();
     })
     .catch(lazyPlay);
+})();
+
+/* ============ GSAP — SCROLL ANIMATIONS ============ */
+(function(){
+  if(!(window.gsap && window.ScrollTrigger)) return;   // vanilla fallbacks handle it
+  gsap.registerPlugin(ScrollTrigger);
+  document.documentElement.classList.add('gsap-on');   // disables CSS .reveal transitions
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const reveals = gsap.utils.toArray('.reveal');
+  if(reduce){
+    gsap.set(reveals, {opacity:1, y:0});
+  } else {
+    gsap.set(reveals, {opacity:0, y:40});
+    ScrollTrigger.batch('.reveal', {
+      start: 'top 88%',
+      once: true,
+      onEnter: batch => gsap.to(batch, {opacity:1, y:0, duration:1, ease:'power3.out', stagger:0.1, overwrite:true})
+    });
+  }
+
+  // Stat numbers count up when the profile section enters
+  gsap.utils.toArray('#about .stat .n').forEach(el=>{
+    const m = el.textContent.trim().match(/^(\d+)(\D*)$/); if(!m) return;
+    const target = +m[1], suf = m[2];
+    if(reduce){ el.textContent = target + suf; return; }
+    ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: ()=>{
+      const o = {v:0};
+      gsap.to(o, {v:target, duration:1.6, ease:'power2.out', onUpdate:()=>{ el.textContent = Math.round(o.v) + suf; }});
+    }});
+  });
+
+  // Work tiles pop in with a stagger as each grid scrolls in
+  gsap.utils.toArray('.disc-grid').forEach(grid=>{
+    const tiles = grid.querySelectorAll('.wtile');
+    gsap.from(tiles, {
+      opacity:0, scale:0.9, y:24, duration:0.7, ease:'power3.out', stagger:0.08,
+      scrollTrigger:{ trigger: grid, start: 'top 82%', once:true }
+    });
+  });
+
+  // recompute trigger positions once images/fonts settle
+  window.addEventListener('load', ()=>ScrollTrigger.refresh());
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>ScrollTrigger.refresh());
 })();
 </script>
 </body>
