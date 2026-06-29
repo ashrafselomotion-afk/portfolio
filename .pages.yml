@@ -9,48 +9,20 @@ content:
     type: file
     path: content/work.json
     format: json
-    description: "Each section has 4 tiles. Paste a Vimeo link (recommended), a YouTube link, or upload a file."
+    description: "Add as many clips as you like per section. Each is one tile in the gallery."
     fields:
       - name: motion
         label: Motion Graphics
-        type: object
-        fields:
-          - name: t1
-            label: Tile 1
-            type: object
-            fields: &tile
-              - { name: label, label: Label, type: string }
-              - name: type
-                label: Video source
-                type: select
-                default: none
-                options:
-                  values: [none, vimeo, youtube, file]
-              - { name: src, label: "Vimeo / YouTube link, or uploaded file path", type: string }
-          - { name: t2, label: Tile 2, type: object, fields: *tile }
-          - { name: t3, label: Tile 3, type: object, fields: *tile }
-          - { name: t4, label: Tile 4, type: object, fields: *tile }
-      - name: ai
-        label: AI Creation
-        type: object
-        fields:
-          - { name: t1, label: Tile 1, type: object, fields: *tile }
-          - { name: t2, label: Tile 2, type: object, fields: *tile }
-          - { name: t3, label: Tile 3, type: object, fields: *tile }
-          - { name: t4, label: Tile 4, type: object, fields: *tile }
-      - name: video
-        label: Video Editing
-        type: object
-        fields:
-          - { name: t1, label: Tile 1, type: object, fields: *tile }
-          - { name: t2, label: Tile 2, type: object, fields: *tile }
-          - { name: t3, label: Tile 3, type: object, fields: *tile }
-          - { name: t4, label: Tile 4, type: object, fields: *tile }
-      - name: social
-        label: Social Media Design
-        type: object
-        fields:
-          - { name: t1, label: Tile 1, type: object, fields: *tile }
-          - { name: t2, label: Tile 2, type: object, fields: *tile }
-          - { name: t3, label: Tile 3, type: object, fields: *tile }
-          - { name: t4, label: Tile 4, type: object, fields: *tile }
+        type: list
+        fields: &clip
+          - { name: label, label: Label, type: string }
+          - name: type
+            label: Video source
+            type: select
+            default: file
+            options:
+              values: [none, file, vimeo, youtube]
+          - { name: src, label: "File path, or Vimeo / YouTube / Drive link", type: string }
+      - { name: ai, label: AI Creation, type: list, fields: *clip }
+      - { name: video, label: Video Editing, type: list, fields: *clip }
+      - { name: social, label: Social Media Design, type: list, fields: *clip }

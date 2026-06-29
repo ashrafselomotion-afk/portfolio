@@ -1,26 +1,29 @@
 {
-  "motion": {
-    "t1": { "label": "Bizcentric", "type": "file", "src": "assets/work/mg1.mp4" },
-    "t2": { "label": "Anchor", "type": "file", "src": "assets/work/mg2.mp4" },
-    "t3": { "label": "SEF Speakers", "type": "file", "src": "assets/work/mg3.mp4" },
-    "t4": { "label": "House of Wisdom", "type": "file", "src": "assets/work/mg4.mp4" }
-  },
-  "ai": {
-    "t1": { "label": "NEW EAST", "type": "file", "src": "assets/work/ai1.mp4" },
-    "t2": { "label": "Hermès Birkin", "type": "file", "src": "assets/work/ai2.mp4" },
-    "t3": { "label": "Baflay", "type": "file", "src": "assets/work/ai3.mp4" },
-    "t4": { "label": "AI Film", "type": "file", "src": "assets/work/ai4.mp4" }
-  },
-  "video": {
-    "t1": { "label": "Creative", "type": "file", "src": "assets/work/ve1.mp4" },
-    "t2": { "label": "Impact Zone", "type": "file", "src": "assets/work/ve2.mp4" },
-    "t3": { "label": "NACD Recap", "type": "file", "src": "assets/work/ve3.mp4" },
-    "t4": { "label": "Reel 04", "type": "none", "src": "" }
-  },
-  "social": {
-    "t1": { "label": "Reel 01", "type": "none", "src": "" },
-    "t2": { "label": "Reel 02", "type": "none", "src": "" },
-    "t3": { "label": "Reel 03", "type": "none", "src": "" },
-    "t4": { "label": "Reel 04", "type": "none", "src": "" }
-  }
+  "motion": [
+    { "label": "Bizcentric", "type": "file", "src": "assets/work/mg1.mp4" },
+    { "label": "Anchor", "type": "file", "src": "assets/work/mg2.mp4" },
+    { "label": "SEF Speakers", "type": "file", "src": "assets/work/mg3.mp4" },
+    { "label": "House of Wisdom", "type": "file", "src": "assets/work/mg4.mp4" },
+    { "label": "Butter", "type": "file", "src": "assets/work/mg5.mp4" },
+    { "label": "Duty Free · EID", "type": "file", "src": "assets/work/mg6.mp4" },
+    { "label": "MB.io", "type": "file", "src": "assets/work/mg7.mp4" },
+    { "label": "Khabib · MultiBank", "type": "file", "src": "assets/work/mg8.mp4" }
+  ],
+  "ai": [
+    { "label": "NEW EAST", "type": "file", "src": "assets/work/ai1.mp4" },
+    { "label": "Hermès Birkin", "type": "file", "src": "assets/work/ai2.mp4" },
+    { "label": "Baflay", "type": "file", "src": "assets/work/ai3.mp4" },
+    { "label": "AI Film", "type": "file", "src": "assets/work/ai4.mp4" }
+  ],
+  "video": [
+    { "label": "Creative", "type": "file", "src": "assets/work/ve1.mp4" },
+    { "label": "Impact Zone", "type": "file", "src": "assets/work/ve2.mp4" },
+    { "label": "NACD Recap", "type": "file", "src": "assets/work/ve3.mp4" }
+  ],
+  "social": [
+    { "label": "Reel 01", "type": "none", "src": "" },
+    { "label": "Reel 02", "type": "none", "src": "" },
+    { "label": "Reel 03", "type": "none", "src": "" },
+    { "label": "Reel 04", "type": "none", "src": "" }
+  ]
 }

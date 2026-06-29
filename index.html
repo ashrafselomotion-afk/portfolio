@@ -156,13 +156,14 @@ html.gsap-on .reveal{transition:none}
 .work-head h2{font-family:'Syne';font-weight:800;font-size:clamp(40px,8vw,108px);line-height:.92;letter-spacing:-.03em}
 .work-head h2 .o{background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0}
 
-.disc{display:grid;grid-template-columns:0.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:center;padding:clamp(48px,8vh,110px) 0;border-top:1px solid var(--line)}
-.disc:nth-child(even) .disc-media{order:2}
-.disc:nth-child(even) .disc-text{order:1}
-.disc-text .num{font-family:'Space Mono';font-size:13px;letter-spacing:.2em;color:var(--rope)}
-.disc-text h3{font-family:'Syne';font-weight:800;font-size:clamp(32px,5.2vw,72px);line-height:.98;letter-spacing:-.02em;margin:14px 0 20px}
-.disc-text h3 .accent{display:block;font-size:.42em;font-weight:600;letter-spacing:.02em;color:var(--mut);-webkit-text-stroke:0}
-.disc-text p{color:#c7c4cf;font-size:clamp(15px,1.6vw,17px);max-width:44ch;margin-bottom:24px}
+.disc{display:block;padding:clamp(48px,8vh,96px) 0;border-top:1px solid var(--line)}
+.disc-text{display:grid;grid-template-columns:1fr 1fr;column-gap:56px;align-items:end;margin-bottom:34px}
+.disc-text .num{grid-column:1;grid-row:1;font-family:'Space Mono';font-size:13px;letter-spacing:.2em;color:var(--rope)}
+.disc-text h3{grid-column:1;grid-row:2;font-family:'Syne';font-weight:800;font-size:clamp(32px,5vw,66px);line-height:.98;letter-spacing:-.02em;margin:14px 0 0}
+.disc-text h3 .accent{display:block;font-size:.42em;font-weight:600;letter-spacing:.02em;color:var(--mut);-webkit-text-stroke:0;margin-top:6px}
+.disc-text p{grid-column:2;grid-row:2;align-self:end;color:#c7c4cf;font-size:clamp(15px,1.6vw,17px);max-width:46ch;margin:0 0 6px}
+.disc-text .chips{grid-column:1/3;grid-row:3;margin-top:22px}
+@media(max-width:760px){.disc-text{display:block}.disc-text h3{margin:14px 0 18px}.disc-text p{max-width:none;margin-bottom:20px}}
 .chips{display:flex;flex-wrap:wrap;gap:10px}
 .chip{font-family:'Space Mono';font-size:11px;letter-spacing:.05em;padding:8px 13px;border:1px solid var(--line);border-radius:100px;color:#d9d6df;transition:.35s var(--ease)}
 .chip:hover{border-color:var(--pink);color:var(--pink);transform:translateY(-2px)}
@@ -190,8 +191,7 @@ html.gsap-on .reveal{transition:none}
 .gl-4{background:radial-gradient(75% 60% at 80% 80%,var(--blue),transparent 60%),radial-gradient(70% 70% at 15% 20%,var(--cream),transparent 60%)}
 @media(max-width:860px){.disc{grid-template-columns:1fr;gap:30px}.disc:nth-child(even) .disc-media{order:0}.disc:nth-child(even) .disc-text{order:0}.disc-media{aspect-ratio:16/11}}
 /* ---------- WORK GRID — 2x2 video tiles ---------- */
-.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.disc:nth-child(even) .disc-grid{order:2}
+.disc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,18vw,210px),1fr));gap:14px}
 .wtile{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0e0e13;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
 .wtile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .wtile .wtag{position:absolute;left:10px;bottom:10px;z-index:3;font-family:'Space Mono';font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#fff;padding:5px 9px;border-radius:100px;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);opacity:0;transform:translateY(6px);transition:.35s var(--ease)}
@@ -380,12 +380,7 @@ html.gsap-on .reveal{transition:none}
           <span class="chip">Kinetic Type</span><span class="chip">Brand Idents</span><span class="chip">Carousels</span>
         </div>
       </div>
-      <div class="disc-grid reveal d1" data-section="motion">
-        <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 04</span></div>
-      </div>
+      <div class="disc-grid reveal" data-section="motion"></div>
     </article>
 
     <!-- 2 AI -->
@@ -399,12 +394,7 @@ html.gsap-on .reveal{transition:none}
           <span class="chip">Veo / Flow</span><span class="chip">Higgsfield</span><span class="chip">Kling</span>
         </div>
       </div>
-      <div class="disc-grid reveal d1" data-section="ai">
-        <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 04</span></div>
-      </div>
+      <div class="disc-grid reveal" data-section="ai"></div>
     </article>
 
     <!-- 3 VIDEO -->
@@ -418,12 +408,7 @@ html.gsap-on .reveal{transition:none}
           <span class="chip">Color Grade</span><span class="chip">Reels</span><span class="chip">Storyboards</span>
         </div>
       </div>
-      <div class="disc-grid reveal d1" data-section="video">
-        <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 04</span></div>
-      </div>
+      <div class="disc-grid reveal" data-section="video"></div>
     </article>
 
     <!-- 4 SOCIAL -->
@@ -437,12 +422,7 @@ html.gsap-on .reveal{transition:none}
           <span class="chip">Campaigns</span><span class="chip">Statics</span><span class="chip">Carousels</span>
         </div>
       </div>
-      <div class="disc-grid reveal d1" data-section="social">
-        <div class="wtile ph-tile"><span class="ph-glow gl-4"></span><span class="ph-play"></span><span class="wtag">Reel 01</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-1"></span><span class="ph-play"></span><span class="wtag">Reel 02</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-2"></span><span class="ph-play"></span><span class="wtag">Reel 03</span></div>
-        <div class="wtile ph-tile"><span class="ph-glow gl-3"></span><span class="ph-play"></span><span class="wtag">Reel 04</span></div>
-      </div>
+      <div class="disc-grid reveal" data-section="social"></div>
     </article>
   </div>
 </section>
@@ -824,9 +804,19 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     .then(r=>r.ok?r.json():null)
     .then(data=>{
       if(data){
+        const GL=['gl-1','gl-2','gl-3','gl-4'];
         document.querySelectorAll('.disc-grid[data-section]').forEach(grid=>{
           const sec=data[grid.getAttribute('data-section')]; if(!sec) return;
-          grid.querySelectorAll('.wtile').forEach((tile,idx)=> fillTile(tile, sec['t'+(idx+1)]));
+          // accept an array of clips, or legacy {t1,t2,...}
+          const items = Array.isArray(sec) ? sec : Object.keys(sec).sort().map(k=>sec[k]);
+          grid.innerHTML='';
+          items.forEach((item,i)=>{
+            const tile=document.createElement('div');
+            tile.className='wtile ph-tile';
+            tile.innerHTML='<span class="ph-glow '+GL[i%4]+'"></span><span class="ph-play"></span><span class="wtag"></span>';
+            grid.appendChild(tile);
+            if(item) fillTile(tile, item);
+          });
         });
       }
       lazyPlay();
