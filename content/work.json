@@ -36,9 +36,11 @@
     { "label": "Saeed · Visa", "type": "file", "src": "assets/work/ve12.mp4", "ar": "9/16" }
   ],
   "social": [
-    { "label": "Reel 01", "type": "none", "src": "", "ar": "9/16" },
-    { "label": "Reel 02", "type": "none", "src": "", "ar": "9/16" },
-    { "label": "Reel 03", "type": "none", "src": "", "ar": "9/16" },
-    { "label": "Reel 04", "type": "none", "src": "", "ar": "9/16" }
+    { "label": "Statics", "type": "none", "src": "", "ar": "4/5" },
+    { "label": "Carousel", "type": "none", "src": "", "ar": "1/1" },
+    { "label": "Story", "type": "none", "src": "", "ar": "9/16" },
+    { "label": "Campaign", "type": "none", "src": "", "ar": "4/5" },
+    { "label": "Poster", "type": "none", "src": "", "ar": "1/1" },
+    { "label": "Reel Cover", "type": "none", "src": "", "ar": "9/16" }
   ]
 }

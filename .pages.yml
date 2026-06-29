@@ -21,7 +21,7 @@ content:
             type: select
             default: file
             options:
-              values: [none, file, vimeo, youtube]
+              values: [none, file, image, vimeo, youtube]
           - { name: src, label: "File path, or Vimeo / YouTube / Drive link", type: string }
           - { name: ar, label: "Shape — 9/16, 16/9 or 1/1 (blank = auto)", type: string }
       - { name: ai, label: AI Creation, type: list, fields: *clip }
