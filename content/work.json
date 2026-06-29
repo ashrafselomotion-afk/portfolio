@@ -1,8 +1,9 @@
 {
   "motion": {
     "t1": {
-      "label": "Reel 01",
-      "type": "none"
+      "label": "Baflay",
+      "type": "file",
+      "src": "https://drive.google.com/file/d/10kPUYPqSkFW83jLUXkCCCNZEdx_4D-mg/view?usp=drive_link"
     },
     "t2": {
       "label": "Hermès Birkin Black Crocodile",
