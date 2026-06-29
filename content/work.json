@@ -1,26 +1,75 @@
 {
   "motion": {
-    "t1": { "label": "Reel 01", "type": "none", "src": "" },
-    "t2": { "label": "Reel 02", "type": "none", "src": "" },
-    "t3": { "label": "Reel 03", "type": "none", "src": "" },
-    "t4": { "label": "Reel 04", "type": "none", "src": "" }
+    "t1": {
+      "label": "Reel 01",
+      "type": "none"
+    },
+    "t2": {
+      "label": "Reel 02",
+      "type": "none"
+    },
+    "t3": {
+      "label": "Reel 03",
+      "type": "none"
+    },
+    "t4": {
+      "label": "Reel 04",
+      "type": "none"
+    }
   },
   "ai": {
-    "t1": { "label": "Reel 01", "type": "none", "src": "" },
-    "t2": { "label": "Reel 02", "type": "none", "src": "" },
-    "t3": { "label": "Reel 03", "type": "none", "src": "" },
-    "t4": { "label": "Reel 04", "type": "none", "src": "" }
+    "t1": {
+      "label": "Reel 01",
+      "type": "none"
+    },
+    "t2": {
+      "label": "Reel 02",
+      "type": "none"
+    },
+    "t3": {
+      "label": "Reel 03",
+      "type": "none"
+    },
+    "t4": {
+      "label": "Neweast",
+      "type": "youtube",
+      "src": "<iframe width=\"1436\" height=\"808\" src=\"https://www.youtube.com/embed/RsEooXWJmDI\" title=\"NEWEAST\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+    }
   },
   "video": {
-    "t1": { "label": "Reel 01", "type": "none", "src": "" },
-    "t2": { "label": "Reel 02", "type": "none", "src": "" },
-    "t3": { "label": "Reel 03", "type": "none", "src": "" },
-    "t4": { "label": "Reel 04", "type": "none", "src": "" }
+    "t1": {
+      "label": "Reel 01",
+      "type": "none"
+    },
+    "t2": {
+      "label": "Reel 02",
+      "type": "none"
+    },
+    "t3": {
+      "label": "Reel 03",
+      "type": "none"
+    },
+    "t4": {
+      "label": "Reel 04",
+      "type": "none"
+    }
   },
   "social": {
-    "t1": { "label": "Reel 01", "type": "none", "src": "" },
-    "t2": { "label": "Reel 02", "type": "none", "src": "" },
-    "t3": { "label": "Reel 03", "type": "none", "src": "" },
-    "t4": { "label": "Reel 04", "type": "none", "src": "" }
+    "t1": {
+      "label": "Reel 01",
+      "type": "none"
+    },
+    "t2": {
+      "label": "Reel 02",
+      "type": "none"
+    },
+    "t3": {
+      "label": "Reel 03",
+      "type": "none"
+    },
+    "t4": {
+      "label": "Reel 04",
+      "type": "none"
+    }
   }
 }
