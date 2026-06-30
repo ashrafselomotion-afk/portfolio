@@ -250,8 +250,10 @@ html.gsap-on .reveal{transition:none}
 .xp-role{font-family:'Inter';font-weight:500;font-size:13px;color:var(--mut);margin:7px 0 12px}
 .xp-cardbody p{color:#bdbac6;font-size:14px;line-height:1.6;max-width:34ch}
 .xp-final{display:flex;align-items:center;flex:0 0 clamp(280px,28vw,420px)}
-.xp-final-in{font-family:'Syne';font-weight:800;font-size:clamp(26px,3.2vw,46px);line-height:1.04;letter-spacing:-.02em;background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
-.xp-final-in span{-webkit-text-fill-color:var(--rope);color:var(--rope)}
+.xp-final-in{font-family:'Syne';font-weight:800;font-size:clamp(26px,3.2vw,46px);line-height:1.04;letter-spacing:-.02em;background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;cursor:pointer;transition:filter .35s var(--ease)}
+.xp-final-in:hover{filter:brightness(1.12)}
+.xp-final-in span{display:inline-block;-webkit-text-fill-color:var(--rope);color:var(--rope);transition:transform .35s var(--ease)}
+.xp-final-in:hover span{transform:translateX(8px)}
 .xp-progress{position:absolute;left:clamp(20px,5vw,64px);right:clamp(20px,5vw,64px);bottom:6vh;height:2px;background:rgba(255,255,255,.1);z-index:4}
 .xp-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--blue))}
 @media(max-width:760px){.xp-title{font-size:32px}.xp-cardbody p{font-size:13px}}
@@ -521,7 +523,7 @@ html.gsap-on .reveal{transition:none}
         <div class="xp-cardbody"><div class="xp-co">Freelance</div><div class="xp-role">Senior Multimedia Designer · MENA</div><p>IG ads, reels and promos for private brands and government entities: cinematic &amp; AI-generated content, live event editing on site. Ongoing alongside every role.</p></div>
         <span class="xp-node"></span><div class="xp-yr">2018 - Now</div>
       </article>
-      <div class="xp-card xp-final"><div class="xp-final-in">The best work<br>is still ahead <span>→</span></div></div>
+      <div class="xp-card xp-final"><div class="xp-final-in" id="xoOpen" role="button" tabindex="0" aria-label="The best work is still ahead — play a quick game">The best work<br>is still ahead <span>→</span></div></div>
     </div>
     <div class="xp-progress"><i id="xpBar"></i></div>
   </div>
@@ -544,7 +546,7 @@ html.gsap-on .reveal{transition:none}
 <section class="block" id="contact">
   <div class="wrap">
     <span class="kicker">Contact</span>
-    <div class="contact-sub">Appreciate you being here. Let's connect and create. <button type="button" class="xo-trigger" id="xoOpen">The best work is still ahead <span class="xo-arrow">→</span></button></div>
+    <div class="contact-sub">Appreciate you being here. Let's connect and create.</div>
     <div class="contact-big"><a href="mailto:Ashrafselo.motion@gmail.com">Let's talk</a></div>
     <div class="contact-info">
       <div class="cinfo"><div class="l">Email</div><div class="v"><a href="mailto:Ashrafselo.motion@gmail.com">Ashrafselo.motion@gmail.com</a></div></div>
@@ -1157,6 +1159,7 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   function hide(){ overlay.classList.remove('on'); }
   loadScore(); renderScore();
   open.addEventListener('click',show);
+  open.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); show(); } });
   again.addEventListener('click',reset);
   closeBtn.addEventListener('click',hide);
   overlay.addEventListener('click',e=>{ if(e.target===overlay) hide(); });
