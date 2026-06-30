@@ -1125,8 +1125,8 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   function finish(res){ over=true; cells.forEach(c=>c.disabled=true);
     if(res){ res.L.forEach(i=>cells[i].classList.add('win'));
       if(res.p==='X'){ score.you++; statusEl.textContent='You win! ✦'; board.classList.remove('flash'); void board.offsetWidth; board.classList.add('flash'); celebrate(); }
-      else { score.cpu++; statusEl.textContent='Got that one 😈 rematch?'; }
-    } else { score.draw++; statusEl.textContent='Draw · you held the line'; }
+      else { score.cpu++; statusEl.textContent='Good game · rematch? ✦'; }
+    } else { score.draw++; statusEl.textContent='Draw · nicely played'; }
     saveScore(); renderScore(); }
   // minimax → plays perfectly, with a rare slip so a win is still within reach
   function minimax(bd, who, depth){
@@ -1139,7 +1139,7 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
       if(who==='O'){ if(r.s>best.s) best={s:r.s,m:i}; } else { if(r.s<best.s) best={s:r.s,m:i}; } }
     return best; }
   function ai(bd){ const empty=bd.map((v,i)=>v?-1:i).filter(i=>i>=0); if(!empty.length) return -1;
-    if(Math.random()<0.13) return empty[Math.floor(Math.random()*empty.length)];   // the occasional slip
+    if(Math.random()<0.4) return empty[Math.floor(Math.random()*empty.length)];   // friendly: slips often, easy to beat
     const r=minimax(bd.slice(),'O',0); return (r.m!=null)? r.m : empty[0]; }
   function celebrate(){ const host=overlay.querySelector('.xo-modal'); const cols=['#f4b9c8','#8fb8e8','#a9854f','#ffffff'];
     for(let i=0;i<36;i++){ const p=document.createElement('i'); p.className='xo-confetti'; p.style.background=cols[i%cols.length]; host.appendChild(p);
