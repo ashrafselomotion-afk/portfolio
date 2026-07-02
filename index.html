@@ -211,6 +211,101 @@ html.gsap-on .reveal{transition:none}
 .wtile img.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:860px){.disc:nth-child(even) .disc-grid{order:0}}
 
+/* ---------- CLIENT JOURNEY ---------- */
+#journey .work-head h2{font-size:clamp(29px,8vw,108px)}   /* "blockbuster." is a long word — needs a smaller floor than other headings */
+#journey{background:
+  radial-gradient(55% 40% at 0% 12%,rgba(244,185,200,.06),transparent 60%),
+  radial-gradient(50% 40% at 100% 82%,rgba(168,201,232,.06),transparent 60%)}
+.jr-flow{position:relative;margin-top:clamp(30px,6vh,70px)}
+.jr-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.jr-ghost{stroke:rgba(255,255,255,.08);stroke-width:2;stroke-linecap:round}
+.jr-path{stroke:url(#jrGrad);stroke-width:2.5;stroke-linecap:round;filter:drop-shadow(0 0 7px rgba(244,185,200,.35))}
+.jr-comet{position:absolute;top:0;left:0;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:#fff;pointer-events:none;opacity:0;transition:opacity .4s var(--ease);
+  box-shadow:0 0 0 4px rgba(244,185,200,.18),0 0 18px 4px rgba(244,185,200,.65),0 0 36px 10px rgba(168,201,232,.35)}
+.jr-comet.on{opacity:1}
+.jr-stage{position:relative;display:grid;grid-template-columns:1fr clamp(70px,10vw,130px) 1fr;align-items:center;min-height:54vh;padding:6vh 0}
+.jr-node-wrap{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center}
+.jr-node{width:17px;height:17px;border-radius:50%;background:#26262e;border:2px solid rgba(255,255,255,.22);transition:.6s var(--ease);position:relative;z-index:2}
+.jr-stage.on .jr-node{background:var(--pink);border-color:transparent;transform:scale(1.15);
+  box-shadow:0 0 0 6px rgba(244,185,200,.14),0 0 26px 6px rgba(244,185,200,.5)}
+.jr-card{grid-column:1;grid-row:1}
+.jr-vig{grid-column:3;grid-row:1;display:flex;justify-content:center}
+.jr-stage:nth-of-type(even) .jr-card{grid-column:3}
+.jr-stage:nth-of-type(even) .jr-vig{grid-column:1}
+.jr-stop{font-family:'Space Mono';font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--rope);margin-bottom:14px;transition:color .5s var(--ease)}
+.jr-stage.on .jr-stop{color:var(--pink)}
+.jr-title{font-family:'Syne';font-weight:800;font-size:clamp(30px,4vw,52px);line-height:1;letter-spacing:-.02em;margin-bottom:14px}
+.jr-card p{color:#c7c4cf;font-size:clamp(14px,1.6vw,16.5px);line-height:1.7;max-width:44ch;margin-bottom:20px}
+.jr-vig .vig{width:min(340px,92%)}
+/* stop 01 - the brief doc */
+.vig-doc{position:relative;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:20px 20px 24px;box-shadow:0 24px 60px -30px rgba(0,0,0,.8)}
+.vd-head{font-family:'Space Mono';font-size:10px;letter-spacing:.18em;color:var(--mut);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.vd-head::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto}
+.vd-line{display:block;height:9px;border-radius:6px;background:linear-gradient(90deg,rgba(255,255,255,.16),rgba(255,255,255,.07));margin-bottom:11px}
+.vd-line.l1{width:88%}
+.vd-line.l2{width:64%;background:linear-gradient(90deg,rgba(244,185,200,.5),rgba(244,185,200,.14))}
+.vd-line.l3{width:94%}
+.vd-line.l4{width:42%;margin-bottom:0}
+.vd-spark{position:absolute;top:-15px;right:-9px;font-size:26px;color:var(--rope);text-shadow:0 0 18px rgba(201,168,125,.8)}
+.vd-spark b{display:block;font-weight:400;animation:vspark 2.6s ease-in-out infinite}
+@keyframes vspark{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.25) rotate(18deg)}}
+/* stop 02 - the moodboard fan */
+.vig-world .vw-fan{position:relative;height:180px}
+.vw-fan i{position:absolute;left:50%;top:50%;width:66px;height:88px;margin:-44px 0 0 -33px;border-radius:10px;border:1px solid rgba(255,255,255,.25);box-shadow:0 14px 34px -14px rgba(0,0,0,.75)}
+.vw-fan .c1{background:linear-gradient(160deg,#f4b9c8,#d8688f);transform:translate(-108px,12px) rotate(-16deg)}
+.vw-fan .c2{background:linear-gradient(160deg,#a8c9e8,#5f8fcf);transform:translate(-55px,-6px) rotate(-8deg)}
+.vw-fan .c3{background:linear-gradient(160deg,#efe7d6,#c9a87d);transform:translate(0,-15px)}
+.vw-fan .c4{background:linear-gradient(160deg,#9b86ff,#7c5cff);transform:translate(55px,-6px) rotate(8deg)}
+.vw-fan .c5{background:linear-gradient(160deg,#23232c,#0e0e13);transform:translate(108px,12px) rotate(16deg)}
+/* stop 03 - storyboard frames */
+.vig-board{display:flex;gap:12px;justify-content:center}
+.vb-frame{width:92px}
+.vb-shot{aspect-ratio:4/3;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.025);display:grid;place-items:center;overflow:hidden}
+.vb-shot svg{width:76%;height:76%;stroke:#cfccd6;fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.vb-shot svg *{stroke-dasharray:1}
+.vb-tc{display:block;text-align:center;font-family:'Space Mono';font-size:10px;letter-spacing:.14em;color:var(--mut);margin-top:8px}
+/* stop 04 - the premiere player */
+.vf-player{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 24px 60px -30px rgba(0,0,0,.8)}
+.vf-screen{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;display:grid;place-items:center;
+  background:linear-gradient(120deg,#d8688f,#7c5cff 45%,#5f8fcf);background-size:220% 220%;animation:vfshift 7s ease-in-out infinite}
+@keyframes vfshift{0%,100%{background-position:0% 30%}50%{background-position:100% 70%}}
+.vf-badge{position:absolute;top:9px;left:9px;font-family:'Space Mono';font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.2);padding:4px 9px;border-radius:100px;backdrop-filter:blur(4px)}
+.vf-play{position:relative;width:44px;height:44px;border-radius:50%;background:rgba(10,10,13,.45);border:1.5px solid rgba(255,255,255,.75);display:grid;place-items:center}
+.vf-play::before{content:"";border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
+.vf-play::after{content:"";position:absolute;inset:-1.5px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);animation:vfring 2.2s ease-out infinite}
+@keyframes vfring{0%{transform:scale(1);opacity:.8}70%,100%{transform:scale(1.9);opacity:0}}
+.vf-bar{position:relative;height:4px;border-radius:4px;background:rgba(255,255,255,.12);margin:14px 2px 10px}
+.vf-fill{position:absolute;left:0;top:0;bottom:0;width:72%;border-radius:4px;background:linear-gradient(90deg,var(--pink),var(--blue))}
+.vf-dot{position:absolute;left:72%;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:#fff;box-shadow:0 0 12px rgba(244,185,200,.8)}
+.vf-meta{display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono';font-size:9.5px;letter-spacing:.12em;color:var(--mut);padding:0 2px}
+.vf-eq{display:inline-flex;align-items:flex-end;gap:2.5px;height:12px}
+.vf-eq i{width:3px;height:30%;border-radius:2px;animation:eq 1.05s ease-in-out infinite}
+.vf-eq i:nth-child(1){background:var(--rope);animation-delay:-.2s}
+.vf-eq i:nth-child(2){background:#d8688f;animation-delay:-.55s}
+.vf-eq i:nth-child(3){background:#5f8fcf;animation-delay:-.85s}
+.vf-eq i:nth-child(4){background:#d8688f;animation-delay:-.4s}
+/* journey CTA */
+.jr-end{text-align:center;margin-top:clamp(24px,5vh,54px)}
+.jr-end .mono{display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+.jr-cta{display:inline-block;font-family:'Syne';font-weight:800;font-size:clamp(24px,3.2vw,42px);letter-spacing:-.02em;line-height:1.05;
+  background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;transition:filter .35s var(--ease)}
+.jr-cta:hover{filter:brightness(1.12)}
+.jr-cta span{display:inline-block;-webkit-text-fill-color:var(--rope);color:var(--rope);margin-left:10px;transition:transform .35s var(--ease)}
+.jr-cta:hover span{transform:translateX(10px)}
+@media(max-width:860px){
+  .jr-stage{grid-template-columns:44px 1fr;min-height:0;padding:8vh 0;align-items:start}
+  .jr-node-wrap{grid-column:1;grid-row:1;padding-top:5px}
+  .jr-card{grid-column:2;grid-row:1}
+  .jr-vig{grid-column:2;grid-row:2;justify-content:flex-start;margin-top:28px}
+  .jr-stage:nth-of-type(even) .jr-card{grid-column:2}
+  .jr-stage:nth-of-type(even) .jr-vig{grid-column:2}
+  .vb-frame{width:84px}
+}
+@media(prefers-reduced-motion:reduce){
+  .vd-spark b,.vf-screen,.vf-play::after,.vf-eq i{animation:none}
+  .vf-eq i{height:58%}
+}
+
 /* ---------- TOOLS ---------- */
 #tools{background:
   radial-gradient(60% 50% at 100% 0%,rgba(168,201,232,.08),transparent 60%),
@@ -351,6 +446,7 @@ html.gsap-on .reveal{transition:none}
   <a class="brand" href="#top"><span class="dot"></span>Ashraf&nbsp;Selo</a>
   <nav>
     <a href="#work">Work</a>
+    <a href="#journey">Journey</a>
     <a href="#tools">Tools</a>
     <a href="#xp">Experience</a>
     <a href="#clients">Clients</a>
@@ -449,6 +545,120 @@ html.gsap-on .reveal{transition:none}
       </div>
       <div class="disc-grid reveal" data-section="social"></div>
     </article>
+  </div>
+</section>
+
+<!-- ===== CLIENT JOURNEY ===== -->
+<section class="block" id="journey">
+  <div class="wrap">
+    <span class="kicker reveal">The Client Journey</span>
+    <div class="work-head">
+      <h2 class="reveal d1">From brief<br><span class="o">to blockbuster.</span></h2>
+      <p class="reveal d2" style="max-width:36ch;color:#bdbac6;font-size:15px">Four stops between your idea and a film people remember. Same route every time — so you always know exactly where your story stands.</p>
+    </div>
+
+    <div class="jr-flow" id="jrFlow">
+      <svg class="jr-svg" id="jrSvg" aria-hidden="true">
+        <defs>
+          <linearGradient id="jrGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f4b9c8"/>
+            <stop offset=".5" stop-color="#a8c9e8"/>
+            <stop offset="1" stop-color="#c9a87d"/>
+          </linearGradient>
+        </defs>
+        <path class="jr-ghost" id="jrGhost" d="" fill="none"/>
+        <path class="jr-path" id="jrPath" d="" fill="none"/>
+      </svg>
+      <div class="jr-comet" id="jrComet" aria-hidden="true"></div>
+
+      <!-- STOP 01 · BRIEF -->
+      <article class="jr-stage" data-vig="spark">
+        <div class="jr-node-wrap"><span class="jr-node"></span></div>
+        <div class="jr-card reveal">
+          <div class="jr-stop">Stop 01 · The Brief</div>
+          <h3 class="jr-title">The Spark</h3>
+          <p>It starts with a conversation, not a form. I dig into your brand, your audience and the one thing this video must achieve — then turn business goals into a creative direction we both believe in.</p>
+          <div class="chips"><span class="chip">Discovery call</span><span class="chip">Goals &amp; audience</span><span class="chip">Creative direction</span></div>
+        </div>
+        <div class="jr-vig reveal d1" aria-hidden="true">
+          <div class="vig">
+            <div class="vig-doc">
+              <div class="vd-head">brief_v1.txt</div>
+              <i class="vd-line l1"></i><i class="vd-line l2"></i><i class="vd-line l3"></i><i class="vd-line l4"></i>
+              <span class="vd-spark"><b>✦</b></span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STOP 02 · MOODBOARD & RESEARCH -->
+      <article class="jr-stage" data-vig="world">
+        <div class="jr-node-wrap"><span class="jr-node"></span></div>
+        <div class="jr-card reveal">
+          <div class="jr-stop">Stop 02 · Moodboard &amp; Research</div>
+          <h3 class="jr-title">The World</h3>
+          <p>Before anything moves, we decide how it should feel. References, palettes and styleframes come together into a visual universe for your story — the look is locked before a single frame is animated.</p>
+          <div class="chips"><span class="chip">Moodboard</span><span class="chip">Styleframes</span><span class="chip">Visual research</span></div>
+        </div>
+        <div class="jr-vig reveal d1" aria-hidden="true">
+          <div class="vig vig-world">
+            <div class="vw-fan"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><i class="c5"></i></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STOP 03 · SCRIPT & STORYBOARD -->
+      <article class="jr-stage" data-vig="board">
+        <div class="jr-node-wrap"><span class="jr-node"></span></div>
+        <div class="jr-card reveal">
+          <div class="jr-stop">Stop 03 · Script &amp; Storyboard</div>
+          <h3 class="jr-title">The Blueprint</h3>
+          <p>Words become scenes. I write the script, sketch it shot by shot and time every beat to the second. You approve the whole film on paper — no surprises later, only sign-offs.</p>
+          <div class="chips"><span class="chip">Script &amp; VO</span><span class="chip">Storyboard</span><span class="chip">Shot timing</span></div>
+        </div>
+        <div class="jr-vig reveal d1" aria-hidden="true">
+          <div class="vig vig-board">
+            <div class="vb-frame">
+              <div class="vb-shot"><svg viewBox="0 0 100 75"><circle cx="70" cy="22" r="10" pathLength="1"/><path d="M8 62 L34 34 L52 54 L66 42 L92 62" pathLength="1"/></svg></div>
+              <span class="vb-tc">00:00</span>
+            </div>
+            <div class="vb-frame">
+              <div class="vb-shot"><svg viewBox="0 0 100 75"><circle cx="34" cy="20" r="9" pathLength="1"/><path d="M34 29 V50 M24 38 H44 M34 50 L25 65 M34 50 L43 65" pathLength="1"/><path d="M60 38 H86 M78 30 L86 38 L78 46" pathLength="1"/></svg></div>
+              <span class="vb-tc">00:04</span>
+            </div>
+            <div class="vb-frame">
+              <div class="vb-shot"><svg viewBox="0 0 100 75"><circle cx="50" cy="38" r="25" pathLength="1"/><path d="M43 27 L43 49 L62 38 Z" pathLength="1"/></svg></div>
+              <span class="vb-tc">00:12</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STOP 04 · THE FILM -->
+      <article class="jr-stage" data-vig="film">
+        <div class="jr-node-wrap"><span class="jr-node"></span></div>
+        <div class="jr-card reveal">
+          <div class="jr-stop">Stop 04 · The Film</div>
+          <h3 class="jr-title">The Premiere</h3>
+          <p>Motion, sound and color lock into a film made to be remembered — then mastered in every ratio, language and format your channels ask for. Lights down, volume up.</p>
+          <div class="chips"><span class="chip">Full production</span><span class="chip">Sound &amp; grade</span><span class="chip">Every format</span></div>
+        </div>
+        <div class="jr-vig reveal d1" aria-hidden="true">
+          <div class="vig">
+            <div class="vf-player">
+              <div class="vf-screen"><span class="vf-badge">4K · Final Cut</span><span class="vf-play"></span></div>
+              <div class="vf-bar"><i class="vf-fill"></i><span class="vf-dot"></span></div>
+              <div class="vf-meta"><span>hero_film_FINAL_v9.mp4</span><span class="vf-eq"><i></i><i></i><i></i><i></i></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="jr-end reveal">
+      <span class="mono">Your idea is stop 01</span>
+      <a class="jr-cta" href="#contact">Bring me your brief <span aria-hidden="true">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -919,6 +1129,8 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
           });
         });
         layoutAll();
+        window.__tilesFX && window.__tilesFX();   // bind the pop-in now that tiles exist
+        window.ScrollTrigger && ScrollTrigger.refresh();   // tile grids changed the page height → recompute trigger positions
       }
       lazyPlay();
     })
@@ -983,14 +1195,21 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     }});
   });
 
-  // Work tiles pop in with a stagger as each grid scrolls in
-  gsap.utils.toArray('.disc-grid').forEach(grid=>{
-    const tiles = grid.querySelectorAll('.wtile');
-    gsap.from(tiles, {
-      opacity:0, scale:0.9, y:24, duration:0.7, ease:'power3.out', stagger:0.08,
-      scrollTrigger:{ trigger: grid, start: 'top 82%', once:true }
+  // Work tiles pop in with a stagger as each grid scrolls in.
+  // Tiles are injected async from content/work.json, so the fill code re-calls this once they exist.
+  window.__tilesFX = function(){
+    if(reduce) return;
+    gsap.utils.toArray('.disc-grid').forEach(grid=>{
+      const tiles = grid.querySelectorAll('.wtile:not(.fx-bound)');
+      if(!tiles.length) return;
+      tiles.forEach(t=>t.classList.add('fx-bound'));
+      gsap.from(tiles, {
+        opacity:0, scale:0.9, y:24, duration:0.7, ease:'power3.out', stagger:0.08,
+        scrollTrigger:{ trigger: grid, start: 'top 82%', once:true }
+      });
     });
-  });
+  };
+  window.__tilesFX();
 
   // Profile (01) - layered parallax: headline + kicker drift up, the big numbers float at staggered rates
   const aboutEl = document.getElementById('about');
@@ -1006,6 +1225,88 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   // recompute trigger positions once images/fonts settle
   window.addEventListener('load', ()=>ScrollTrigger.refresh());
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>ScrollTrigger.refresh());
+})();
+
+/* ============ CLIENT JOURNEY - SCROLL-DRAWN PATH + VIGNETTES ============ */
+(function(){
+  const flow=document.getElementById('jrFlow'); if(!flow) return;
+  const svg=document.getElementById('jrSvg');
+  const path=document.getElementById('jrPath');
+  const ghost=document.getElementById('jrGhost');
+  const comet=document.getElementById('jrComet');
+  const stages=[...flow.querySelectorAll('.jr-stage')];
+  const nodes=stages.map(s=>s.querySelector('.jr-node'));
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap=!!(window.gsap&&window.ScrollTrigger);
+  let L=0, lastP=0;
+
+  // build a smooth S-curve through the node centers (recomputed on resize)
+  function build(){
+    const fr=flow.getBoundingClientRect();
+    if(!fr.width||!fr.height) return;
+    svg.setAttribute('viewBox','0 0 '+fr.width+' '+fr.height);
+    const pts=nodes.map(n=>{const r=n.getBoundingClientRect();return{x:r.left+r.width/2-fr.left,y:r.top+r.height/2-fr.top};});
+    const bulge=window.innerWidth<=860 ? 10 : Math.min(150, fr.width*0.14);
+    let d='M'+pts[0].x+' '+Math.max(0,pts[0].y-46)+' L'+pts[0].x+' '+pts[0].y;
+    for(let i=1;i<pts.length;i++){
+      const a=pts[i-1], b=pts[i], dir=(i%2? 1:-1), dy=b.y-a.y;
+      d+=' C '+(a.x+dir*bulge)+' '+(a.y+dy*0.34)+', '+(b.x+dir*bulge)+' '+(b.y-dy*0.34)+', '+b.x+' '+b.y;
+    }
+    path.setAttribute('d',d); ghost.setAttribute('d',d);
+    L=path.getTotalLength();
+    path.style.strokeDasharray=L;
+  }
+  function draw(p){
+    lastP=p;
+    if(!L) return;
+    path.style.strokeDashoffset=String(L*(1-p));
+    const pt=path.getPointAtLength(Math.max(0.01, L*p));
+    comet.style.transform='translate('+pt.x+'px,'+pt.y+'px)';
+    comet.classList.toggle('on', p>0.004 && p<0.996);
+  }
+
+  // active stop highlight: stage lights up while it crosses the middle of the screen
+  const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('on', e.isIntersecting)),
+    {rootMargin:'-35% 0px -45% 0px', threshold:0});
+  stages.forEach(s=>io.observe(s));
+
+  build();
+  if(hasGsap && !reduce){
+    draw(0);
+    ScrollTrigger.create({
+      trigger:flow, start:'top 58%', end:'bottom 60%', scrub:0.5,
+      onUpdate:s=>draw(s.progress),
+      onRefresh:s=>{ build(); draw(s.progress); }
+    });
+  } else {
+    draw(1);                       // no GSAP / reduced motion → path fully drawn
+    comet.style.display='none';
+  }
+  let rT; window.addEventListener('resize',()=>{ clearTimeout(rT); rT=setTimeout(()=>{ build(); draw(lastP); },150); });
+  window.addEventListener('load',()=>{ build(); draw(lastP); });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ build(); draw(lastP); });
+
+  // per-stop vignettes (CSS holds the finished state, so no-GSAP/reduced-motion needs nothing)
+  if(hasGsap && !reduce){
+    stages.forEach(st=>{
+      const kind=st.getAttribute('data-vig');
+      const vigEl=st.querySelector('.jr-vig')||st;               // on mobile the vignette sits below the card
+      const trg=()=>({trigger:vigEl, start:'top 80%', once:true});
+      if(kind==='spark'){
+        gsap.from(st.querySelectorAll('.vd-line'),{scaleX:0,transformOrigin:'0 50%',duration:.6,ease:'power3.out',stagger:.13,scrollTrigger:trg()});
+        gsap.from(st.querySelector('.vd-spark'),{scale:0,rotation:-140,duration:1.2,ease:'elastic.out(1,.45)',delay:.5,scrollTrigger:trg()});
+      } else if(kind==='world'){
+        gsap.from(st.querySelectorAll('.vw-fan i'),{x:0,y:0,rotation:0,scale:.55,opacity:0,duration:1.05,ease:'elastic.out(1,.5)',stagger:.07,scrollTrigger:trg()});
+      } else if(kind==='board'){
+        gsap.fromTo(st.querySelectorAll('.vb-shot svg *'),{strokeDashoffset:1},{strokeDashoffset:0,duration:1.1,ease:'power2.inOut',stagger:.18,scrollTrigger:trg()});
+        gsap.from(st.querySelectorAll('.vb-tc'),{opacity:0,y:6,duration:.5,stagger:.18,delay:.5,scrollTrigger:trg()});
+      } else if(kind==='film'){
+        gsap.from(st.querySelector('.vf-play'),{scale:0,duration:1,ease:'elastic.out(1,.5)',delay:.3,scrollTrigger:trg()});
+        gsap.from(st.querySelector('.vf-fill'),{scaleX:0,transformOrigin:'0 50%',duration:1.5,ease:'power2.inOut',scrollTrigger:trg()});
+        gsap.from(st.querySelector('.vf-dot'),{opacity:0,scale:0,duration:.5,delay:1.3,scrollTrigger:trg()});
+      }
+    });
+  }
 })();
 
 /* ============ THREE.JS - 3D PARTICLE FIELD (cinematic depth) ============ */
