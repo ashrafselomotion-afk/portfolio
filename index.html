@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -33,7 +33,7 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   background:var(--ink);
   color:var(--paper);
-  font-family:'Inter',system-ui,sans-serif;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
   font-weight:400;
   line-height:1.55;
   overflow-x:hidden;
@@ -59,6 +59,13 @@ a{color:inherit;text-decoration:none}
 @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8vw,7vh) scale(1.18)}}
 @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-7vw,-6vh) scale(1.12)}}
 @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,-9vh) scale(1.22)}}
+
+/* ---------- FILM GRAIN (cinematic texture over everything) ---------- */
+.film-grain{position:fixed;top:-60px;left:-60px;right:-60px;bottom:-60px;z-index:130;pointer-events:none;opacity:.05;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='130' height='130' filter='url(%23n)'/%3E%3C/svg%3E") repeat;
+  background-size:130px 130px;animation:grainJitter .9s steps(4) infinite}
+@keyframes grainJitter{0%,100%{transform:translate(0,0)}25%{transform:translate(-26px,14px)}50%{transform:translate(16px,-28px)}75%{transform:translate(-10px,-16px)}}
+@media(prefers-reduced-motion:reduce){.film-grain{animation:none}}
 
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 .mono{font-family:'Space Mono',monospace;letter-spacing:.04em}
@@ -388,7 +395,7 @@ html.gsap-on .reveal{transition:none}
 .xp-card.up::before{content:"";position:absolute;left:0;top:54%;height:3%;width:1px;background:rgba(255,255,255,.18)}
 .xp-card.down::before{content:"";position:absolute;left:0;top:57%;height:3%;width:1px;background:rgba(255,255,255,.18)}
 .xp-co{font-family:'Syne';font-weight:700;font-size:clamp(20px,2.3vw,29px);letter-spacing:-.01em;line-height:1.05}
-.xp-role{font-family:'Inter';font-weight:500;font-size:13px;color:var(--mut);margin:7px 0 12px}
+.xp-role{font-weight:500;font-size:13px;color:var(--mut);margin:7px 0 12px}
 .xp-cardbody p{color:#bdbac6;font-size:14px;line-height:1.6;max-width:34ch}
 .xp-final{display:flex;align-items:center;flex:0 0 clamp(280px,28vw,420px)}
 .xp-final-in{font-family:'Syne';font-weight:800;font-size:clamp(26px,3.2vw,46px);line-height:1.04;letter-spacing:-.02em;background:linear-gradient(120deg,var(--pink),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;cursor:pointer;transition:filter .35s var(--ease)}
@@ -501,6 +508,7 @@ html.gsap-on .reveal{transition:none}
 </div>
 
 <div class="cine-bg" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i></div>
+<div class="film-grain" aria-hidden="true"></div>
 
 <div class="side">Dubai, UAE · Est. 2018</div>
 
