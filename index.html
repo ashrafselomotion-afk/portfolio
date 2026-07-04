@@ -1216,7 +1216,7 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     const W=grid.clientWidth; if(!W) return;
     const cols=colCount(W);
     const colW=(W-GAP*(cols-1))/cols;
-    const wide=grid.getAttribute('data-section')==='motion' && cols>=2;   // landscape tiles get a double slot in the motion grid
+    const wide=cols>=2;   // landscape tiles get a double slot in every grid — same height as the squares
     const tiles=[...grid.querySelectorAll('.wtile')].map(t=>{
       const ar=parseFloat(t.dataset.ar)||(9/16);
       const span=(wide && ar>1.3) ? 2 : 1;
