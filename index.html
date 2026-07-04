@@ -930,10 +930,20 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     if(!img || !img.complete) return;
     const cw = canvas.clientWidth, ch = canvas.clientHeight;
     const ir = img.width/img.height, cr = cw/ch;
+    ctx.clearRect(0,0,cw,ch);
+    if(cr < 0.9){
+      // portrait phones: cover would crop ~2/3 of the frame (title + character lost).
+      // Show the full frame width as a cinematic strip; bands match the renders' studio gray.
+      const w = cw, h = cw/ir, y = (ch-h)/2;
+      const g = ctx.createLinearGradient(0,0,0,ch);
+      g.addColorStop(0,'#e9e8ec'); g.addColorStop(1,'#f2f1f4');
+      ctx.fillStyle = g; ctx.fillRect(0,0,cw,ch);
+      ctx.drawImage(img,0,y,w,h);
+      return;
+    }
     let w,h,x,y;
     if(ir > cr){ h = ch; w = ch*ir; x = (cw-w)/2; y = 0; }
     else { w = cw; h = cw/ir; x = 0; y = (ch-h)/2; }
-    ctx.clearRect(0,0,cw,ch);
     ctx.drawImage(img,x,y,w,h);
   }
   let currentFrame = 0;
