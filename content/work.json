@@ -37,6 +37,7 @@
     { "label": "Saeed · Visa", "type": "file", "src": "assets/work/ve12.mp4", "ar": "9/16" }
   ],
   "social": [
+    { "label": "MultiBank · IB Program", "type": "image", "src": "assets/social/multibank-ib.jpg", "ar": "1080/1350" },
     { "label": "Statics", "type": "none", "src": "", "ar": "4/5" },
     { "label": "Carousel", "type": "none", "src": "", "ar": "1/1" },
     { "label": "Story", "type": "none", "src": "", "ar": "9/16" },
