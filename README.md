@@ -1,6 +1,6 @@
 # Ashraf Selo — Portfolio
 
-An epic, single-page portfolio with a **scroll-driven hero** (your fluffy 3D "Portfolio" clip scrubs frame-by-frame as you scroll while the rope ties it together), then a cinematic dark body covering your four crafts, tools, experience, clients and contact — plus a **private `/admin`** to manage the work and videos.
+An epic, single-page portfolio with a **scroll-driven hero** (your fluffy 3D "Portfolio" clip scrubs frame-by-frame as you scroll while the rope ties it together), then a cinematic dark body covering your four crafts, tools, experience, clients and contact — plus a **private `/ashrafiko`** to manage the work and videos.
 
 ## Run it locally
 ```bash
@@ -14,9 +14,9 @@ python3 -m http.server 4599
 ashraf-portfolio/
 ├─ index.html          ← the site (HTML + CSS + JS, no build step)
 ├─ content/
-│  └─ work.json        ← the 4 cards + their video links (edited via /admin)
-├─ admin/
-│  ├─ index.html       ← the private CMS login page  (yoursite.com/admin)
+│  └─ work.json        ← the 4 cards + their video links (edited via /ashrafiko)
+├─ ashrafiko/
+│  ├─ index.html       ← the private CMS login page  (yoursite.com/ashrafiko)
 │  └─ config.yml       ← CMS config — set your GitHub repo here
 ├─ assets/
 │  ├─ frames/          ← 120 JPGs = the scroll-scrub hero
@@ -31,22 +31,22 @@ The four discipline cards read from `content/work.json`. Each card has:
 - `media_type`: `vimeo` · `youtube` · `file` · `none`
 - `media_value`: the link (Vimeo/YouTube) or path (`assets/uploads/clip.mp4`)
 
-**Recommended: host reels on Vimeo and paste the link.** Keeps the site fast and there's no file-size limit to worry about. You never touch code — you do it in `/admin`.
+**Recommended: host reels on Vimeo and paste the link.** Keeps the site fast and there's no file-size limit to worry about. You never touch code — you do it in `/ashrafiko`.
 
 ---
 
 ## It's already live
 
 - **Site:** https://ashrafselomotion-afk.github.io/portfolio/
-- **Admin:** https://ashrafselomotion-afk.github.io/portfolio/admin/
+- **Admin:** https://ashrafselomotion-afk.github.io/portfolio/ashrafiko/
 - **Repo:** https://github.com/ashrafselomotion-afk/portfolio (GitHub Pages, `main` branch)
 
 Any change pushed to `main` auto-redeploys in ~1 minute.
 
 ### The admin (Pages CMS)
-The `/admin` page sends you to **[Pages CMS](https://pagescms.org)** — a free, hosted editor that signs you in with **your GitHub account**, so only you can edit. It reads the schema in `.pages.yml` and saves to `content/work.json`.
+The `/ashrafiko` page sends you to **[Pages CMS](https://pagescms.org)** — a free, hosted editor that signs you in with **your GitHub account**, so only you can edit. It reads the schema in `.pages.yml` and saves to `content/work.json`.
 
-**First-time connect (once):** open `/admin` → **Sign in with GitHub** → install the Pages CMS GitHub app on your account → pick the **portfolio** repo. After that, `/admin` drops you straight into the editor.
+**First-time connect (once):** open `/ashrafiko` → **Sign in with GitHub** → install the Pages CMS GitHub app on your account → pick the **portfolio** repo. After that, `/ashrafiko` drops you straight into the editor.
 
 **Add a reel:** Editor → **Work & Reels** → pick a card → set *Video source* = **Vimeo** → paste the link → **Save**. Live in ~1 min.
 
@@ -60,4 +60,4 @@ The `/admin` page sends you to **[Pages CMS](https://pagescms.org)** — a free,
 - **Text / colors** — copy is inline in `index.html`; palette is the `:root` CSS variables (`--pink`, `--blue`, `--rope`, `--ink`, `--paper`).
 - **Clients** — the `rowA/rowB/rowC` arrays in the marquee script.
 
-*(Want experience, tools and clients editable in `/admin` too? They're currently in the HTML — I can move them into the CMS the same way as the work cards whenever you want.)*
+*(Want experience, tools and clients editable in `/ashrafiko` too? They're currently in the HTML — I can move them into the CMS the same way as the work cards whenever you want.)*
