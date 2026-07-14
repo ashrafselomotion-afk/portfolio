@@ -1,49 +1,200 @@
 {
   "motion": [
-    { "label": "Bizcentric", "type": "file", "src": "assets/work/mg1.mp4", "ar": "16/9" },
-    { "label": "Anchor", "type": "file", "src": "assets/work/mg2.mp4", "ar": "9/16" },
-    { "label": "SEF Speakers", "type": "file", "src": "assets/work/mg3.mp4", "ar": "9/16" },
-    { "label": "House of Wisdom", "type": "file", "src": "assets/work/mg4.mp4", "ar": "9/16" },
-    { "label": "SBA · National Day", "type": "file", "src": "assets/work/mg5.mp4", "ar": "9/16" },
-    { "label": "Duty Free · EID", "type": "file", "src": "assets/work/mg6.mp4", "ar": "9/16" },
-    { "label": "MB.io", "type": "file", "src": "assets/work/mg7.mp4", "ar": "1/1" },
-    { "label": "Khabib · MultiBank", "type": "file", "src": "assets/work/mg8.mp4", "ar": "1/1" },
-    { "label": "Invest in Sharjah · AIM", "type": "file", "src": "assets/work/mg9.mp4", "ar": "9/16" },
-    { "label": "Xposure · Rick Smolan", "type": "file", "src": "assets/work/mg10.mp4", "ar": "9/16" },
-    { "label": "Impact Zone", "type": "file", "src": "assets/work/ve2.mp4", "ar": "9/16" }
+    {
+      "label": "Bizcentric",
+      "type": "file",
+      "src": "assets/work/mg1.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "Anchor",
+      "type": "file",
+      "src": "assets/work/mg2.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "SEF Speakers",
+      "type": "file",
+      "src": "assets/work/mg3.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "House of Wisdom",
+      "type": "file",
+      "src": "assets/work/mg4.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "SBA · National Day",
+      "type": "file",
+      "src": "assets/work/mg5.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "Duty Free · EID",
+      "type": "file",
+      "src": "assets/work/mg6.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "MB.io",
+      "type": "file",
+      "src": "assets/work/mg7.mp4",
+      "ar": "1/1"
+    },
+    {
+      "label": "Khabib · MultiBank",
+      "type": "file",
+      "src": "assets/work/mg8.mp4",
+      "ar": "1/1"
+    },
+    {
+      "label": "Invest in Sharjah · AIM",
+      "type": "file",
+      "src": "assets/work/mg9.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "Xposure · Rick Smolan",
+      "type": "file",
+      "src": "assets/work/mg10.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "Impact Zone",
+      "type": "file",
+      "src": "assets/work/ve2.mp4",
+      "ar": "9/16"
+    }
   ],
   "ai": [
-    { "label": "NEW EAST", "type": "file", "src": "assets/work/ai1.mp4", "ar": "16/9" },
-    { "label": "Hermès Birkin", "type": "file", "src": "assets/work/ai2.mp4", "ar": "9/16" },
-    { "label": "Baflay", "type": "file", "src": "assets/work/ai3.mp4", "ar": "9/16" },
-    { "label": "AI Film", "type": "file", "src": "assets/work/ai4.mp4", "ar": "9/16" },
-    { "label": "Isuzu", "type": "file", "src": "assets/work/ai5.mp4", "ar": "16/9" },
-    { "label": "Napoli Pasta", "type": "file", "src": "assets/work/ai6.mp4", "ar": "9/16" },
-    { "label": "AI Film · Sesen I", "type": "file", "src": "assets/work/ai7.mp4", "ar": "16/9" },
-    { "label": "AI Film · Sesen II", "type": "file", "src": "assets/work/ai8.mp4", "ar": "16/9" },
-    { "label": "Perfume", "type": "file", "src": "assets/work/ai9.mp4", "ar": "16/9" }
+    {
+      "label": "NEW EAST",
+      "type": "file",
+      "src": "assets/work/ai1.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "Hermès Birkin",
+      "type": "file",
+      "src": "assets/work/ai2.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "Baflay",
+      "type": "file",
+      "src": "assets/work/ai3.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "AI Film",
+      "type": "file",
+      "src": "assets/work/ai4.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "Isuzu",
+      "type": "file",
+      "src": "assets/work/ai5.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "Napoli Pasta",
+      "type": "file",
+      "src": "assets/work/ai6.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "AI Film · Sesen I",
+      "type": "file",
+      "src": "assets/work/ai7.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "AI Film · Sesen II",
+      "type": "file",
+      "src": "assets/work/ai8.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "Perfume",
+      "type": "file",
+      "src": "assets/work/ai9.mp4",
+      "ar": "16/9"
+    }
   ],
   "video": [
-    { "label": "Creative", "type": "file", "src": "assets/work/ve1.mp4", "ar": "9/16" },
-    { "label": "IIS Padel Day", "type": "file", "src": "assets/work/ve13.mp4", "ar": "9/16" },
-    { "label": "NACD Recap", "type": "file", "src": "assets/work/ve3.mp4", "ar": "16/9" },
-    { "label": "IIS Recap", "type": "file", "src": "assets/work/ve4.mp4", "ar": "9/16" },
-    { "label": "Colors", "type": "file", "src": "assets/work/ve5.mp4", "ar": "9/16" },
-    { "label": "EDGE · SDF", "type": "file", "src": "assets/work/ve6.mp4", "ar": "16/9" },
-    { "label": "IIS Golf Day", "type": "file", "src": "assets/work/ve7.mp4", "ar": "9/16" },
-    { "label": "Shurooq Highlights", "type": "file", "src": "assets/work/ve8.mp4", "ar": "9/16" },
-    { "label": "Formula 1", "type": "file", "src": "assets/work/ve9.mp4", "ar": "16/9" },
-    { "label": "Children's Day", "type": "file", "src": "assets/work/ve10.mp4", "ar": "9/16" },
-    { "label": "IIS Tunaiji Reels", "type": "file", "src": "assets/work/ve11.mp4", "ar": "16/9" },
-    { "label": "Saeed · Visa", "type": "file", "src": "assets/work/ve12.mp4", "ar": "9/16" }
-  ],
-  "social": [
-    { "label": "MultiBank · IB Program", "type": "image", "src": "assets/social/multibank-ib.jpg", "ar": "1080/1350" },
-    { "label": "Statics", "type": "none", "src": "", "ar": "4/5" },
-    { "label": "Carousel", "type": "none", "src": "", "ar": "1/1" },
-    { "label": "Story", "type": "none", "src": "", "ar": "9/16" },
-    { "label": "Campaign", "type": "none", "src": "", "ar": "4/5" },
-    { "label": "Poster", "type": "none", "src": "", "ar": "1/1" },
-    { "label": "Reel Cover", "type": "none", "src": "", "ar": "9/16" }
+    {
+      "label": "Creative",
+      "type": "file",
+      "src": "assets/work/ve1.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "IIS Padel Day",
+      "type": "file",
+      "src": "assets/work/ve13.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "NACD Recap",
+      "type": "file",
+      "src": "assets/work/ve3.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "IIS Recap",
+      "type": "file",
+      "src": "assets/work/ve4.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "Colors",
+      "type": "file",
+      "src": "assets/work/ve5.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "EDGE · SDF",
+      "type": "file",
+      "src": "assets/work/ve6.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "IIS Golf Day",
+      "type": "file",
+      "src": "assets/work/ve7.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "Shurooq Highlights",
+      "type": "file",
+      "src": "assets/work/ve8.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "Formula 1",
+      "type": "file",
+      "src": "assets/work/ve9.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "Children's Day",
+      "type": "file",
+      "src": "assets/work/ve10.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "IIS Tunaiji Reels",
+      "type": "file",
+      "src": "assets/work/ve11.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "Saeed · Visa",
+      "type": "file",
+      "src": "assets/work/ve12.mp4",
+      "ar": "9/16"
+    }
   ]
 }

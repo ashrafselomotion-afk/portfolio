@@ -26,4 +26,3 @@ content:
           - { name: ar, label: "Shape — 9/16, 16/9 or 1/1 (blank = auto)", type: string }
       - { name: ai, label: AI Creation, type: list, fields: *clip }
       - { name: video, label: Video Editing, type: list, fields: *clip }
-      - { name: social, label: Social Media Design, type: list, fields: *clip }
