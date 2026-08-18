@@ -89,6 +89,18 @@
       "type": "file",
       "src": "assets/work/mg14.mp4",
       "ar": "16/9"
+    },
+    {
+      "label": "Sultans Mines · Game Trailer",
+      "type": "file",
+      "src": "assets/work/mg15.mp4",
+      "ar": "16/9"
+    },
+    {
+      "label": "Compositing · Green Screen",
+      "type": "file",
+      "src": "assets/work/mg16.mp4",
+      "ar": "16/9"
     }
   ],
   "ai": [
