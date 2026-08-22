@@ -1,0 +1,21 @@
+{
+  "name": "Ashraf Selo",
+  "short_name": "Ashraf Selo",
+  "description": "Motion graphics designer and video editor in Dubai",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a0a0d",
+  "theme_color": "#0a0a0d",
+  "icons": [
+    {
+      "src": "/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

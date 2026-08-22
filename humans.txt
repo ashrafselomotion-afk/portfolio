@@ -1,0 +1,13 @@
+/* TEAM */
+Creator: Ashraf Selo
+Role: Senior Motion Graphics Designer, AI Creative, Video Editor
+Location: Dubai, United Arab Emirates
+Site: https://ashrafselo.com/
+LinkedIn: https://www.linkedin.com/in/ashraf-selo-b54148188/
+Instagram: https://www.instagram.com/ashraf.selo/
+
+/* SITE */
+Last update: 2026-08-22
+Languages: English, Arabic
+Stack: HTML, CSS, JavaScript, GSAP, Three.js
+Hosting: Vercel
