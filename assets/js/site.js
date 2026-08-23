@@ -380,6 +380,14 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
             if(item && item.ar){ const ar=arNum(item.ar); if(ar) tile.dataset.ar=ar; }
             grid.appendChild(tile);
             if(item) fillTile(tile, item);
+            if(item && item.featured===true){
+              tile.classList.add('featured');
+              const b=document.createElement('button'); b.type='button'; b.className='wopen';
+              b.textContent='Open project: '+String(item.label||'').slice(0,80);
+              b.setAttribute('aria-label', b.textContent);
+              b.addEventListener('click',()=>{ window.__openProject && window.__openProject(item, b, section); });
+              tile.appendChild(b);
+            }
           });
         });
         layoutAll();
@@ -959,4 +967,128 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   closeBtn.addEventListener('click',hide);
   overlay.addEventListener('click',e=>{ if(e.target===overlay) hide(); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&overlay.classList.contains('on')) hide(); });
+})();
+
+
+/* ============ CONVERSION LAYER: analytics helper, CTAs, mobile menu, project dialog ============ */
+(function(){
+  // --- central event helper: no PII, deduped, pluggable sink (Vercel Analytics / Plausible if present, else no-op)
+  const fired=new Set();
+  const ALLOWED=/^[a-z_]{3,40}$/;
+  window.asTrack=function(name, props){
+    if(!ALLOWED.test(name||'')) return;
+    const p={}; if(props && typeof props.label==='string') p.label=props.label.slice(0,80); if(props && typeof props.section==='string') p.section=props.section.slice(0,20);
+    const key=name+'|'+(p.label||'');
+    if(props && props.once){ if(fired.has(key)) return; fired.add(key); }
+    try{
+      if(typeof window.va==='function') window.va('event',{name:name,data:p});
+      else if(typeof window.plausible==='function') window.plausible(name,{props:p});
+    }catch(e){}
+  };
+  document.addEventListener('click',e=>{
+    const el=e.target.closest('[data-track]'); if(!el) return;
+    asTrack(el.getAttribute('data-track'),{label:el.textContent.trim().slice(0,40)});
+  },{passive:true});
+
+  // --- smooth in-page scrolling that respects reduced motion (for nav/menu/CTA anchors)
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function scrollToHash(hash){
+    const id=(hash||'').replace(/^\/?#/,''); const el=id&&document.getElementById(id); if(!el) return false;
+    el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}); return true;
+  }
+
+  // --- mobile menu (dialog semantics, focus trap, Esc, scroll lock, focus restore)
+  const toggle=document.querySelector('.nav-toggle'), menu=document.getElementById('mnav');
+  if(toggle && menu){
+    const closeBtn=menu.querySelector('.mnav-close');
+    let lastFocus=null, scrollY=0;
+    const focusables=()=>[...menu.querySelectorAll('a[href],button:not([disabled])')].filter(x=>x.offsetParent!==null||x===closeBtn);
+    function open(){
+      lastFocus=toggle; scrollY=window.scrollY;
+      menu.hidden=false; setTimeout(()=>menu.classList.add('on'),0);
+      toggle.setAttribute('aria-expanded','true'); toggle.setAttribute('aria-label','Close menu');
+      document.body.classList.add('menu-open'); document.body.style.top=(-scrollY)+'px';
+      (menu.querySelector('.mnav-links a')||closeBtn).focus();
+      asTrack('nav_opened');
+    }
+    function close(){
+      menu.classList.remove('on'); toggle.setAttribute('aria-expanded','false'); toggle.setAttribute('aria-label','Open menu');
+      document.body.classList.remove('menu-open'); document.body.style.top='';
+      window.scrollTo(0,scrollY);
+      setTimeout(()=>{ menu.hidden=true; },reduce?0:350);
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    toggle.addEventListener('click',()=>{ menu.hidden?open():close(); });
+    closeBtn.addEventListener('click',close);
+    menu.addEventListener('keydown',e=>{
+      if(e.key==='Escape'){ e.preventDefault(); close(); return; }
+      if(e.key==='Tab'){ const f=focusables(); if(!f.length) return; const i=f.indexOf(document.activeElement);
+        if(e.shiftKey && (i<=0)){ e.preventDefault(); f[f.length-1].focus(); }
+        else if(!e.shiftKey && i===f.length-1){ e.preventDefault(); f[0].focus(); } }
+    });
+    menu.querySelectorAll('a[href^="/#"], a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+      const h=a.getAttribute('href'); close();
+      if(scrollToHash(h)){ e.preventDefault(); history.replaceState(null,'',h.replace(/^\//,'')); }
+    }));
+  }
+
+  // --- hero + journey + contact anchors: smooth scroll with reduced-motion support
+  document.querySelectorAll('a.cta-primary[href^="#"], a.cta-secondary[href^="#"], a.jr-cta[href^="#"], .m-cta[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{ if(scrollToHash(a.getAttribute('href'))){ e.preventDefault(); history.replaceState(null,'',a.getAttribute('href')); } });
+  });
+
+  // --- mobile contact shortcut: appears after the hero, hides while the contact section is on screen
+  const mcta=document.getElementById('mCta'), hero=document.getElementById('hero'), contact=document.getElementById('contact');
+  if(mcta && hero && contact && 'IntersectionObserver' in window){
+    let pastHero=false, nearContact=false;
+    const apply=()=>{ const show=pastHero && !nearContact && window.innerWidth<=760; if(show){ mcta.hidden=false; setTimeout(()=>mcta.classList.add('on'),0); } else { mcta.classList.remove('on'); setTimeout(()=>{ if(!(pastHero&&!nearContact)) mcta.hidden=true; },reduce?0:350); } };
+    new IntersectionObserver(es=>{ es.forEach(en=>{ pastHero = !en.isIntersecting && en.boundingClientRect.bottom<0; }); apply(); },{threshold:0}).observe(hero);
+    new IntersectionObserver(es=>{ es.forEach(en=>{ nearContact=en.isIntersecting; }); apply(); },{threshold:0.05}).observe(contact);
+    window.addEventListener('resize',apply);
+    window.addEventListener('scroll',()=>{ const past=window.scrollY > hero.offsetHeight - innerHeight*0.5; const near=contact.getBoundingClientRect().top < innerHeight*0.9; if(past!==pastHero || near!==nearContact){ pastHero=past; nearContact=near; apply(); } },{passive:true});
+  }
+
+  // --- project dialog (featured tiles): built from CMS data with textContent only, focus-trapped, Esc/backdrop close
+  const dlg=document.getElementById('pdlg');
+  if(dlg){
+    const media=document.getElementById('pdlgMedia'), kicker=document.getElementById('pdlgKicker'), title=document.getElementById('pdlgTitle'), meta=document.getElementById('pdlgMeta'), cta=document.getElementById('pdlgCta'), closeBtn=dlg.querySelector('.pdlg-close');
+    let lastFocus=null, scrollY=0, curLabel='';
+    const SECTION={motion:'Motion graphics',ai:'AI creation',video:'Video editing'};
+    function row(k,v){ if(!v) return; const dt=document.createElement('dt'); dt.textContent=k; const dd=document.createElement('dd'); dd.textContent=Array.isArray(v)?v.join(' · '):String(v); meta.append(dt,dd); }
+    function mediaFor(item){
+      media.replaceChildren();
+      const src=String(item.src||'').trim(); const type=String(item.type||'none').toLowerCase();
+      const ok=/^assets\/[\w./-]+$/.test(src) && !/\.\./.test(src);
+      if(type==='file' && ok && /\.(mp4|webm|mov|m4v)$/i.test(src)){ const v=document.createElement('video'); v.src=src; v.controls=true; v.muted=true; v.autoplay=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline',''); v.addEventListener('play',()=>asTrack('project_media_played',{label:curLabel,once:true}),{once:true}); media.appendChild(v); }
+      else if(type==='image' && ok){ const im=document.createElement('img'); im.src=src; im.alt=String(item.label||''); media.appendChild(im); }
+    }
+    window.__openProject=function(item, opener, section){
+      lastFocus=opener||document.activeElement; scrollY=window.scrollY; curLabel=String(item.label||'').slice(0,80);
+      mediaFor(item);
+      kicker.textContent=item.category?String(item.category):(SECTION[section]||'');
+      title.textContent=curLabel;
+      meta.replaceChildren();
+      row('Client', item.client); row('Role', item.role); row('Objective', item.objective); row('Deliverables', item.services); row('Approach', item.approach); row('Outcome', item.outcome);
+      cta.href='mailto:ashrafselo.motion@gmail.com?subject='+encodeURIComponent('Project inquiry: similar to '+curLabel)+'&body='+encodeURIComponent('Hi Ashraf,\n\nI saw "'+curLabel+'" on your portfolio and we need something similar.\n\nProject: \nTimeline: \nBudget range (optional): \nLinks or references: ');
+      dlg.hidden=false; setTimeout(()=>dlg.classList.add('on'),0);
+      document.body.classList.add('menu-open'); document.body.style.top=(-scrollY)+'px';
+      closeBtn.focus();
+      asTrack('project_opened',{label:curLabel,section:section});
+    };
+    function close(){
+      dlg.classList.remove('on'); document.body.classList.remove('menu-open'); document.body.style.top=''; window.scrollTo(0,scrollY);
+      setTimeout(()=>{ dlg.hidden=true; media.replaceChildren(); },reduce?0:350);
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    closeBtn.addEventListener('click',close);
+    dlg.addEventListener('click',e=>{ if(e.target===dlg) close(); });
+    dlg.addEventListener('keydown',e=>{
+      if(e.key==='Escape'){ e.preventDefault(); close(); return; }
+      if(e.key==='Tab'){ const f=[...dlg.querySelectorAll('button,a[href],video[controls]')]; const i=f.indexOf(document.activeElement);
+        if(e.shiftKey && i<=0){ e.preventDefault(); f[f.length-1].focus(); } else if(!e.shiftKey && i===f.length-1){ e.preventDefault(); f[0].focus(); } }
+    });
+    cta.addEventListener('click',()=>{ asTrack('inquiry_started',{label:curLabel}); });
+  }
+  // inquiry_started for every "Start a project" path
+  document.querySelectorAll('[data-track$="_start_project"]').forEach(a=>a.addEventListener('click',()=>asTrack('inquiry_started',{label:a.getAttribute('data-track')})));
 })();

@@ -111,6 +111,7 @@
 <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body>
+<a class="sr-skip" href="#work">Skip to content</a>
 <noscript><p>Ashraf Selo is a senior motion graphics designer, AI creative and video editor based in Dubai, working across Abu Dhabi, Sharjah and the UAE. Services: <a href="/services/motion-graphics-designer/">motion graphics design</a>, <a href="/services/video-editing/">video editing</a>, <a href="/services/social-media-reels/">reels and social video</a>, <a href="/services/3d-motion-graphics/">3D motion graphics</a>, <a href="/services/ai-video-production/">AI video production</a>. Contact: ashrafselo.motion@gmail.com.</p></noscript>
 
 <!-- ===== PRELOADER ===== -->
@@ -137,6 +138,7 @@
     <a href="/#contact">Contact</a>
   </nav>
   <div class="loc">+971 55 344 1707</div>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span></button>
 </header>
 
 <!-- ===== HERO SCROLL-SCRUB ===== -->
@@ -160,6 +162,11 @@
           <div class="item"><b>Video</b> Editing</div>
           <div class="item"><b>3D</b> Motion</div>
         </div></div>
+        <p class="hero-sub">Motion graphics, AI films and video editing for brands across Dubai, Abu Dhabi and Sharjah · 8+ years · Arabic &amp; English</p>
+        <div class="hero-cta">
+          <a class="cta-primary" href="#contact" data-track="hero_start_project">Start a project <span aria-hidden="true">→</span></a>
+          <a class="cta-secondary" href="#work" data-track="hero_view_work">View selected work</a>
+        </div>
         <div class="scrollcue"><span>Scroll to unfold</span><span class="bar"></span></div>
       </div>
       <div class="scrubmeter"><span id="scrubPct">00</span><span class="ring" id="scrubRing"><i></i></span></div>
@@ -342,7 +349,8 @@
 
     <div class="jr-end reveal">
       <span class="mono">Your idea is stop 01</span>
-      <a class="jr-cta" href="#contact">Bring me your brief <span aria-hidden="true">→</span></a>
+      <a class="jr-cta" href="#contact" data-track="journey_start_project">Bring me your brief <span aria-hidden="true">→</span></a>
+      <p class="jr-after">What happens next: a short call, a scoped plan with timeline and quote, then we start at Stop 01.</p>
     </div>
   </div>
 </section>
@@ -441,15 +449,19 @@
 <section class="block" id="contact">
   <div class="wrap">
     <span class="kicker">Contact</span>
-    <div class="contact-sub">Based in Dubai, available across the UAE. Email or call to start a project.</div>
-    <div class="contact-big"><a href="mailto:ashrafselo.motion@gmail.com">Let's talk</a></div>
+    <div class="contact-sub">Based in Dubai, available across the UAE. Send a brief, a deck or just an idea. I reply with next steps, a timeline and a quote.</div>
+    <div class="contact-big"><a href="mailto:ashrafselo.motion@gmail.com" data-track="contact_email">Let's talk</a></div>
     <div class="contact-info">
-      <div class="cinfo"><div class="l">Email</div><div class="v"><a href="mailto:ashrafselo.motion@gmail.com">ashrafselo.motion@gmail.com</a></div></div>
-      <div class="cinfo"><div class="l">Phone</div><div class="v"><a href="tel:+971553441707">+971 55 344 1707</a></div></div>
+      <div class="cinfo"><div class="l">Email</div><div class="v"><a href="mailto:ashrafselo.motion@gmail.com" data-track="contact_email">ashrafselo.motion@gmail.com</a></div></div>
+      <div class="cinfo"><div class="l">Phone</div><div class="v"><a href="tel:+971553441707" data-track="contact_phone">+971 55 344 1707</a></div></div>
       <div class="cinfo"><div class="l">Based In</div><div class="v">Dubai, UAE</div></div>
       <div class="cinfo"><div class="l">Languages</div><div class="v">Arabic · English</div></div>
-      <div class="cinfo"><div class="l">LinkedIn</div><div class="v"><a href="https://www.linkedin.com/in/ashraf-selo-b54148188/" target="_blank" rel="me noopener">ashraf-selo</a></div></div>
-      <div class="cinfo"><div class="l">Instagram</div><div class="v"><a href="https://www.instagram.com/ashraf.selo/" target="_blank" rel="me noopener">@ashraf.selo</a></div></div>
+      <div class="cinfo"><div class="l">LinkedIn</div><div class="v"><a href="https://www.linkedin.com/in/ashraf-selo-b54148188/" target="_blank" rel="me noopener" data-track="contact_linkedin">ashraf-selo</a></div></div>
+      <div class="cinfo"><div class="l">Instagram</div><div class="v"><a href="https://www.instagram.com/ashraf.selo/" target="_blank" rel="me noopener" data-track="contact_instagram">@ashraf.selo</a></div></div>
+    </div>
+    <div class="contact-cta">
+      <a class="cta-primary" href="mailto:ashrafselo.motion@gmail.com?subject=Project%20inquiry&amp;body=Hi%20Ashraf%2C%0A%0AProject%3A%20%0AWhat%20we%20need%3A%20%0ATimeline%3A%20%0ABudget%20range%20(optional)%3A%20%0ALinks%20or%20references%3A%20" data-track="contact_start_project">Start a project <span aria-hidden="true">→</span></a>
+      <a class="cta-secondary" href="tel:+971553441707" data-track="contact_phone">Or call +971 55 344 1707</a>
     </div>
     <div class="footnote">
       <span>© 2026 Ashraf Selo</span>
@@ -471,6 +483,35 @@
       <span class="you">You<b id="xoY">0</b></span>
       <span>Draws<b id="xoD">0</b></span>
       <span class="cpu">Site<b id="xoC">0</b></span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <button class="mnav-close" type="button" aria-label="Close menu">✕</button>
+  <nav class="mnav-links" aria-label="Mobile">
+    <a href="/#work">Work</a>
+    <a href="/#journey">Process</a>
+    <a href="/#xp">Experience</a>
+    <a href="/#clients">Clients</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+  <a class="mnav-cta" href="/#contact" data-track="nav_start_project">Start a project <span aria-hidden="true">→</span></a>
+  <div class="mnav-meta"><a href="mailto:ashrafselo.motion@gmail.com" data-track="contact_email">ashrafselo.motion@gmail.com</a><a href="tel:+971553441707" data-track="contact_phone">+971 55 344 1707</a></div>
+</div>
+<a class="m-cta" id="mCta" href="#contact" data-track="mobile_start_project" hidden>Start a project</a>
+
+<!-- ===== PROJECT DIALOG ===== -->
+<div class="pdlg" id="pdlg" role="dialog" aria-modal="true" aria-labelledby="pdlgTitle" hidden>
+  <div class="pdlg-card">
+    <button class="pdlg-close" type="button" aria-label="Close project">✕</button>
+    <div class="pdlg-media" id="pdlgMedia"></div>
+    <div class="pdlg-body">
+      <div class="pdlg-kicker" id="pdlgKicker"></div>
+      <h3 class="pdlg-title" id="pdlgTitle"></h3>
+      <dl class="pdlg-meta" id="pdlgMeta"></dl>
+      <a class="cta-primary" id="pdlgCta" href="#contact" data-track="project_cta">Start a similar project <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </div>
