@@ -1,3 +1,13 @@
 _font-test.html
 _gudlak.ttf
 _ny.ttf
+.env*
+.indexnow-key
+.pages.yml
+.github
+.vercel
+scripts
+src
+README.md
+.DS_Store
+*.md

@@ -89,6 +89,10 @@
         {
           "key": "Origin-Agent-Cluster",
           "value": "?1"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://ashrafselo.com"
         }
       ]
     },
