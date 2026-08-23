@@ -34,7 +34,10 @@
       "label": "Duty Free · EID",
       "type": "file",
       "src": "assets/work/mg6.mp4",
-      "ar": "9/16"
+      "ar": "9/16",
+      "featured": true,
+      "client": "Dubai Duty Free",
+      "category": "Seasonal campaign · Motion graphics"
     },
     {
       "label": "MB.io",
@@ -46,7 +49,10 @@
       "label": "Khabib · MultiBank",
       "type": "file",
       "src": "assets/work/mg8.mp4",
-      "ar": "1/1"
+      "ar": "1/1",
+      "featured": true,
+      "client": "MultiBank Group",
+      "category": "Brand campaign · Motion graphics"
     },
     {
       "label": "Invest in Sharjah · AIM",
@@ -58,7 +64,10 @@
       "label": "Xposure · Rick Smolan",
       "type": "file",
       "src": "assets/work/mg10.mp4",
-      "ar": "9/16"
+      "ar": "9/16",
+      "featured": true,
+      "client": "Xposure International Photography Festival",
+      "category": "Festival content · Motion graphics"
     },
     {
       "label": "Impact Zone",
@@ -70,7 +79,10 @@
       "label": "House of Wisdom · Flag Day",
       "type": "file",
       "src": "assets/work/mg11.mp4",
-      "ar": "9/16"
+      "ar": "9/16",
+      "featured": true,
+      "client": "House of Wisdom",
+      "category": "Event film · Motion graphics"
     },
     {
       "label": "DSW · All Sports All Summer",
@@ -108,13 +120,18 @@
       "label": "NEW EAST",
       "type": "file",
       "src": "assets/work/ai1.mp4",
-      "ar": "16/9"
+      "ar": "16/9",
+      "featured": true,
+      "client": "NEW EAST",
+      "category": "AI ad"
     },
     {
       "label": "Hermès Birkin",
       "type": "file",
       "src": "assets/work/ai2.mp4",
-      "ar": "9/16"
+      "ar": "9/16",
+      "featured": true,
+      "category": "AI concept film"
     },
     {
       "label": "Baflay",
@@ -170,7 +187,10 @@
       "label": "IIS Padel Day",
       "type": "file",
       "src": "assets/work/ve13.mp4",
-      "ar": "9/16"
+      "ar": "9/16",
+      "featured": true,
+      "client": "Invest in Sharjah",
+      "category": "Event recap · Video editing"
     },
     {
       "label": "NACD Recap",
@@ -212,7 +232,9 @@
       "label": "Formula 1",
       "type": "file",
       "src": "assets/work/ve9.mp4",
-      "ar": "16/9"
+      "ar": "16/9",
+      "featured": true,
+      "category": "Event recap · Video editing"
     },
     {
       "label": "Children's Day",
