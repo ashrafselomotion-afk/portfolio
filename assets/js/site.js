@@ -380,10 +380,10 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
             if(item && item.ar){ const ar=arNum(item.ar); if(ar) tile.dataset.ar=ar; }
             grid.appendChild(tile);
             if(item) fillTile(tile, item);
-            if(item && item.featured===true){
-              tile.classList.add('featured');
+            if(item && item.src){
+              if(item.featured===true) tile.classList.add('featured');
               const b=document.createElement('button'); b.type='button'; b.className='wopen';
-              b.textContent='Open project: '+String(item.label||'').slice(0,80);
+              b.textContent='Play: '+String(item.label||'').slice(0,80);
               b.setAttribute('aria-label', b.textContent);
               b.addEventListener('click',()=>{ window.__openProject && window.__openProject(item, b, section); });
               tile.appendChild(b);

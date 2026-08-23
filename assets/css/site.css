@@ -483,6 +483,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--rope);outline-offse
 .cta-secondary{display:inline-flex;align-items:center;font-family:'Space Mono';font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut-d);padding:12px 2px;min-height:44px;border-bottom:1px solid rgba(0,0,0,.25);transition:color .3s,border-color .3s}
 .cta-secondary:hover{color:var(--ink);border-color:var(--ink)}
 .hero-bottom{gap:10px}
+@media(max-height:720px){.hero-sub{display:none}.hero-bottom{gap:6px}}
+@media(min-width:761px) and (max-height:820px){.hero-bottom{bottom:4vh}}
+@media(min-width:761px) and (max-height:640px){.hero-bottom{bottom:2vh;gap:4px}.hero-cta{margin:0}}
 /* dark sections use paper-coloured CTAs */
 #journey .cta-primary,#contact-dark .cta-primary{color:var(--paper)}
 .jr-after{margin-top:14px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13px;color:var(--mut);max-width:46ch;margin-left:auto;margin-right:auto;line-height:1.6}
