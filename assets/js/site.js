@@ -466,20 +466,27 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
   }
   if(canSplit){
     gsap.registerPlugin(SplitText);
+    // Split at the moment the headline enters, animate, then revert immediately.
+    // Splitting up front measured the lines at the wrong width and left the DOM
+    // split forever whenever the trigger's cached position went stale, which
+    // padded every heading with phantom empty lines.
     const initSplit = ()=>{
       gsap.utils.toArray('[data-split]').forEach(el=>{
         gsap.set(el, {opacity:1, y:0});
-        let split = null;
-        try{ split = new SplitText(el, {type:'lines', mask:'lines'}); }catch(e){}
-        if(!split || !split.lines || !split.lines.length){
-          gsap.from(el, {opacity:0, y:40, duration:1, ease:'power3.out',
-            scrollTrigger:{trigger:el, start:'top 88%', once:true}});
-          return;
-        }
-        gsap.from(split.lines, {
-          yPercent:115, duration:1.05, ease:'power4.out', stagger:0.085,
-          scrollTrigger:{trigger:el, start:'top 86%', once:true},
-          onComplete:()=>split.revert()   // restore clean DOM: descenders, gradient spans, resize-safe
+        ScrollTrigger.create({
+          trigger: el, start:'top 88%', once:true,
+          onEnter: ()=>{
+            let split = null;
+            try{ split = new SplitText(el, {type:'lines', mask:'lines'}); }catch(e){}
+            if(!split || !split.lines || !split.lines.length){
+              gsap.from(el, {opacity:0, y:40, duration:1, ease:'power3.out'});
+              return;
+            }
+            gsap.from(split.lines, {
+              yPercent:115, duration:1.05, ease:'power4.out', stagger:0.085,
+              onComplete:()=>{ split.revert(); ScrollTrigger.refresh(); }   // clean DOM: descenders, gradient spans, resize-safe
+            });
+          }
         });
       });
       ScrollTrigger.refresh();
