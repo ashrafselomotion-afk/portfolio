@@ -338,6 +338,12 @@
       "type": "file",
       "src": "assets/work/mg20.mp4",
       "ar": "9/16"
+    },
+    {
+      "label": "DECE 2026 · Day 01 Highlight",
+      "type": "file",
+      "src": "assets/work/ve20.mp4",
+      "ar": "9/16"
     }
   ]
 }
