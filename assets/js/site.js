@@ -67,7 +67,7 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     draw(currentFrame);
   }
   function drawCover(img){
-    if(!img || !img.complete) return;
+    if(!img || !img.complete || !img.naturalWidth) return;
     const cw = canvas.clientWidth, ch = canvas.clientHeight;
     const ir = img.width/img.height, cr = cw/ch;
     ctx.clearRect(0,0,cw,ch);
@@ -96,24 +96,50 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     ctx.drawImage(img,x,y,w,h);
   }
   let currentFrame = 0;
+  const ready = new Array(TOTAL).fill(false);
+  // until every frame has arrived, show the closest one that has
+  function nearest(i){
+    if(ready[i]) return i;
+    for(let d=1; d<TOTAL; d++){
+      if(i-d>=0 && ready[i-d]) return i-d;
+      if(i+d<TOTAL && ready[i+d]) return i+d;
+    }
+    return -1;
+  }
   function draw(i){
     i = Math.max(0,Math.min(TOTAL-1, i|0));
     currentFrame = i;
-    drawCover(imgs[i]);
+    const n = nearest(i);
+    if(n>=0) drawCover(imgs[n]);
   }
 
-  function onload(){
-    loaded++;
-    const p = loaded/TOTAL;
-    pct.textContent = Math.round(p*100)+'%';
-    if(loaded===TOTAL) start();
-  }
-  for(let i=0;i<TOTAL;i++){
+  // Progressive load: the loader only waits for a sparse key set (frame 1 + every
+  // 6th), the page opens, and the in-between frames fill in while you scroll.
+  // AVIF when the browser decodes it (about a third lighter), JPG otherwise.
+  const KEY = [];
+  for(let i=0;i<TOTAL;i+=6) KEY.push(i);
+  if(KEY[KEY.length-1]!==TOTAL-1) KEY.push(TOTAL-1);
+  let ext = 'jpg', keyDone = 0;
+  function loadFrame(i, isKey){
     const im = new Image();
-    im.onload = onload; im.onerror = onload;
-    im.src = FRAME_DIR+'f_'+pad(i+1)+'.jpg';
-    imgs[i]=im;
+    im.decoding = 'async';
+    im.onload = ()=>{
+      ready[i] = true;
+      if(isKey){ keyDone++; pct.textContent = Math.round(keyDone/KEY.length*100)+'%'; if(keyDone===KEY.length) start(); }
+      else if(started && Math.abs(i-currentFrame)<=3) draw(currentFrame);
+    };
+    im.onerror = ()=>{
+      if(ext==='avif' && !im.dataset.fb){ im.dataset.fb='1'; im.src = FRAME_DIR+'f_'+pad(i+1)+'.jpg'; return; }
+      if(isKey){ keyDone++; if(keyDone===KEY.length) start(); }
+    };
+    im.src = FRAME_DIR+'f_'+pad(i+1)+'.'+ext;
+    imgs[i] = im;
   }
+  function loadRest(){ for(let i=0;i<TOTAL;i++) if(!imgs[i]) loadFrame(i, false); }
+  const probe = new Image();
+  probe.onload = ()=>{ ext='avif'; KEY.forEach(i=>loadFrame(i,true)); };
+  probe.onerror = ()=>{ ext='jpg'; KEY.forEach(i=>loadFrame(i,true)); };
+  probe.src = FRAME_DIR+'f_001.avif';
 
   let started=false;
   function start(){
@@ -131,6 +157,7 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     }
     document.body.classList.add('ready');
     bindScroll();
+    loadRest();
   }
   // safety: don't hang forever if an image stalls
   setTimeout(()=>{ if(!started) start(); }, 9000);
