@@ -217,6 +217,12 @@
       "type": "file",
       "src": "assets/work/ai13.mp4",
       "ar": "16/9"
+    },
+    {
+      "label": "Nexora · Missed It",
+      "type": "file",
+      "src": "assets/work/ai14.mp4",
+      "ar": "9/16"
     }
   ],
   "video": [

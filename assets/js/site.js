@@ -4,16 +4,21 @@ window.scrollTo(0,0);
 window.addEventListener('load', function(){ window.scrollTo(0,0); });
 /* ============ PRELOADER + FRAME SEQUENCE ============ */
 (function(){
-  const TOTAL = 120;
-  // portrait screens get the native 9:16 frame set (full-bleed), wide screens the 16:9 one
-  const FRAME_DIR = window.matchMedia('(max-aspect-ratio: 4/5)').matches ? 'assets/frames-m/' : 'assets/frames/';
-  const pad = n => String(n).padStart(3,'0');
-  const imgs = new Array(TOTAL);
-  let loaded = 0;
+  const TOTAL = 120;   // frame-equivalent count, still shown on the mobile timecode chip
+  // portrait screens get the native 9:16 cut (full-bleed), wide screens the 16:9 one
+  const HERO_SRC = window.matchMedia('(max-aspect-ratio: 4/5)').matches ? 'assets/hero/hero-m.mp4' : 'assets/hero/hero-d.mp4';
   const pct = document.getElementById('lpct');
   const loader = document.getElementById('loader');
   const canvas = document.getElementById('frames');
   const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // The hero is a video that plays once and holds its last frame. It is drawn into
+  // the canvas so the tall-phone / narrow-window framing below still applies.
+  const vid = document.createElement('video');
+  vid.muted = true; vid.defaultMuted = true; vid.playsInline = true;
+  vid.setAttribute('muted',''); vid.setAttribute('playsinline','');
+  vid.preload = 'auto';
+  vid.src = HERO_SRC;
 
   // ---- funny GSAP loader: bouncing dots (squash & stretch) + rotating quips ----
   (function loaderFX(){
@@ -64,12 +69,13 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     const dpr = Math.min(window.devicePixelRatio||1, 2);
     canvas.width = w*dpr; canvas.height = h*dpr;
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    draw(currentFrame);
+    paint();
   }
   function drawCover(img){
-    if(!img || !img.complete || !img.naturalWidth) return;
+    const iw = img && (img.videoWidth || img.naturalWidth), ih = img && (img.videoHeight || img.naturalHeight);
+    if(!iw || !ih) return;
     const cw = canvas.clientWidth, ch = canvas.clientHeight;
-    const ir = img.width/img.height, cr = cw/ch;
+    const ir = iw/ih, cr = cw/ch;
     ctx.clearRect(0,0,cw,ch);
     if(cr < 0.9 && ir > 1.2){
       // portrait screen stuck with a LANDSCAPE frame set (fallback only, e.g. desktop window squeezed):
@@ -96,56 +102,23 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     ctx.drawImage(img,x,y,w,h);
   }
   let currentFrame = 0;
-  const ready = new Array(TOTAL).fill(false);
-  // until every frame has arrived, show the closest one that has
-  function nearest(i){
-    if(ready[i]) return i;
-    for(let d=1; d<TOTAL; d++){
-      if(i-d>=0 && ready[i-d]) return i-d;
-      if(i+d<TOTAL && ready[i+d]) return i+d;
-    }
-    return -1;
-  }
-  function draw(i){
-    i = Math.max(0,Math.min(TOTAL-1, i|0));
-    currentFrame = i;
-    const n = nearest(i);
-    if(n>=0) drawCover(imgs[n]);
-  }
+  function paint(){ drawCover(vid); }
+  function progress(){ return vid.duration ? Math.min(1, vid.currentTime/vid.duration) : 0; }
 
-  // Progressive load: the loader only waits for a sparse key set (frame 1 + every
-  // 6th), the page opens, and the in-between frames fill in while you scroll.
-  // AVIF when the browser decodes it (about a third lighter), JPG otherwise.
-  const KEY = [];
-  for(let i=0;i<TOTAL;i+=6) KEY.push(i);
-  if(KEY[KEY.length-1]!==TOTAL-1) KEY.push(TOTAL-1);
-  let ext = 'jpg', keyDone = 0;
-  function loadFrame(i, isKey){
-    const im = new Image();
-    im.decoding = 'async';
-    im.onload = ()=>{
-      ready[i] = true;
-      if(isKey){ keyDone++; pct.textContent = Math.round(keyDone/KEY.length*100)+'%'; if(keyDone===KEY.length) start(); }
-      else if(started && Math.abs(i-currentFrame)<=3) draw(currentFrame);
-    };
-    im.onerror = ()=>{
-      if(ext==='avif' && !im.dataset.fb){ im.dataset.fb='1'; im.src = FRAME_DIR+'f_'+pad(i+1)+'.jpg'; return; }
-      if(isKey){ keyDone++; if(keyDone===KEY.length) start(); }
-    };
-    im.src = FRAME_DIR+'f_'+pad(i+1)+'.'+ext;
-    imgs[i] = im;
-  }
-  function loadRest(){ for(let i=0;i<TOTAL;i++) if(!imgs[i]) loadFrame(i, false); }
-  const probe = new Image();
-  probe.onload = ()=>{ ext='avif'; KEY.forEach(i=>loadFrame(i,true)); };
-  probe.onerror = ()=>{ ext='jpg'; KEY.forEach(i=>loadFrame(i,true)); };
-  probe.src = FRAME_DIR+'f_001.avif';
+  // loader percentage follows how much of the video has buffered
+  vid.addEventListener('progress', ()=>{
+    if(started || !vid.duration || !vid.buffered.length) return;
+    pct.textContent = Math.round(Math.min(1, vid.buffered.end(vid.buffered.length-1)/vid.duration)*100)+'%';
+  });
+  vid.addEventListener('loadeddata', paint);
+  vid.addEventListener('canplaythrough', ()=>{ pct.textContent = '100%'; start(); }, {once:true});
+  vid.load();
 
   let started=false;
   function start(){
     if(started) return; started=true;
     window.scrollTo(0,0);
-    fit(); draw(0);
+    fit();
     if(window.gsap){
       gsap.killTweensOf('#loader .load-dots i');
       const tl = gsap.timeline({ delay:0.2, onComplete:()=>loader.classList.add('done') });
@@ -156,35 +129,23 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
       setTimeout(()=>{ loader.classList.add('done'); }, 350);
     }
     document.body.classList.add('ready');
-    bindScroll();
-    loadRest();
+    play();
   }
-  // safety: don't hang forever if an image stalls
+  // safety: don't hang forever on a slow connection
   setTimeout(()=>{ if(!started) start(); }, 9000);
 
   window.addEventListener('resize', fit);
 
-  /* ============ SCROLL → FRAME + UI ============ */
-  const hero = document.getElementById('hero');
+  /* ============ VIDEO → UI ============ */
   const heroTop = document.querySelector('.hero-top');
   const discTrack = document.getElementById('discTrack');
   const scrubPct = document.getElementById('scrubPct');
   const scrubRing = document.getElementById('scrubRing');
-  let ticking=false, lastP=0;
 
-  function heroProgress(){
-    const rect = hero.getBoundingClientRect();
-    const total = hero.offsetHeight - window.innerHeight;
-    if(total <= 0) return 0;
-    const p = Math.min(1, Math.max(0, -rect.top/total));
-    return p;
-  }
   function render(){
-    ticking=false;
-    const p = heroProgress();
-    lastP = p;
-    draw(Math.round(p*(TOTAL-1)));
-    // fade the name out as you scroll so the character is revealed cleanly
+    const p = progress();
+    currentFrame = Math.round(p*(TOTAL-1));
+    // fade the name out as the film plays so the character is revealed cleanly
     if(heroTop) heroTop.style.opacity = String(Math.min(1, Math.max(0, 1 - (p-0.22)/0.36)));
     // rotating discipline word (4 items)
     const idx = Math.min(3, Math.floor(p*3.999));
@@ -196,11 +157,26 @@ window.addEventListener('load', function(){ window.scrollTo(0,0); });
     if(chip) chip.textContent = String(currentFrame+1).padStart(3,'0')+' · 120';
     if(scrubRing) scrubRing.style.setProperty('--p', pp+'%');
   }
-  function bindScroll(){
-    window.addEventListener('scroll', ()=>{
-      if(!ticking){ requestAnimationFrame(render); ticking=true; }
-    }, {passive:true});
-    render();
+  let raf = 0;
+  function tick(){
+    paint(); render();
+    if(!vid.paused && !vid.ended) raf = requestAnimationFrame(tick);
+  }
+  vid.addEventListener('playing', ()=>{ cancelAnimationFrame(raf); tick(); });
+  vid.addEventListener('ended', ()=>{ paint(); render(); });   // hold on the final pose
+  function play(){
+    paint(); render();
+    if(reduceMotion){
+      // no playback: show the finished pose straight away
+      const toEnd = ()=>{ vid.addEventListener('seeked', ()=>{ paint(); render(); }, {once:true}); vid.currentTime = Math.max(0, vid.duration-0.05); };
+      if(vid.duration) toEnd(); else vid.addEventListener('loadedmetadata', toEnd, {once:true});
+      return;
+    }
+    // let the loader clear first so the opening beat isn't hidden behind it
+    setTimeout(()=>{
+      const pr = vid.play();
+      if(pr && pr.catch) pr.catch(()=>{ paint(); render(); });   // autoplay refused (e.g. Low Power Mode): hold frame one
+    }, window.gsap ? 900 : 350);
   }
 })();
 

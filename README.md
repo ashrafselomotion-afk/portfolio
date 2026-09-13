@@ -56,7 +56,7 @@ The `/ashrafiko` page sends you to **[Pages CMS](https://pagescms.org)** — a f
 ---
 
 ## Other tweaks
-- **Hero clip** — re-extract frames at 12fps / 1440px into `assets/frames/` named `f_001.jpg …`, then set `const TOTAL = <count>` in the script in `index.html`.
+- **Hero clip** — `assets/hero/hero-d.mp4` (16:9, 1600×900) and `assets/hero/hero-m.mp4` (9:16, 720×1280); plays once on load and holds the last frame.
 - **Text / colors** — copy is inline in `index.html`; palette is the `:root` CSS variables (`--pink`, `--blue`, `--rope`, `--ink`, `--paper`).
 - **Clients** — the `rowA/rowB/rowC` arrays in the marquee script.
 
