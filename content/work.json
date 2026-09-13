@@ -217,6 +217,12 @@
       "type": "file",
       "src": "assets/work/ai12.mp4",
       "ar": "9/16"
+    },
+    {
+      "label": "Emotional Trades",
+      "type": "file",
+      "src": "assets/work/ai13.mp4",
+      "ar": "16/9"
     }
   ],
   "video": [
