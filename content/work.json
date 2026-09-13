@@ -131,12 +131,6 @@
       "type": "file",
       "src": "assets/work/mg19.mp4",
       "ar": "16/9"
-    },
-    {
-      "label": "IIS · Emirati Women's Day 2026",
-      "type": "file",
-      "src": "assets/work/mg20.mp4",
-      "ar": "9/16"
     }
   ],
   "ai": [
@@ -337,6 +331,12 @@
       "label": "OCC · Teaser",
       "type": "file",
       "src": "assets/work/ve17.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "IIS · Emirati Women's Day 2026",
+      "type": "file",
+      "src": "assets/work/mg20.mp4",
       "ar": "9/16"
     }
   ]
