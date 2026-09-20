@@ -143,6 +143,12 @@
       "type": "file",
       "src": "assets/work/mg23.mp4",
       "ar": "9/16"
+    },
+    {
+      "label": "MultiBank · Brand Film",
+      "type": "file",
+      "src": "assets/work/mg24.mp4",
+      "ar": "16/9"
     }
   ],
   "ai": [
@@ -235,6 +241,13 @@
       "type": "file",
       "src": "assets/work/ai14.mp4",
       "ar": "9/16"
+    },
+    {
+      "label": "Batman",
+      "type": "file",
+      "src": "assets/work/ai15.mp4",
+      "ar": "16/9",
+      "category": "AI concept film"
     }
   ],
   "video": [
@@ -361,6 +374,12 @@
       "label": "DECE 2026 · Day 01 Highlight",
       "type": "file",
       "src": "assets/work/ve20.mp4",
+      "ar": "9/16"
+    },
+    {
+      "label": "V60 · Pour Over",
+      "type": "file",
+      "src": "assets/work/ve21.mp4",
       "ar": "9/16"
     }
   ]
