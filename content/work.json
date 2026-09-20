@@ -131,6 +131,18 @@
       "type": "file",
       "src": "assets/work/mg21.mp4",
       "ar": "16/9"
+    },
+    {
+      "label": "MultiBank · Trading Records",
+      "type": "file",
+      "src": "assets/work/mg22.mp4",
+      "ar": "1/1"
+    },
+    {
+      "label": "Sharjah Classic Car Festival",
+      "type": "file",
+      "src": "assets/work/mg23.mp4",
+      "ar": "9/16"
     }
   ],
   "ai": [
