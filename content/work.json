@@ -149,6 +149,12 @@
       "type": "file",
       "src": "assets/work/mg24.mp4",
       "ar": "16/9"
+    },
+    {
+      "label": "MultiBank · App Tutorial",
+      "type": "file",
+      "src": "assets/work/mg25.mp4",
+      "ar": "1/1"
     }
   ],
   "ai": [
